@@ -12,6 +12,6 @@ package gerenciadordepatrimonio;
 public class FazTudo {
     
     void login(){
-        System.out.println("oi");
+        System.out.println("bago");
     }
 }
