@@ -18,6 +18,7 @@ public class Servidor {
     private String papel;
     private String login;
     private String senha;
+    private boolean logado;
     
     public int getId() {
         return id;
@@ -71,15 +72,23 @@ public class Servidor {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setLoginSenha(String login, String senha) {
+        this.login = login;
         this.senha = senha;
+        this.logado = false;
     }
+    
+    public void setLogado(boolean logado) {
+        this.logado = logado;
+    }
+
+    @Override
+    public String toString() {
+        return "Servidor{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", camp=" + camp + ", cargo=" + cargo + ", papel=" + papel + ", login=" + login + ", senha=" + senha + '}';
+    }
+    
 }

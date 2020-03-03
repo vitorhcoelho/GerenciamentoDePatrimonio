@@ -82,4 +82,9 @@ public class Movimentacao {
     public void setDatamodificacao(String datamodificacao) {
         this.datamodificacao = datamodificacao;
     }
+
+    @Override
+    public String toString() {
+        return "Movimentacao{" + "entrada=" + entrada + ", id=" + id + ", it=" + it + ", origem=" + origem + ", destino=" + destino + ", motivo=" + motivo + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
+    }
 }

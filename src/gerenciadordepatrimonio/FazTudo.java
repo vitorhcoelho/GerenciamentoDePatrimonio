@@ -5,13 +5,74 @@
  */
 package gerenciadordepatrimonio;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Vitor Hugo
  */
 public class FazTudo {
     
-    void login(){
-        System.out.println("bago");
+    int opcao=10;
+    Scanner in = new Scanner(System.in);
+    
+    public void login(){
+        
+        while (this.opcao != 0) {
+            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("Para acessar como:\n\n"
+                    + "[1] -> SERVIDOR\n"
+                    + "[2] -> ADMINISTRADOR\n"
+                    + "[0] -> SAIR\n");
+            this.opcao = Integer.parseInt(in.nextLine());
+
+            switch (this.opcao) {
+                case 1:
+                    System.out.println("Login: ");
+                    String login = in.nextLine();
+                    System.out.println("Senha: ");
+                    String senha = in.nextLine();
+
+                    if (jogDAO.getJogadoresLogin(login) != null) {
+
+                        if (jogDAO.getJogadoresLogin(login).getSenha().equals(senha)) {
+                            jogDAO.setLoginJog(jogDAO.getJogadoresLogin(login));
+                            jogDAO.getLogadoJog().setLogado(true);
+
+                            while (jogDAO.getLogadoJog().isLogado() != false && jogDAO.getLogadoJog() != null) {
+                                menuJogP(jogDAO, adDAO, tDAO, qdDAO, hrSTDAO, hrCTDAO);
+                            }
+
+                        } else {
+                            System.out.println("\nLogin ou Senha Incorretos!\n");
+                        }
+                    } else {
+                        System.out.println("\nLogin ou Senha Incorretos!\n");
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("Login: ");
+                    login = in.nextLine();
+                    System.out.println("Senha: ");
+                    senha = in.nextLine();
+
+                    if (adDAO.validaLoginAdm(login, senha)) {
+                        adDAO.getAdm().setLogado(true);
+
+                        while (adDAO.getAdm().isLogado() != false) {
+                            this.menuAdmP(adDAO, qdDAO, jogDAO);
+                        }
+
+                    } else {
+                        System.out.println("Login ou Senha Incorretos!\n");
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
     }
 }

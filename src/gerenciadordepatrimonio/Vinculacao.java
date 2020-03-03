@@ -19,4 +19,9 @@ public class Vinculacao {
     public void setAmb(Ambiente amb) {
         this.amb = amb;
     }
+
+    @Override
+    public String toString() {
+        return "Vinculacao{" + "amb=" + amb + '}';
+    }
 }

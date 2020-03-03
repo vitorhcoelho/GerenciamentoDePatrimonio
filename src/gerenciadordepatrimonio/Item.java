@@ -91,4 +91,9 @@ public class Item {
     public void setDatamodificacao(String datamodificacao) {
         this.datamodificacao = datamodificacao;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" + "id=" + id + ", especificacao=" + especificacao + ", codigo=" + codigo + ", estado=" + estado + ", datacompra=" + datacompra + ", valorcompra=" + valorcompra + ", ambiente=" + ambiente + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
+    }
 }

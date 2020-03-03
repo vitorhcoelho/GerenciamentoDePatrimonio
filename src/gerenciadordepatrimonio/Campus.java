@@ -82,4 +82,9 @@ public class Campus {
     public void setCep(String cep) {
         this.cep = cep;
     }
+
+    @Override
+    public String toString() {
+        return "Campus{" + "id=" + id + ", nome=" + nome + ", abreviacao=" + abreviacao + ", data=" + data + ", cidade=" + cidade + ", bairro=" + bairro + ", endereco=" + endereco + ", cep=" + cep + '}';
+    }
 }
