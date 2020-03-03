@@ -357,10 +357,10 @@ public class ServidorDAO {
             if (es == 1) {
                 if (getServidoresId(id).getId().equals(id)) {
                     getServidoresId(id).setLogado?????????(false);
-                    deleteJogador(cpf);
+                    deleteServidor(id);
                     System.out.println("\nJogador Deletado\n");
                 } else {
-                    deleteJogador(cpf);
+                    deleteServidor(id);
                     System.out.println("\nJogador Deletado\n");
                 }
             } else {
@@ -370,7 +370,7 @@ public class ServidorDAO {
     }
 
     public void buscaJog() {
-        System.out.println("\nBuscar por:\n1 - Nome\n2 - CPF\n3 - Voltar");
+        System.out.println("\nBuscar por:\n1 - Nome\n2 - ID\n3 - Voltar");
         int escB = Integer.parseInt(in.nextLine());
 
         switch (escB) {
@@ -379,20 +379,20 @@ public class ServidorDAO {
                 System.out.println("\nDigite o Nome: ");
                 String buscaNome = in.nextLine();
 
-                if (getJogadoresNome(buscaNome) == null) {
+                if (getServidoresNome(buscaNome) == null) {
                     System.out.println("\nJogador Não Encontrado\n");
                 } else {
-                    System.out.println(getJogadoresNome(buscaNome).toString());
+                    System.out.println(getServidoresNome(buscaNome).toString());
                 }
                 break;
             case 2:
                 System.out.println("\nDigite o CPF: ");
-                String buscaCpf = in.nextLine();
+                String buscaId = in.nextLine();
 
-                if (getJogadoresCpf(buscaCpf) == null) {
+                if (getServidoresId(buscaId) == null) {
                     System.out.println("\nJogador Não Encontrado\n");
                 } else {
-                    System.out.println(getJogadoresCpf(buscaCpf).toString());
+                    System.out.println(getServidoresId(buscaId).toString());
                 }
 
             default:

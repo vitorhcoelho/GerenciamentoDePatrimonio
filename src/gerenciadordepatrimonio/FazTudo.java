@@ -16,7 +16,7 @@ public class FazTudo {
     int opcao=10;
     Scanner in = new Scanner(System.in);
     
-    public void login(){
+    public void login(ServidorDAO servDAO){
         
         while (this.opcao != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -33,11 +33,11 @@ public class FazTudo {
                     System.out.println("Senha: ");
                     String senha = in.nextLine();
 
-                    if (jogDAO.getJogadoresLogin(login) != null) {
+                    if (servDAO.getJogadoresLogin(login) != null) {
 
-                        if (jogDAO.getJogadoresLogin(login).getSenha().equals(senha)) {
-                            jogDAO.setLoginJog(jogDAO.getJogadoresLogin(login));
-                            jogDAO.getLogadoJog().setLogado(true);
+                        if (servDAO.getJogadoresLogin(login).getSenha().equals(senha)) {
+                            servDAO.setLoginJog(servDAO.getJogadoresLogin(login));
+                            servDAO.getLogadoJog().setLogado(true);
 
                             while (jogDAO.getLogadoJog().isLogado() != false && jogDAO.getLogadoJog() != null) {
                                 menuJogP(jogDAO, adDAO, tDAO, qdDAO, hrSTDAO, hrCTDAO);
