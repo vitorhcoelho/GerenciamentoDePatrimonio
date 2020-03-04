@@ -33,6 +33,14 @@ public class Administrador {
         return senha;
     }
 
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
     public void setLoginSenha(String login, String senha) {
         this.login = login;
         this.senha = senha;

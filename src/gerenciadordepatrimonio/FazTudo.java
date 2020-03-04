@@ -13,10 +13,23 @@ import java.util.Scanner;
  */
 public class FazTudo {
     
-    int opcao=10;
+    Servidor serv = new Servidor();
+    Administrador adm = new Administrador();
     Scanner in = new Scanner(System.in);
+    int opcao=10;
     
-    public void login(ServidorDAO servDAO){
+    private String menuServ = "1 - Gerar relatório\n"
+            + "0 - Sair\n";
+    
+    private String menuAdm = "1 - Lista de servidores\n"
+            + "2 - Campus\n"
+            + "3 - Itens\n"
+            + "4 - Ambientes\n"
+            + "5 - Vinculações\n"
+            + "6 - Movimentações\n"
+            + "0 - Sair\n";
+    
+    public void login(ServidorDAO servDAO, AdministradorDAO admDAO){
         
         while (this.opcao != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -33,14 +46,14 @@ public class FazTudo {
                     System.out.println("Senha: ");
                     String senha = in.nextLine();
 
-                    if (servDAO.getJogadoresLogin(login) != null) {
+                    if (servDAO.getServidoresLogin(login) != null) {
 
-                        if (servDAO.getJogadoresLogin(login).getSenha().equals(senha)) {
-                            servDAO.setLoginJog(servDAO.getJogadoresLogin(login));
-                            servDAO.getLogadoJog().setLogado(true);
+                        if (servDAO.getServidoresLogin(login).getSenha().equals(senha)) {
+                            servDAO.setLoginServ??????(servDAO.getServidoresLogin(login));
+                            servDAO.getLogadoServ().setLogado(true);
 
-                            while (jogDAO.getLogadoJog().isLogado() != false && jogDAO.getLogadoJog() != null) {
-                                menuJogP(jogDAO, adDAO, tDAO, qdDAO, hrSTDAO, hrCTDAO);
+                            while (servDAO.getLogadoServ().isLogado() != false && servDAO.getLogadoServ()!= null) {
+                                menuServ(servDAO, admDAO, tDAO, qdDAO, hrSTDAO, hrCTDAO);??????
                             }
 
                         } else {
@@ -57,11 +70,11 @@ public class FazTudo {
                     System.out.println("Senha: ");
                     senha = in.nextLine();
 
-                    if (adDAO.validaLoginAdm(login, senha)) {
-                        adDAO.getAdm().setLogado(true);
+                    if (admDAO.validaLoginAdm(login, senha)) {
+                        admDAO.getAdm().setLogado(true);
 
-                        while (adDAO.getAdm().isLogado() != false) {
-                            this.menuAdmP(adDAO, qdDAO, jogDAO);
+                        while (admDAO.getAdm().isLogado() != false) {
+                            this.menuAdm(admDAO, servDAO);
                         }
 
                     } else {
@@ -74,5 +87,121 @@ public class FazTudo {
             }
 
         }
+    }
+    
+    public void menuAdm(AdministradorDAO bkp, ServidorDAO jogDAO) {
+        int opc = 0;
+
+        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+                + bkp.getAdm().toStringLogado()
+                + "\n\n" + menuAdmP);
+        opc = Integer.parseInt(in.nextLine());
+
+        switch (opc) {
+            case 1:
+                int opc1 = 0;
+                while (opc1 != 5) {
+                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+                            + bkp.getAdm().toStringLogado()
+                            + "\n\n" + menuAdm1);
+                    opc1 = Integer.parseInt(in.nextLine());
+
+                    switch (opc1) {
+                        case 1:
+                            qdDAO.criaQuadra();
+                            break;
+
+                        case 2:
+                            qdDAO.editaQuadra();
+                            break;
+
+                        case 3:
+                            qdDAO.excluiQuadra();
+                            break;
+
+                        case 4:
+                            qdDAO.mostraQuadras();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                break;
+
+            case 2:
+           
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                bkp.alteraSenha(system);
+                break;
+
+            case 5:
+                bkp.getAdm().setLogado(false);
+                break;
+        }
+
+    }
+    
+    public void menuServ(adminDAO bkp, quadraDAO qdDAO, JogadorDAO jogDAO) {
+        int opc = 0;
+
+        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+                + bkp.getAdm().toStringLogado()
+                + "\n\n" + menuAdmP);
+        opc = Integer.parseInt(in.nextLine());
+
+        switch (opc) {
+            case 1:
+                int opc1 = 0;
+                while (opc1 != 5) {
+                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+                            + bkp.getAdm().toStringLogado()
+                            + "\n\n" + menuAdm1);
+                    opc1 = Integer.parseInt(in.nextLine());
+
+                    switch (opc1) {
+                        case 1:
+                            qdDAO.criaQuadra();
+                            break;
+
+                        case 2:
+                            qdDAO.editaQuadra();
+                            break;
+
+                        case 3:
+                            qdDAO.excluiQuadra();
+                            break;
+
+                        case 4:
+                            qdDAO.mostraQuadras();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                break;
+
+            case 2:
+           
+                break;
+
+            case 3:
+                break;
+
+            case 4:
+                bkp.alteraSenha(system);
+                break;
+
+            case 5:
+                bkp.getAdm().setLogado(false);
+                break;
+        }
+
     }
 }
