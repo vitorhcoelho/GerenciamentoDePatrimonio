@@ -49,11 +49,11 @@ public class FazTudo {
                     if (servDAO.getServidoresLogin(login) != null) {
 
                         if (servDAO.getServidoresLogin(login).getSenha().equals(senha)) {
-                            servDAO.setLoginServ??????(servDAO.getServidoresLogin(login));
-                            servDAO.getLogadoServ().setLogado(true);
+                            servDAO.(servDAO.getServidoresLogin(login));
+                            servDAO.getServidorLogado().setLogado(true);
 
-                            while (servDAO.getLogadoServ().isLogado() != false && servDAO.getLogadoServ()!= null) {
-                                menuServ(servDAO, admDAO, tDAO, qdDAO, hrSTDAO, hrCTDAO);??????
+                            while (servDAO.getServidorLogado().isLogado() != false && servDAO.getLogadoServ()!= null) {
+                                menuServ();
                             }
 
                         } else {

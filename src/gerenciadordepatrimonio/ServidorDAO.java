@@ -20,9 +20,6 @@ public class ServidorDAO {
     
     Scanner in = new Scanner(System.in);
     
-    public Servidor getLogadoServ() {
-        return this.servidorLogado;
-    }
     
     public boolean validaLoginServ(String login, String senha) {
         for (int x = 0; x < servidores.length; x++) {
@@ -39,20 +36,32 @@ public class ServidorDAO {
         return false;
     }
     
-    public boolean validaLoginServ(String login, String senha) {
-        for (int x = 0; x < servidores.length; x++) {
-            if (this.servidores[x].getLogin().equals(login) && servidores[x] != null) {
-                if (this.servidores[x].getSenha().equals(senha)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        return false;
+    
+
+    public Servidor getServidorLogado() {
+        return servidorLogado;
     }
+
+    public void setServidorLogado(Servidor servidorLogado) {
+        this.servidorLogado = servidorLogado;
+    }
+    
+
+    
+//    public boolean validaLoginServ(String login, String senha) {
+//        for (int x = 0; x < servidores.length; x++) {
+//            if (this.servidores[x].getLogin().equals(login) && servidores[x] != null) {
+//                if (this.servidores[x].getSenha().equals(senha)) {
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            } else {
+//                return false;
+//            }
+//        }
+//        return false;
+//    }
 
     public int posicaoServ() {
         for (int x = 0; x < servidores.length; x++) {

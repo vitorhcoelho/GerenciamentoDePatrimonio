@@ -81,6 +81,11 @@ public class Servidor {
         this.senha = senha;
         this.logado = false;
     }
+
+    public boolean isLogado() {
+        return logado;
+    }
+    
     
     public void setLogado(boolean logado) {
         this.logado = logado;
