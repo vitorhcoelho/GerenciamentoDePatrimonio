@@ -19,6 +19,10 @@ public class Servidor {
     private String login;
     private String senha;
     private boolean logado;
+
+    public boolean isLogado() {
+        return logado;
+    }
     
     public int getId() {
         return id;
@@ -27,7 +31,15 @@ public class Servidor {
     public void setId(int id) {
         this.id = id;
     }
-
+    
+    public boolean checkId(int id){
+        if(id<0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+   
     public String getNome() {
         return nome;
     }
@@ -89,6 +101,14 @@ public class Servidor {
     @Override
     public String toString() {
         return "Servidor{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", camp=" + camp + ", cargo=" + cargo + ", papel=" + papel + ", login=" + login + ", senha=" + senha + '}';
+    }
+
+    public String toStringLogado() {
+        if (this.logado) {
+            return "Online";
+        } else {
+            return "Offline";
+        }
     }
     
 }

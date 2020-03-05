@@ -19,24 +19,14 @@ public class ServidorDAO {
     private int qtdServidor;
     
     Scanner in = new Scanner(System.in);
+    private Servidor servLogado;
     
     public Servidor getLogadoServ() {
         return this.servidorLogado;
     }
     
-    public boolean validaLoginServ(String login, String senha) {
-        for (int x = 0; x < servidores.length; x++) {
-            if (this.servidores[x].getLogin().equals(login) && servidores[x] != null) {
-                if (this.servidores[x].getSenha().equals(senha)) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        return false;
+    public void setLoginServ(Servidor logado) {
+        this.servLogado = logado;
     }
     
     public boolean validaLoginServ(String login, String senha) {
@@ -53,7 +43,7 @@ public class ServidorDAO {
         }
         return false;
     }
-
+    
     public int posicaoServ() {
         for (int x = 0; x < servidores.length; x++) {
             if (servidores[x] == null) {
@@ -168,6 +158,7 @@ public class ServidorDAO {
     
     public void insereServ() {
         String dado;
+        int id=0;
         Servidor i = new Servidor();
 
         System.out.println("\nNome: ");
@@ -175,31 +166,19 @@ public class ServidorDAO {
         i.setNome(dado);
 
         while (dado != null) {
-            System.out.println("\nCPF: ");
+            System.out.println("\nId: ");
             dado = in.nextLine();
-            if (i.checkCpf(dado)) {
-                i.setCpf(dado);
+            if (i.checkId(id)) {
+                i.setId(id);
                 break;
             } else {
-                System.out.println("\nCPF Inválido\n");
+                System.out.println("\nId Inválido\n");
             }
         }
 
         System.out.println("\nE-mail: ");
         dado = in.nextLine();
         i.setEmail(dado);
-
-        System.out.println("\nTelefone Fixo: ");
-        dado = in.nextLine();
-        i.setTelFixo(dado);
-
-        System.out.println("\nTelefone Celular: ");
-        dado = in.nextLine();
-        i.setTelCel(dado);
-
-        System.out.println("\nEndereço: ");
-        dado = in.nextLine();
-        i.setEndereco(dado);
 
         System.out.println("\nLogin: ");
         dado = in.nextLine();
@@ -223,7 +202,7 @@ public class ServidorDAO {
         setServidores(i);
 
         if (setServidores(i)) {
-            System.out.println("\Servidro Adicionado\n");
+            System.out.println("\Servidor Adicionado\n");
         }
     }
 

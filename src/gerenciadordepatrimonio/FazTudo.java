@@ -5,6 +5,7 @@
  */
 package gerenciadordepatrimonio;
 
+import static java.time.Clock.system;
 import java.util.Scanner;
 
 /**
@@ -49,11 +50,11 @@ public class FazTudo {
                     if (servDAO.getServidoresLogin(login) != null) {
 
                         if (servDAO.getServidoresLogin(login).getSenha().equals(senha)) {
-                            servDAO.setLoginServ??????(servDAO.getServidoresLogin(login));
+                            servDAO.setLoginServ(servDAO.getServidoresLogin(login));
                             servDAO.getLogadoServ().setLogado(true);
 
                             while (servDAO.getLogadoServ().isLogado() != false && servDAO.getLogadoServ()!= null) {
-                                menuServ(servDAO, admDAO, tDAO, qdDAO, hrSTDAO, hrCTDAO);??????
+                                menuServ(servDAO);
                             }
 
                         } else {
@@ -74,7 +75,7 @@ public class FazTudo {
                         admDAO.getAdm().setLogado(true);
 
                         while (admDAO.getAdm().isLogado() != false) {
-                            this.menuAdm(admDAO, servDAO);
+                            this.menuAdm(admDAO);
                         }
 
                     } else {
@@ -89,38 +90,34 @@ public class FazTudo {
         }
     }
     
-    public void menuAdm(AdministradorDAO bkp, ServidorDAO jogDAO) {
+    public void menuAdm(AdministradorDAO admDAO) {
         int opc = 0;
 
-        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                + bkp.getAdm().toStringLogado()
-                + "\n\n" + menuAdmP);
+        System.out.println("Bem - Vindo Administrador: " + admDAO.getAdm().getNome() + "\t"
+                + admDAO.getAdm().toStringLogado()
+                + "\n\n" + menuAdm);
         opc = Integer.parseInt(in.nextLine());
 
         switch (opc) {
             case 1:
                 int opc1 = 0;
                 while (opc1 != 5) {
-                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                            + bkp.getAdm().toStringLogado()
-                            + "\n\n" + menuAdm1);
+                    System.out.println("Bem - Vindo\nAdministrador: " + admDAO.getAdm().getNome() + "\t"
+                            + admDAO.getAdm().toStringLogado()
+                            + "\n\n" + menuAdm);
                     opc1 = Integer.parseInt(in.nextLine());
 
                     switch (opc1) {
                         case 1:
-                            qdDAO.criaQuadra();
                             break;
 
                         case 2:
-                            qdDAO.editaQuadra();
                             break;
 
                         case 3:
-                            qdDAO.excluiQuadra();
                             break;
 
                         case 4:
-                            qdDAO.mostraQuadras();
                             break;
 
                         default:
@@ -137,48 +134,127 @@ public class FazTudo {
                 break;
 
             case 4:
-                bkp.alteraSenha(system);
+                admDAO.alteraSenha(adm);
                 break;
 
             case 5:
-                bkp.getAdm().setLogado(false);
+                admDAO.getAdm().setLogado(false);
                 break;
         }
 
     }
-    
-    public void menuServ(adminDAO bkp, quadraDAO qdDAO, JogadorDAO jogDAO) {
+    public void menuServ(ServidorDAO servDAO) {
         int opc = 0;
-
-        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                + bkp.getAdm().toStringLogado()
-                + "\n\n" + menuAdmP);
+        String id;
+        System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
+                + servDAO.getLogadoServ().toStringLogado()
+                + "\n\n" + menuJog1);//????
         opc = Integer.parseInt(in.nextLine());
 
         switch (opc) {
             case 1:
                 int opc1 = 0;
-                while (opc1 != 5) {
-                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                            + bkp.getAdm().toStringLogado()
-                            + "\n\n" + menuAdm1);
+                while (opc1 != 5 && servDAO.getLogadoServ().isLogado() != false) {
+                    System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
+                            + servDAO.getLogadoServ().toStringLogado()
+                            + "\n\n" + menuServ);
                     opc1 = Integer.parseInt(in.nextLine());
-
                     switch (opc1) {
                         case 1:
-                            qdDAO.criaQuadra();
+                            
                             break;
 
                         case 2:
-                            qdDAO.editaQuadra();
+                            
                             break;
 
                         case 3:
-                            qdDAO.excluiQuadra();
+                            
                             break;
 
                         case 4:
-                            qdDAO.mostraQuadras();
+                            
+                            break;
+
+                        default:
+                            break;
+
+                    }
+
+                }
+                break;
+
+            case 2:
+                int opc2 = 0;
+                while (opc2 != 6) {
+                    System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
+                            + servDAO.getLogadoServ().toStringLogado()
+                            + "\n\n" + menuJog2);//?????
+                    opc2 = Integer.parseInt(in.nextLine());
+                    switch (opc2) {
+                        case 1:
+                            
+                            break;
+
+                        case 2:
+                            
+                            break;
+
+                        case 3:
+                            
+                            break;
+
+                        case 4:
+                            
+                            break;
+
+                        case 5:
+                            
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                }
+                break;
+
+            case 3:
+                int opc3 = 0;
+                while (opc3 != 9) {
+                    System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
+                            + servDAO.getLogadoServ().toStringLogado()
+                            + "\n\n" + menuJog3);//???????
+                    opc3 = Integer.parseInt(in.nextLine());
+                    switch (opc3) {
+                        case 1:
+                            
+                            break;
+
+                        case 2:
+                            
+                            break;
+                        case 3:
+                            
+                            break;
+
+                        case 4:
+                            
+                            break;
+
+                        case 5:
+                            
+                            break;
+
+                        case 6:
+                            break;
+
+                        case 7:
+                            
+                            break;
+
+                        case 8:
+                            
                             break;
 
                         default:
@@ -187,19 +263,8 @@ public class FazTudo {
                 }
                 break;
 
-            case 2:
-           
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-                bkp.alteraSenha(system);
-                break;
-
             case 5:
-                bkp.getAdm().setLogado(false);
+                servDAO.getLogadoServ().setLogado(false);
                 break;
         }
 

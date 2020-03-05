@@ -15,8 +15,10 @@ import static java.awt.SystemColor.menu;
 public class Main {
 
     public void start() {
+        AdministradorDAO admDAO = new AdministradorDAO();
+        ServidorDAO servDAO = new ServidorDAO();
         FazTudo fazTudo = new FazTudo();
-        fazTudo.login();
+        fazTudo.login(servDAO, admDAO);
     }
     public static void main(String[] args) {
         Main boost = new Main();
