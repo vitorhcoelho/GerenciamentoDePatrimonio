@@ -49,11 +49,12 @@ public class FazTudo {
                     if (servDAO.getServidoresLogin(login) != null) {
 
                         if (servDAO.getServidoresLogin(login).getSenha().equals(senha)) {
-                            servDAO.(servDAO.getServidoresLogin(login));
+                            servDAO.setServidorLogado(servDAO.getServidoresLogin(login));
                             servDAO.getServidorLogado().setLogado(true);
 
-                            while (servDAO.getServidorLogado().isLogado() != false && servDAO.getLogadoServ()!= null) {
-                                menuServ();
+                            while (servDAO.getServidorLogado().isLogado() != false && servDAO.getServidorLogado()!= null) {
+                                //menuServ();
+                                System.out.println("ok serv");
                             }
 
                         } else {
@@ -74,6 +75,7 @@ public class FazTudo {
                         admDAO.getAdm().setLogado(true);
 
                         while (admDAO.getAdm().isLogado() != false) {
+                            System.out.println("ok adm");
                             this.menuAdm(admDAO, servDAO);
                         }
 
@@ -90,118 +92,118 @@ public class FazTudo {
     }
     
     public void menuAdm(AdministradorDAO bkp, ServidorDAO jogDAO) {
-        int opc = 0;
-
-        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                + bkp.getAdm().toStringLogado()
-                + "\n\n" + menuAdmP);
-        opc = Integer.parseInt(in.nextLine());
-
-        switch (opc) {
-            case 1:
-                int opc1 = 0;
-                while (opc1 != 5) {
-                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                            + bkp.getAdm().toStringLogado()
-                            + "\n\n" + menuAdm1);
-                    opc1 = Integer.parseInt(in.nextLine());
-
-                    switch (opc1) {
-                        case 1:
-                            qdDAO.criaQuadra();
-                            break;
-
-                        case 2:
-                            qdDAO.editaQuadra();
-                            break;
-
-                        case 3:
-                            qdDAO.excluiQuadra();
-                            break;
-
-                        case 4:
-                            qdDAO.mostraQuadras();
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-                break;
-
-            case 2:
-           
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-                bkp.alteraSenha(system);
-                break;
-
-            case 5:
-                bkp.getAdm().setLogado(false);
-                break;
-        }
+//        int opc = 0;
+//
+//        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+//                + bkp.getAdm().toStringLogado()
+//                + "\n\n" + menuAdmP);
+//        opc = Integer.parseInt(in.nextLine());
+//
+//        switch (opc) {
+//            case 1:
+//                int opc1 = 0;
+//                while (opc1 != 5) {
+//                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+//                            + bkp.getAdm().toStringLogado()
+//                            + "\n\n" + menuAdm1);
+//                    opc1 = Integer.parseInt(in.nextLine());
+//
+//                    switch (opc1) {
+//                        case 1:
+//                            qdDAO.criaQuadra();
+//                            break;
+//
+//                        case 2:
+//                            qdDAO.editaQuadra();
+//                            break;
+//
+//                        case 3:
+//                            qdDAO.excluiQuadra();
+//                            break;
+//
+//                        case 4:
+//                            qdDAO.mostraQuadras();
+//                            break;
+//
+//                        default:
+//                            break;
+//                    }
+//                }
+//                break;
+//
+//            case 2:
+//           
+//                break;
+//
+//            case 3:
+//                break;
+//
+//            case 4:
+//                bkp.alteraSenha(system);
+//                break;
+//
+//            case 5:
+//                bkp.getAdm().setLogado(false);
+//                break;
+//        }
 
     }
     
-    public void menuServ(adminDAO bkp, quadraDAO qdDAO, JogadorDAO jogDAO) {
-        int opc = 0;
-
-        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                + bkp.getAdm().toStringLogado()
-                + "\n\n" + menuAdmP);
-        opc = Integer.parseInt(in.nextLine());
-
-        switch (opc) {
-            case 1:
-                int opc1 = 0;
-                while (opc1 != 5) {
-                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
-                            + bkp.getAdm().toStringLogado()
-                            + "\n\n" + menuAdm1);
-                    opc1 = Integer.parseInt(in.nextLine());
-
-                    switch (opc1) {
-                        case 1:
-                            qdDAO.criaQuadra();
-                            break;
-
-                        case 2:
-                            qdDAO.editaQuadra();
-                            break;
-
-                        case 3:
-                            qdDAO.excluiQuadra();
-                            break;
-
-                        case 4:
-                            qdDAO.mostraQuadras();
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-                break;
-
-            case 2:
-           
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-                bkp.alteraSenha(system);
-                break;
-
-            case 5:
-                bkp.getAdm().setLogado(false);
-                break;
-        }
-
-    }
+//    public void menuServ(adminDAO bkp, quadraDAO qdDAO, JogadorDAO jogDAO) {
+//        int opc = 0;
+//
+//        System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+//                + bkp.getAdm().toStringLogado()
+//                + "\n\n" + menuAdmP);
+//        opc = Integer.parseInt(in.nextLine());
+//
+//        switch (opc) {
+//            case 1:
+//                int opc1 = 0;
+//                while (opc1 != 5) {
+//                    System.out.println("Bem - Vindo\nAdministrador: " + bkp.getAdm().getNome() + "\t"
+//                            + bkp.getAdm().toStringLogado()
+//                            + "\n\n" + menuAdm1);
+//                    opc1 = Integer.parseInt(in.nextLine());
+//
+//                    switch (opc1) {
+//                        case 1:
+//                            qdDAO.criaQuadra();
+//                            break;
+//
+//                        case 2:
+//                            qdDAO.editaQuadra();
+//                            break;
+//
+//                        case 3:
+//                            qdDAO.excluiQuadra();
+//                            break;
+//
+//                        case 4:
+//                            qdDAO.mostraQuadras();
+//                            break;
+//
+//                        default:
+//                            break;
+//                    }
+//                }
+//                break;
+//
+//            case 2:
+//           
+//                break;
+//
+//            case 3:
+//                break;
+//
+//            case 4:
+//                bkp.alteraSenha(system);
+//                break;
+//
+//            case 5:
+//                bkp.getAdm().setLogado(false);
+//                break;
+//        }
+//
+//    }
 }
