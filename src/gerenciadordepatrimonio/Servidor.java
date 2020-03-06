@@ -10,6 +10,7 @@ package gerenciadordepatrimonio;
  * @author Vitor Hugo
  */
 public class Servidor {
+
     private int id;
     private String nome;
     private String email;
@@ -23,7 +24,7 @@ public class Servidor {
     public boolean isLogado() {
         return logado;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -31,15 +32,15 @@ public class Servidor {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public boolean checkId(int id){
-        if(id<0){
+
+    public boolean checkId(int id) {
+        if (id < 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
-   
+
     public String getNome() {
         return nome;
     }
@@ -93,7 +94,7 @@ public class Servidor {
         this.senha = senha;
         this.logado = false;
     }
-    
+
     public void setLogado(boolean logado) {
         this.logado = logado;
     }
@@ -110,5 +111,5 @@ public class Servidor {
             return "Offline";
         }
     }
-    
+
 }

@@ -12,15 +12,15 @@ import java.util.Scanner;
  * @author Aluno
  */
 public class ServidorDAO {
-    
+
     private Servidor servidorLogado;
 
     private Servidor[] servidores = new Servidor[221];
     private int qtdServidor;
-    
+
     Scanner in = new Scanner(System.in);
     private Servidor servLogado;
-    
+
     public Servidor getLogadoServ() {
         return this.servidorLogado;
     }
@@ -28,7 +28,7 @@ public class ServidorDAO {
     public void setLoginServ(Servidor logado) {
         this.servLogado = logado;
     }
-    
+
     public boolean validaLoginServ(String login, String senha) {
         for (int x = 0; x < servidores.length; x++) {
             if (this.servidores[x].getLogin().equals(login) && servidores[x] != null) {
@@ -43,7 +43,7 @@ public class ServidorDAO {
         }
         return false;
     }
-    
+
     public int posicaoServ() {
         for (int x = 0; x < servidores.length; x++) {
             if (servidores[x] == null) {
@@ -155,10 +155,10 @@ public class ServidorDAO {
     public int getQtdServ() {
         return this.qtdServidor;
     }
-    
+
     public void insereServ() {
         String dado;
-        int id=0;
+        int id = 0;
         Servidor i = new Servidor();
 
         System.out.println("\nNome: ");
@@ -236,8 +236,8 @@ public class ServidorDAO {
                 while (esc == 1) {
                     System.out.println("\nNovo CPF: ");
                     String novoCpf = in.nextLine();
-                    if (edit.checkCpf???????(novoCpf)) {
-                        edit.setCpf?????????(novoCpf);
+                    if (edit.checkId(novoCpf)) { //ID
+                        edit.setCpfnovoCpf); //ID
                         break;
                     } else {
                         System.out.println("\nCPF Inválido\n");
@@ -335,7 +335,7 @@ public class ServidorDAO {
             int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
                 if (getServidoresId(id).getId().equals(id)) {
-                    getServidoresId(id).setLogado?????????(false);
+                    getServidoresId(id).setLogado(false);
                     deleteServidor(id);
                     System.out.println("\nJogador Deletado\n");
                 } else {

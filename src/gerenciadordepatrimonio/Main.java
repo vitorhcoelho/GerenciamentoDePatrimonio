@@ -13,7 +13,7 @@ import static java.awt.SystemColor.menu;
  * @author Vitor Hugo
  */
 public class Main {
-
+    
     public void start() {
         AdministradorDAO admDAO = new AdministradorDAO();
         ServidorDAO servDAO = new ServidorDAO();
