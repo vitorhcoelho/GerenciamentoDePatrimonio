@@ -5,16 +5,19 @@
  */
 package gerenciadordepatrimonio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Vitor Hugo
  */
 public class Ambiente {
+
     private int id;
     private String descricao;
     private Campus camp;
-    private String datacriacao;
-    private String datamodificacao;
+    private LocalDate datacriacao;
+    private LocalDate datamodificacao;
 
     public int getId() {
         return id;
@@ -32,27 +35,27 @@ public class Ambiente {
         this.descricao = descricaoambiente;
     }
 
-    public Campus getCamp() {
+    public Campus getCampus() {
         return camp;
     }
 
-    public void setCamp(Campus camp) {
+    public void setCampus(Campus camp) {
         this.camp = camp;
     }
 
-    public String getDatacriacao() {
+    public LocalDate getDatacriacao() {
         return datacriacao;
     }
 
-    public void setDatacriacao(String datacriacao) {
+    public void setDatacriacao(LocalDate datacriacao) {
         this.datacriacao = datacriacao;
     }
 
-    public String getDatamodificacao() {
+    public LocalDate getDatamodificacao() {
         return datamodificacao;
     }
 
-    public void setDatamodificacao(String datamodificacao) {
+    public void setDatamodificacao(LocalDate datamodificacao) {
         this.datamodificacao = datamodificacao;
     }
 
@@ -60,5 +63,5 @@ public class Ambiente {
     public String toString() {
         return "Ambiente{" + "id=" + id + ", descricaoambiente=" + descricao + ", camp=" + camp + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
     }
-    
+
 }

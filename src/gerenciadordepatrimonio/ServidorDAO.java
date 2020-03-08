@@ -85,9 +85,9 @@ public class ServidorDAO {
         }
     }
 
-    public int achaServidorId(String id) {
+    public int achaServidorId(int id) {
         for (int x = 0; x < this.qtdServidor; x++) {
-            if (servidores[x].getId().equals(id) && servidores[x] != null) {
+            if (id == servidores[x].getId() && servidores[x] != null) {
                 return x;
             } else {
 
@@ -96,7 +96,7 @@ public class ServidorDAO {
         return -1;
     }
 
-    public Servidor getServidoresId(String id) {
+    public Servidor getServidoresId(int id) {
         int loc = this.achaServidorId(id);
         if (loc == -1) {
             return null;
@@ -126,9 +126,9 @@ public class ServidorDAO {
         }
     }
 
-    public boolean deleteServidor(String cpf) {
+    public boolean deleteServidor(int id) {
         for (int x = 0; x < this.qtdServidor; x++) {
-            if (cpf.equals(servidores[x].getId()) && servidores[x] != null) {
+            if (id == servidores[x].getId() && servidores[x] != null) {
                 this.servidores[x] = null;
                 this.qtdServidor--;
                 return true;
@@ -200,14 +200,14 @@ public class ServidorDAO {
         setServidores(i);
 
         if (setServidores(i)) {
-            System.out.println("\Servidor Adicionado\n");
+            System.out.println("\nServidor Adicionado\n");
         }
     }
 
     public void editaServ() {
-        String id;
+        int id;
         System.out.println("\nDigite o ID do jogador: ");
-        id = in.nextLine();
+        id = Integer.parseInt(in.nextLine());
 
         if (getServidoresId(id) == null) {
             System.out.println("\nServidor Não Encontrado\n");
@@ -234,9 +234,8 @@ public class ServidorDAO {
                 while (esc == 1) {
                     System.out.println("\nNovo CPF: ");
                     String novoCpf = in.nextLine();
-                    if (edit.checkId(novoCpf)) { //ID
-                        edit.setCpfnovoCpf
-                        ); //ID
+                    if (edit.checkId(id)) { //ID
+                        edit.setId(id);
                         break;
                     } else {
                         System.out.println("\nCPF Inválido\n");
@@ -256,36 +255,6 @@ public class ServidorDAO {
                 System.out.println("\nE-mail Mantido\n");
             }
 
-            System.out.println("\nDeseja mudar o Telefone Fixo:\n1 - Sim\n2 - Não");
-            esc = Integer.parseInt(in.nextLine());
-
-            if (esc == 1) {
-                System.out.println("\nNovo Telefone Fixo: ");
-                edit.setTelFixo(in.nextLine());
-            } else {
-                System.out.println("\nTelefone Fixo Mantido\n");
-            }
-
-            System.out.println("\nDeseja mudar o Telefone Celular:\n1 - Sim\n2 - Não");
-            esc = Integer.parseInt(in.nextLine());
-
-            if (esc == 1) {
-                System.out.println("\nNovo Telefone Celular: ");
-                edit.setTelCel(in.nextLine());
-            } else {
-                System.out.println("\nTelefone Celular Mantido\n");
-            }
-
-            System.out.println("\nDeseja mudar o Endereço:\n1 - Sim\n2 - Não");
-            esc = Integer.parseInt(in.nextLine());
-
-            if (esc == 1) {
-                System.out.println("\nNovo Endereço: ");
-                edit.setEndereco(in.nextLine());
-            } else {
-                System.out.println("\nEndereço Mantido\n");
-            }
-
             System.out.println("\nDeseja mudar o Login e Senha:\n1 - Sim\n2 - Não");
             esc = Integer.parseInt(in.nextLine());
 
@@ -300,7 +269,7 @@ public class ServidorDAO {
                     System.out.println("\nConfirme sua Nova Senha: ");
                     String conf = in.nextLine();
 
-                    if (getLogadoServ().getSenha().equals(atual)) {
+                    if (getServLogado().getSenha().equals(atual)) {
                         if (novaPass.equals(conf)) {
                             edit.setLoginSenha(login, novaPass);
                             break;
@@ -320,20 +289,20 @@ public class ServidorDAO {
     }
 
     public void excluiJog() {
-        String id;
+        int id;
         System.out.println("\nDigite o CPF do servidor: ");
-        id = in.nextLine();
+        id = Integer.parseInt(in.nextLine());
 
         if (getServidoresId(id) == null) {
             System.out.println("\nServidor Não Encontrado");
-        } else if (getServidoresId(id).iSystem()) {
+        } else if (getServidoresId(id).isSystem()) {
             System.out.println("\nVocê não pode deletar esse usuário!\n:user_system:\n");
         } else {
             System.out.println("\nJogador " + getServidoresId(id).getNome() + " Encontrado"
                     + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
             int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
-                if (getServidoresId(id).getId().equals(id)) {
+                if (getServidoresId(id).getId() == id) {
                     getServidoresId(id).setLogado(false);
                     deleteServidor(id);
                     System.out.println("\nJogador Deletado\n");
@@ -365,7 +334,7 @@ public class ServidorDAO {
                 break;
             case 2:
                 System.out.println("\nDigite o CPF: ");
-                String buscaId = in.nextLine();
+                int buscaId = Integer.parseInt(in.nextLine());
 
                 if (getServidoresId(buscaId) == null) {
                     System.out.println("\nJogador Não Encontrado\n");

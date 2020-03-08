@@ -10,18 +10,24 @@ package gerenciadordepatrimonio;
  * @author Vitor Hugo
  */
 public class Vinculacao {
-    private Ambiente amb;
 
-    public Ambiente getAmb() {
-        return amb;
+    private int codAmb;
+    private int codItem;
+
+    public int getCodAmb() {
+        return codAmb;
     }
 
-    public void setAmb(Ambiente amb) {
-        this.amb = amb;
+    public void setCodAmb(int codAmb) {
+        this.codAmb = codAmb;
     }
 
-    @Override
-    public String toString() {
-        return "Vinculacao{" + "amb=" + amb + '}';
+    public int getCodItem() {
+        return codItem;
     }
+
+    public void setCodItem(int codItem) {
+        this.codItem = codItem;
+    }
+
 }

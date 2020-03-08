@@ -21,6 +21,15 @@ public class Servidor {
     private String senha;
     private boolean logado;
     private boolean adm;
+    private boolean system;
+
+    public boolean isSystem() {
+        return system;
+    }
+
+    public void setSystem(boolean system) {
+        this.system = system;
+    }
 
     public boolean isAdm() {
         return adm;
@@ -29,7 +38,7 @@ public class Servidor {
     public void setAdm(boolean adm) {
         this.adm = adm;
     }
-    
+
     public boolean isLogado() {
         return logado;
     }
@@ -111,14 +120,6 @@ public class Servidor {
     @Override
     public String toString() {
         return "Servidor{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", camp=" + campus + ", cargo=" + cargo + ", papel=" + papel + ", login=" + login + ", senha=" + senha + '}';
-    }
-
-    public String toStringLogado() {
-        if (this.logado) {
-            return "Online";
-        } else {
-            return "Offline";
-        }
     }
 
 }
