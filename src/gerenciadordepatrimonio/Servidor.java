@@ -14,13 +14,22 @@ public class Servidor {
     private int id;
     private String nome;
     private String email;
-    private Campus camp;
+    private Campus campus;
     private String cargo;
     private String papel;
     private String login;
     private String senha;
     private boolean logado;
+    private boolean adm;
 
+    public boolean isAdm() {
+        return adm;
+    }
+
+    public void setAdm(boolean adm) {
+        this.adm = adm;
+    }
+    
     public boolean isLogado() {
         return logado;
     }
@@ -57,12 +66,12 @@ public class Servidor {
         this.email = email;
     }
 
-    public Campus getCamp() {
-        return camp;
+    public Campus getCampus() {
+        return campus;
     }
 
-    public void setCamp(Campus camp) {
-        this.camp = camp;
+    public void setCampus(Campus camp) {
+        this.campus = campus;
     }
 
     public String getCargo() {
@@ -101,7 +110,7 @@ public class Servidor {
 
     @Override
     public String toString() {
-        return "Servidor{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", camp=" + camp + ", cargo=" + cargo + ", papel=" + papel + ", login=" + login + ", senha=" + senha + '}';
+        return "Servidor{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", camp=" + campus + ", cargo=" + cargo + ", papel=" + papel + ", login=" + login + ", senha=" + senha + '}';
     }
 
     public String toStringLogado() {

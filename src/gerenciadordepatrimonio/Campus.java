@@ -5,6 +5,8 @@
  */
 package gerenciadordepatrimonio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Vitor Hugo
@@ -13,7 +15,7 @@ public class Campus {
     private int id;
     private String nome;
     private String abreviacao;
-    private String data;
+    private LocalDate dataCriacao;
     private String cidade;
     private String bairro;
     private String endereco;
@@ -43,12 +45,12 @@ public class Campus {
         this.abreviacao = abreviacao;
     }
 
-    public String getData() {
-        return data;
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setDataCriacao(LocalDate data) {
+        this.dataCriacao = data;
     }
 
     public String getCidade() {
@@ -85,6 +87,6 @@ public class Campus {
 
     @Override
     public String toString() {
-        return "Campus{" + "id=" + id + ", nome=" + nome + ", abreviacao=" + abreviacao + ", data=" + data + ", cidade=" + cidade + ", bairro=" + bairro + ", endereco=" + endereco + ", cep=" + cep + '}';
+        return "Campus{" + "id=" + id + ", nome=" + nome + ", abreviacao=" + abreviacao + ", data=" + dataCriacao + ", cidade=" + cidade + ", bairro=" + bairro + ", endereco=" + endereco + ", cep=" + cep + '}';
     }
 }

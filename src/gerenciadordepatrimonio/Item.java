@@ -5,6 +5,8 @@
  */
 package gerenciadordepatrimonio;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Vitor Hugo
@@ -14,11 +16,11 @@ public class Item {
     private String especificacao;
     private String codigo;
     private int estado;
-    private String datacompra;
+    private LocalDate datacompra;
     private double valorcompra;
     private String ambiente;
-    private String datacriacao;
-    private String datamodificacao;
+    private LocalDate datacriacao;
+    private LocalDate datamodificacao;
 
     public int getId() {
         return id;
@@ -52,11 +54,11 @@ public class Item {
         this.estado = estado;
     }
 
-    public String getDatacompra() {
-        return datacompra;
+    public LocalDate getDatacompra() {
+        return datacompra;   
     }
 
-    public void setDatacompra(String datacompra) {
+    public void setDatacompra(LocalDate datacompra) {
         this.datacompra = datacompra;
     }
 
@@ -76,19 +78,19 @@ public class Item {
         this.ambiente = ambiente;
     }
 
-    public String getDatacriacao() {
+    public LocalDate getDatacriacao() {
         return datacriacao;
     }
 
-    public void setDatacriacao(String datacriacao) {
+    public void setDatacriacao(LocalDate datacriacao) {
         this.datacriacao = datacriacao;
     }
 
-    public String getDatamodificacao() {
+    public LocalDate getDatamodificacao() {
         return datamodificacao;
     }
 
-    public void setDatamodificacao(String datamodificacao) {
+    public void setDatamodificacao(LocalDate datamodificacao) {
         this.datamodificacao = datamodificacao;
     }
 

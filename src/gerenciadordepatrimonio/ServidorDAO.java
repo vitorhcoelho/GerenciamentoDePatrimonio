@@ -13,18 +13,16 @@ import java.util.Scanner;
  */
 public class ServidorDAO {
 
-    private Servidor servidorLogado;
-
     private Servidor[] servidores = new Servidor[221];
     private int qtdServidor;
 
     Scanner in = new Scanner(System.in);
     private Servidor servLogado;
 
-    public Servidor getLogadoServ() {
-        return this.servidorLogado;
+    public Servidor getServLogado() {
+        return servLogado;
     }
-    
+
     public void setLoginServ(Servidor logado) {
         this.servLogado = logado;
     }
@@ -237,7 +235,8 @@ public class ServidorDAO {
                     System.out.println("\nNovo CPF: ");
                     String novoCpf = in.nextLine();
                     if (edit.checkId(novoCpf)) { //ID
-                        edit.setCpfnovoCpf); //ID
+                        edit.setCpfnovoCpf
+                        ); //ID
                         break;
                     } else {
                         System.out.println("\nCPF Inválido\n");
@@ -379,5 +378,5 @@ public class ServidorDAO {
 
         }
     }
-    
+
 }

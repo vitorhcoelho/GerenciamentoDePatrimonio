@@ -11,7 +11,7 @@ package gerenciadordepatrimonio;
  */
 public class Ambiente {
     private int id;
-    private String descricaoambiente;
+    private String descricao;
     private Campus camp;
     private String datacriacao;
     private String datamodificacao;
@@ -24,12 +24,12 @@ public class Ambiente {
         this.id = id;
     }
 
-    public String getDescricaoambiente() {
-        return descricaoambiente;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricaoambiente(String descricaoambiente) {
-        this.descricaoambiente = descricaoambiente;
+    public void setDescricao(String descricaoambiente) {
+        this.descricao = descricaoambiente;
     }
 
     public Campus getCamp() {
@@ -58,7 +58,7 @@ public class Ambiente {
 
     @Override
     public String toString() {
-        return "Ambiente{" + "id=" + id + ", descricaoambiente=" + descricaoambiente + ", camp=" + camp + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
+        return "Ambiente{" + "id=" + id + ", descricaoambiente=" + descricao + ", camp=" + camp + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
     }
     
 }
