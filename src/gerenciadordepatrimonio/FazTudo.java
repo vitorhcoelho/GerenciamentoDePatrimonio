@@ -5,7 +5,6 @@
  */
 package gerenciadordepatrimonio;
 
-import static java.time.Clock.system;
 import java.util.Scanner;
 
 /**
@@ -15,32 +14,69 @@ import java.util.Scanner;
 public class FazTudo {
 
     Servidor serv = new Servidor();
-    Administrador adm = new Administrador();
     Scanner in = new Scanner(System.in);
-    int opcao=10;
 
-    private String menuServ = "1 - Gerar relatório\n"
+    private String menuServ = "1 - Gerar Relatório\n"
+            + "2 - Visulizar\n"
             + "0 - Sair\n";
 
-    private String menuAdm = "1 - Lista de servidores\n"
-            + "2 - Campus\n"
-            + "3 - Itens\n"
-            + "4 - Ambientes\n"
-            + "5 - Vinculações\n"
-            + "6 - Movimentações\n"
+    private String menuAdm = "1 - Gerar Relatório\n"
+            + "2 - Visualizar\n"
+            + "3 - Gerenciar\n"
             + "0 - Sair\n";
 
-    public void login(ServidorDAO servDAO, AdministradorDAO admDAO) {
+    private String menuRelatorio = "1 - Relatório de Ambientes\n"
+            + "2 - Relatório de Servidores\n"
+            + "0 - Voltar\n";
 
-        while (this.opcao != 0) {
+    private String menuVisualizar = "1 - Visualizar Servidores\n"
+            + "2 - Visualizar Campus\n"
+            + "3 - Visualizar Ambientes\n"
+            + "4 - Visualizar Itens\n"
+            + "5 - Visualizar Movimentação de Itens\n"
+            + "6 - Visualizar Movimentação de Donos\n"
+            + "7 - Visualizar Revisões\n"
+            + "0 - Voltar\n";
+
+    private String menuVisuAmb = "1 - Filtrar por Servidor\n"
+            + "2 - Filtrar por Campus\n"
+            + "0 - Voltar\n";
+
+    private String menuVisuItens = "1 - Filtrar por Campus\n"
+            + "2 - Filtrar por Servidor Dono\n"
+            + "3 - Buscar por ID\n"
+            + "0 - Voltar\n";
+
+    private String menuGerenciar = "1 - Campus\n"
+            + "2 - Servidores\n"
+            + "3 - Ambientes\n"
+            + "4 - Itens\n"
+            + "5 - Movimentações de Itens\n"
+            + "6 - Movimentações de Donos\n"
+            + "0 - Voltar\n";
+
+    private String menuGerenciar2 = "1 - Adicionar\n"
+            + "2 - Editar\n"
+            + "3 - Excluir\n"
+            + "0 - Voltar\n";
+
+    public void login(ServidorDAO servDAO) {
+
+        serv.setLoginSenha("login", "senha");//user teste
+        serv.setAdm(true);
+        servDAO.setServidores(serv);
+
+        int opcao = 5;
+
+        while (opcao != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
             System.out.println("Para acessar como:\n\n"
                     + "[1] -> SERVIDOR\n"
                     + "[2] -> ADMINISTRADOR\n"
                     + "[0] -> SAIR\n");
-            this.opcao = Integer.parseInt(in.nextLine());
+            opcao = Integer.parseInt(in.nextLine());
 
-            switch (this.opcao) {
+            switch (opcao) {
                 case 1:
                     System.out.println("Login: ");
                     String login = in.nextLine();
@@ -48,54 +84,48 @@ public class FazTudo {
                     String senha = in.nextLine();
 
                     if (servDAO.getServidoresLogin(login) != null) {
-
                         if (servDAO.getServidoresLogin(login).getSenha().equals(senha)) {
 
                             servDAO.setLoginServ(servDAO.getServidoresLogin(login));
-                            servDAO.getLogadoServ().setLogado(true);
+                            servDAO.getServLogado().setLogado(true);
 
-                            servDAO.setServidorLogado(servDAO.getServidoresLogin(login));
-                            servDAO.getServidorLogado().setLogado(true);
+                            while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
+                                mainServidor(servDAO);
+                            }
 
-                            while (servDAO.getLogadoServ().isLogado() != false && servDAO.getLogadoServ() != null) {
-                                menuServ(servDAO);
-
-                                while (servDAO.getServidorLogado().isLogado() != false && servDAO.getServidorLogado() != null) {
-                                    //menuServ();
-                                    System.out.println("ok serv");
-
-                                }
-
-                            }else {
-                            System.out.println("\nLogin ou Senha Incorretos!\n");
-                        }
                         } else {
                             System.out.println("\nLogin ou Senha Incorretos!\n");
                         }
-                        break;
+                    } else {
+                        System.out.println("\nLogin ou Senha Incorretos!\n");
+                    }
+                    break;
 
-                    
-            
-        case 2:
+                case 2:
                     System.out.println("Login: ");
                     login = in.nextLine();
                     System.out.println("Senha: ");
                     senha = in.nextLine();
 
-                    if (admDAO.validaLoginAdm(login, senha)) {
-                        admDAO.getAdm().setLogado(true);
+                    if (servDAO.getServidoresLogin(login) != null) {
+                        if (servDAO.getServidoresLogin(login).isAdm()) {
+                            if (servDAO.getServidoresLogin(login).getSenha().equals(senha)) {
 
-                        while (admDAO.getAdm().isLogado() != false) {
+                                servDAO.setLoginServ(servDAO.getServidoresLogin(login));
+                                servDAO.getServLogado().setLogado(true);
 
-                            this.menuAdm(admDAO);
+                                while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
+                                    mainAdm(servDAO);
+                                }
 
-                            System.out.println("ok adm");
-                            this.menuAdm(admDAO, servDAO);
-
+                            } else {
+                                System.out.println("\nLogin ou Senha Incorretos!\n");
+                            }
+                        } else {
+                            System.out.println("\nUsuário sem Permissão Administrativa!\n");
                         }
-
                     } else {
-                        System.out.println("Login ou Senha Incorretos!\n");
+                        System.out.println("\nLogin ou Senha Incorretos!\n");
                     }
                     break;
 
@@ -105,188 +135,320 @@ public class FazTudo {
 
         }
     }
-    
 
-    
+    public void relatorios(ServidorDAO servDAO) {
+        int aux = 1;
+        while (aux != 0) {
+            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println(menuRelatorio);
+            aux = Integer.parseInt(in.nextLine());
 
-    public void menuAdm(AdministradorDAO admDAO) {
-        int opc = 0;
+            switch (aux) {
+                case 1:
 
-        System.out.println("Bem - Vindo Administrador: " + admDAO.getAdm().getNome() + "\t"
-                + admDAO.getAdm().toStringLogado()
-                + "\n\n" + menuAdm);
-        opc = Integer.parseInt(in.nextLine());
+                    break;
 
-        switch (opc) {
-            case 1:
-                int opc1 = 0;
-                while (opc1 != 5) {
-                    System.out.println("Bem - Vindo\nAdministrador: " + admDAO.getAdm().getNome() + "\t"
-                            + admDAO.getAdm().toStringLogado()
-                            + "\n\n" + menuAdm);
-                    opc1 = Integer.parseInt(in.nextLine());
+                case 2:
 
-                    switch (opc1) {
-                        case 1:
-                            break;
+                    break;
 
-                        case 2:
-                            break;
-
-                        case 3:
-                            break;
-
-                        case 4:
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-                break;
-
-            case 2:
-
-                break;
-
-            case 3:
-                break;
-
-            case 4:
-                admDAO.alteraSenha(adm);
-                break;
-
-            case 5:
-                admDAO.getAdm().setLogado(false);
-                break;
+                default:
+                    break;
+            }
         }
-        
-    
+    }
 
-    public void menuServ(ServidorDAO servDAO) {
-        int opc = 0;
-        String id;
-        System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
-                + servDAO.getLogadoServ().toStringLogado()
-                + "\n\n" + menuJog1);//????
-        opc = Integer.parseInt(in.nextLine());
+    public void visualizar(ServidorDAO servDAO) {
+        int aux = 1;
+        while (aux != 0) {
+            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println(menuVisualizar);
+            aux = Integer.parseInt(in.nextLine());
+            int opc = 1;
 
-        switch (opc) {
-            case 1:
-                int opc1 = 0;
-                while (opc1 != 5 && servDAO.getLogadoServ().isLogado() != false) {
-                    System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
-                            + servDAO.getLogadoServ().toStringLogado()
-                            + "\n\n" + menuServ);
-                    opc1 = Integer.parseInt(in.nextLine());
-                    switch (opc1) {
-                        case 1:
+            switch (aux) {
+                case 1:
 
-                            break;
+                    break;
+                case 2:
 
-                        case 2:
+                    break;
+                case 3:
+                    while (opc != 0) {
+                        System.out.println(menuVisuAmb);
+                        opc = Integer.parseInt(in.nextLine());
 
-                            break;
+                        switch (opc) {
+                            case 1:
 
-                        case 3:
+                                break;
 
-                            break;
+                            case 2:
 
-                        case 4:
+                                break;
 
-                            break;
-
-                        default:
-                            break;
-
+                            default:
+                                break;
+                        }
                     }
+                    break;
+                case 4:
+                    while (opc != 0) {
+                        System.out.println(menuVisuItens);
+                        opc = Integer.parseInt(in.nextLine());
 
-                }
-                break;
+                        switch (opc) {
+                            case 1:
 
-            case 2:
-                int opc2 = 0;
-                while (opc2 != 6) {
-                    System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
-                            + servDAO.getLogadoServ().toStringLogado()
-                            + "\n\n" + menuJog2);//?????
-                    opc2 = Integer.parseInt(in.nextLine());
-                    switch (opc2) {
-                        case 1:
+                                break;
 
-                            break;
+                            case 2:
 
-                        case 2:
+                                break;
 
-                            break;
+                            case 3:
 
-                        case 3:
+                                break;
 
-                            break;
-
-                        case 4:
-
-                            break;
-
-                        case 5:
-
-                            break;
-
-                        default:
-                            break;
+                            default:
+                                break;
+                        }
                     }
+                    break;
+                case 5:
 
-                }
-                break;
+                    break;
+                case 6:
 
-            case 3:
-                int opc3 = 0;
-                while (opc3 != 9) {
-                    System.out.println("Bem - Vindo\n" + servDAO.getLogadoServ().toString() + ": " + servDAO.getLogadoServ().getNome() + "\t"
-                            + servDAO.getLogadoServ().toStringLogado()
-                            + "\n\n" + menuJog3);//???????
-                    opc3 = Integer.parseInt(in.nextLine());
-                    switch (opc3) {
-                        case 1:
+                    break;
+                case 7:
 
-                            break;
+                    break;
+                default:
+                    break;
 
-                        case 2:
-
-                            break;
-                        case 3:
-
-                            break;
-
-                        case 4:
-
-                            break;
-
-                        case 5:
-
-                            break;
-
-                        case 6:
-                            break;
-
-                        case 7:
-
-                            break;
-
-                        case 8:
-
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-                break;
-
-            case 5:
-                servDAO.getLogadoServ().setLogado(false);
-                break;
+            }
         }
+    }
 
+    public void gerenciamento(ServidorDAO servDAO) {
+        int aux = 1;
+        while (aux != 0) {
+            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println(menuGerenciar);
+            aux = Integer.parseInt(in.nextLine());
+            int opc = 1;
+
+            switch (aux) {
+                case 1:
+                    while (opc != 0) {
+                        System.out.println("\nCampus:\n");
+                        System.out.println(menuGerenciar2);
+                        opc = Integer.parseInt(in.nextLine());
+
+                        switch (opc) {
+                            case 1:
+
+                                break;
+
+                            case 2:
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+
+                    break;
+
+                case 2:
+                    while (opc != 0) {
+                        System.out.println("\nServidores:\n");
+                        System.out.println(menuGerenciar2);
+                        opc = Integer.parseInt(in.nextLine());
+
+                        switch (opc) {
+                            case 1:
+
+                                break;
+
+                            case 2:
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+
+                    break;
+                case 3:
+                    while (opc != 0) {
+                        System.out.println("\nAmbiente:\n");
+                        System.out.println(menuGerenciar2);
+                        opc = Integer.parseInt(in.nextLine());
+
+                        switch (opc) {
+                            case 1:
+
+                                break;
+
+                            case 2:
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                        break;
+                    }
+
+                case 4:
+                    while (opc != 0) {
+                        System.out.println("\nItens:\n");
+                        System.out.println(menuGerenciar2);
+                        opc = Integer.parseInt(in.nextLine());
+                        switch (opc) {
+                            case 1:
+
+                                break;
+
+                            case 2:
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case 5:
+                    while (opc != 0) {
+                        System.out.println("\nMovimentações de Itens:\n");
+                        System.out.println(menuGerenciar2);
+                        opc = Integer.parseInt(in.nextLine());
+                        switch (opc) {
+                            case 1:
+
+                                break;
+
+                            case 2:
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                case 6:
+                    while (opc != 0) {
+                        System.out.println("\nMovimentações de Donos:\n");
+                        System.out.println(menuGerenciar2);
+                        opc = Integer.parseInt(in.nextLine());
+                        switch (opc) {
+                            case 1:
+
+                                break;
+
+                            case 2:
+
+                                break;
+
+                            case 3:
+
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                default:
+                    break;
+
+            }
+        }
+    }
+
+    public void mainServidor(ServidorDAO servDAO) {
+        int opc = 1;
+        while (opc != 0) {
+            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("Bem Vindo " + servDAO.getServLogado().getNome());
+            System.out.println(menuServ);
+            opc = Integer.parseInt(in.nextLine());
+
+            switch (opc) {
+                case 1:
+
+                    relatorios(servDAO);
+                    break;
+
+                case 2:
+
+                    visualizar(servDAO);
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+        servDAO.getServLogado().setLogado(false);
+
+    }
+
+    public void mainAdm(ServidorDAO servDAO) {
+        int opc = 1;
+        while (opc != 0) {
+            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("Bem Vindo " + servDAO.getServLogado().getNome());
+            System.out.println(menuAdm);
+            opc = Integer.parseInt(in.nextLine());
+
+            switch (opc) {
+                case 1:
+
+                    relatorios(servDAO);
+                    break;
+
+                case 2:
+
+                    visualizar(servDAO);
+                    break;
+
+                case 3:
+
+                    gerenciamento(servDAO);
+                    break;
+
+                default:
+
+                    break;
+            }
+        }
+        servDAO.getServLogado().setLogado(false);
     }
 }
