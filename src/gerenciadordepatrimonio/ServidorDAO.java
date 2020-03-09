@@ -206,7 +206,7 @@ public class ServidorDAO {
 
     public void editaServ() {
         int id;
-        System.out.println("\nDigite o ID do jogador: ");
+        System.out.println("\nDigite o ID do Servidor: ");
         id = Integer.parseInt(in.nextLine());
 
         if (getServidoresId(id) == null) {
@@ -284,7 +284,7 @@ public class ServidorDAO {
                 System.out.println("\nLogin e Senha Mantidos\n");
             }
 
-            System.out.println("\nJogador Alterado\n");
+            System.out.println("\nServidor Alterado\n");
         }
     }
 
@@ -298,20 +298,20 @@ public class ServidorDAO {
         } else if (getServidoresId(id).isSystem()) {
             System.out.println("\nVocê não pode deletar esse usuário!\n:user_system:\n");
         } else {
-            System.out.println("\nJogador " + getServidoresId(id).getNome() + " Encontrado"
+            System.out.println("\nServidor " + getServidoresId(id).getNome() + " Encontrado"
                     + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
             int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
                 if (getServidoresId(id).getId() == id) {
                     getServidoresId(id).setLogado(false);
                     deleteServidor(id);
-                    System.out.println("\nJogador Deletado\n");
+                    System.out.println("\nServidor Deletado\n");
                 } else {
                     deleteServidor(id);
-                    System.out.println("\nJogador Deletado\n");
+                    System.out.println("\nServidor Deletado\n");
                 }
             } else {
-                System.out.println("\nJogador Mantido\n");
+                System.out.println("\nServidor Mantido\n");
             }
         }
     }

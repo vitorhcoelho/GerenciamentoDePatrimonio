@@ -87,6 +87,9 @@ public class Campus {
 
     @Override
     public String toString() {
-        return "Campus{" + "id=" + id + ", nome=" + nome + ", abreviacao=" + abreviacao + ", data=" + dataCriacao + ", cidade=" + cidade + ", bairro=" + bairro + ", endereco=" + endereco + ", cep=" + cep + '}';
+       return "Campus: " + this.nome + "  " + this.abreviacao + "\tID: " + this.id + "\n"
+               + this.endereco + ", " + this.bairro + " - " + this.cidade + "\nCEP: " + this.cep 
+               + "\tAdicionado: " + this.dataCriacao;
+    
     }
 }
