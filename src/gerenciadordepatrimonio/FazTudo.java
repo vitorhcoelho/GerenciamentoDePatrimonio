@@ -252,11 +252,11 @@ public class FazTudo {
                                 break;
 
                             case 2:
-
+                                campDAO.editaCampus();
                                 break;
 
                             case 3:
-
+                                campDAO.excluiCampus();
                                 break;
 
                             default:

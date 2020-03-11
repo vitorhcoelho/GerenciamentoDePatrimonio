@@ -10,13 +10,14 @@ import java.util.Scanner;
 
 /**
  *
- * @author gusta
+ * @author gusta em andamento
  */
 public class CampusDAO {
 
     private Campus[] campus = new Campus[100];
     private int qtdCampus;
     private int id = 0;
+    private int idlivre = 0;
 
     Scanner in = new Scanner(System.in);
 
@@ -24,19 +25,23 @@ public class CampusDAO {
         this.id++;
         return id;
     }
-    
-    public int vagaCampus(){
+
+    public int vagaCampus() {
         for (int x = 0; x < campus.length; x++) {
             if (campus[x] == null) {
                 return x;
             } else {
+                if (campus[x].getNome().equals("Campus Apagado")) {
+                    return x;
+                } else {
 
+                }
             }
         }
         return -1;
     }
-    
-    public boolean setCampus(Campus camp){
+
+    public boolean setCampus(Campus camp) {
         int pos = vagaCampus();
         if (pos == -1) {
             System.out.println("\nLista de Campus Cheia\n");
@@ -59,7 +64,7 @@ public class CampusDAO {
         System.out.println("\nInsira a Abreviação:");
         dado = in.nextLine();
         c.setAbreviacao(dado);
-       
+
         System.out.println("\nInsira a Cidade que se Localiza:");
         dado = in.nextLine();
         c.setCidade(dado);
@@ -85,24 +90,50 @@ public class CampusDAO {
                 verify = 0;
             }
         }
-        
+
         c.setDataCriacao(LocalDate.now());
-        c.setId(geraId());
+
+        if (this.idlivre != 0) {
+            c.setId(idlivre);
+            idlivre = 0;
+        } else {
+            c.setId(geraId());
+        }
         this.setCampus(c);
-        
+
         System.out.println(c.toString() + "\nIncluído com Sucesso!\n");
     }
-    
-    public void editaCampus(){
+
+    public int achaCampusId(int id) {
+        for (int x = 0; x < this.qtdCampus; x++) {
+            if (id == campus[x].getId() && campus[x] != null) {
+                return x;
+            } else {
+
+            }
+        }
+        return -1;
+    }
+
+    public Campus getCampus(int id) {
+        int x = achaCampusId(id);
+        if (x == -1) {
+            return null;
+        } else {
+            return campus[x];
+        }
+    }
+
+    public void editaCampus() {
         int id;
         System.out.println("\nDigite o ID do Campus: ");
         id = Integer.parseInt(in.nextLine());
 
-        if (getServidoresId(id) == null) {
-            System.out.println("\nServidor Não Encontrado\n");
+        if (getCampus(id) == null) {
+            System.out.println("\nCampus Não Encontrado\n");
         } else {
-            Servidor edit = getServidoresId(id);
-            System.out.println("\nServidor " + edit.getNome() + " Encontrado");
+            Campus edit = getCampus(id);
+            System.out.println("\nCampus:  " + edit.getNome() + " Encontrado");
 
             int esc;
 
@@ -116,64 +147,87 @@ public class CampusDAO {
                 System.out.println("\nNome Mantido\n");
             }
 
-            System.out.println("\nDeseja mudar o CPF:\n1 - Sim\n2 - Não");
+            System.out.println("\nDeseja mudar a abreviação:\n1 - Sim\n2 - Não");
             esc = Integer.parseInt(in.nextLine());
 
             if (esc == 1) {
-                while (esc == 1) {
-                    System.out.println("\nNovo CPF: ");
-                    String novoCpf = in.nextLine();
-                    if (edit.checkId(id)) { //ID
-                        edit.setId(id);
-                        break;
-                    } else {
-                        System.out.println("\nCPF Inválido\n");
-                    }
-                }
+                System.out.println("\nNova Abreviação: ");
+                edit.setAbreviacao(in.nextLine());
             } else {
-                System.out.println("\nCPF Mantido\n");
+                System.out.println("\nAbreviação Mantida\n");
             }
 
-            System.out.println("\nDeseja mudar o E-mail:\n1 - Sim\n2 - Não");
+            System.out.println("\nDeseja mudar a cidade:\n1 - Sim\n2 - Não");
             esc = Integer.parseInt(in.nextLine());
 
             if (esc == 1) {
-                System.out.println("\nNovo E-mail: ");
-                edit.setEmail(in.nextLine());
+                System.out.println("\nNova cidade: ");
+                edit.setCidade(in.nextLine());
             } else {
-                System.out.println("\nE-mail Mantido\n");
+                System.out.println("\nCidade Mantida\n");
             }
 
-            System.out.println("\nDeseja mudar o Login e Senha:\n1 - Sim\n2 - Não");
+            System.out.println("\nDeseja mudar o bairro:\n1 - Sim\n2 - Não");
             esc = Integer.parseInt(in.nextLine());
 
             if (esc == 1) {
-                while (esc == 1) {
-                    System.out.println("\nNovo Login: ");
-                    String login = in.nextLine();
-                    System.out.println("\nSenha Atual: ");
-                    String atual = in.nextLine();
-                    System.out.println("\nNova Senha: ");
-                    String novaPass = in.nextLine();
-                    System.out.println("\nConfirme sua Nova Senha: ");
-                    String conf = in.nextLine();
-
-                    if (getServLogado().getSenha().equals(atual)) {
-                        if (novaPass.equals(conf)) {
-                            edit.setLoginSenha(login, novaPass);
-                            break;
-                        } else {
-                            System.out.println("\nSenhas Diferentes\n");
-                        }
-                    } else {
-                        System.out.println("\nSenha Atual Errada\n");
-                    }
-                }
+                System.out.println("\nNovo bairro: ");
+                edit.setBairro(in.nextLine());
             } else {
-                System.out.println("\nLogin e Senha Mantidos\n");
+                System.out.println("\nBairro Mantido\n");
             }
 
-            System.out.println("\nJogador Alterado\n");
+            System.out.println("\nDeseja mudar o endereço:\n1 - Sim\n2 - Não");
+            esc = Integer.parseInt(in.nextLine());
+
+            if (esc == 1) {
+                System.out.println("\nNovo Endereço: ");
+                edit.setEndereco(in.nextLine());
+            } else {
+                System.out.println("\nEndereço Mantido\n");
+            }
+
+            System.out.println("\nDeseja mudar o CEP:\n1 - Sim\n2 - Não");
+            esc = Integer.parseInt(in.nextLine());
+
+            if (esc == 1) {
+                System.out.println("\nNovo CEP: ");
+                edit.setCep(in.nextLine());
+            } else {
+                System.out.println("\nCEP Mantido\n");
+            }
+
+            System.out.println(edit.toString() + "\nCampus Alterado\n");
+        }
+    }
+
+    public void excluiCampus() {
+        System.out.println("\nDigite o CPF do servidor: ");
+        int id = Integer.parseInt(in.nextLine());
+
+        if (getCampus(id) == null) {
+            System.out.println("\nServidor Não Encontrado");
+
+        } else {
+            System.out.println("\nServidor " + getCampus(id).getNome() + " Encontrado"
+                    + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
+            int es = Integer.parseInt(in.nextLine());
+            if (es == 1) {
+
+                Campus del = getCampus(id);
+                this.idlivre = del.getId();
+                del.setNome("Campus Apagado");
+                del.setAbreviacao(null);
+                del.setBairro(null);
+                del.setCep(null);
+                del.setCidade(null);
+                del.setDataCriacao(null);
+                del.setEndereco(null);
+                System.out.println("\nServidor Deletado\n");
+
+            } else {
+                System.out.println("\nServidor Mantido\n");
+            }
         }
     }
 }
