@@ -12,13 +12,14 @@ import java.time.LocalDate;
  * @author Vitor Hugo
  */
 public class Item {
+
     private int id;
     private String especificacao;
     private String codigo;
     private int estado;
-    private LocalDate datacompra;
+    private String datacompra;
     private double valorcompra;
-    private String ambiente;
+    private int ambienteId;
     private LocalDate datacriacao;
     private LocalDate datamodificacao;
 
@@ -54,11 +55,11 @@ public class Item {
         this.estado = estado;
     }
 
-    public LocalDate getDatacompra() {
-        return datacompra;   
+    public String getDatacompra() {
+        return datacompra;
     }
 
-    public void setDatacompra(LocalDate datacompra) {
+    public void setDatacompra(String datacompra) {
         this.datacompra = datacompra;
     }
 
@@ -70,12 +71,12 @@ public class Item {
         this.valorcompra = valorcompra;
     }
 
-    public String getAmbiente() {
-        return ambiente;
+    public int getAmbiente() {
+        return ambienteId;
     }
 
-    public void setAmbiente(String ambiente) {
-        this.ambiente = ambiente;
+    public void setAmbiente(int ambiente) {
+        this.ambienteId = ambiente;
     }
 
     public LocalDate getDatacriacao() {
@@ -96,6 +97,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", especificacao=" + especificacao + ", codigo=" + codigo + ", estado=" + estado + ", datacompra=" + datacompra + ", valorcompra=" + valorcompra + ", ambiente=" + ambiente + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
+        return "Item{" + "id=" + id + ", especificacao=" + especificacao + ", codigo=" + codigo + ", estado=" + estado + ", datacompra=" + datacompra + ", valorcompra=" + valorcompra + ", ambiente=" + ambienteId + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
     }
 }

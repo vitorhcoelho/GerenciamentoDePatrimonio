@@ -288,7 +288,7 @@ public class ServidorDAO {
         }
     }
 
-    public void excluiJog() {
+    public void excluiServ() {
         int id;
         System.out.println("\nDigite o CPF do servidor: ");
         id = Integer.parseInt(in.nextLine());
@@ -316,7 +316,7 @@ public class ServidorDAO {
         }
     }
 
-    public void buscaJog() {
+    public void buscaServ() {
         System.out.println("\nBuscar por:\n1 - Nome\n2 - ID\n3 - Voltar");
         int escB = Integer.parseInt(in.nextLine());
 
