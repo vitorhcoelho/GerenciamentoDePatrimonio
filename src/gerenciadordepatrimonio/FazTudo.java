@@ -274,15 +274,15 @@ public class FazTudo {
 
                         switch (opc) {
                             case 1:
-
+                                servDAO.insereServ();
                                 break;
 
                             case 2:
-
+                                servDAO.editaServ();
                                 break;
 
                             case 3:
-
+                                servDAO.excluiServ();
                                 break;
 
                             default:

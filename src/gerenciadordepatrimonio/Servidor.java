@@ -14,7 +14,7 @@ public class Servidor {
     private int id;
     private String nome;
     private String email;
-    private Campus campus;
+    private int campus;
     private String cargo;
     private String papel;
     private String login;
@@ -22,6 +22,10 @@ public class Servidor {
     private boolean logado;
     private boolean adm;
     private boolean system;
+    
+    public Servidor(){
+        this.id = 0;
+    }
 
     public boolean isSystem() {
         return system;
@@ -29,6 +33,14 @@ public class Servidor {
 
     public void setSystem(boolean system) {
         this.system = system;
+    }
+
+    public String descreveAdm() {
+        if (isAdm()) {
+            return "Sim";
+        } else {
+            return "Não";
+        }
     }
 
     public boolean isAdm() {
@@ -51,14 +63,6 @@ public class Servidor {
         this.id = id;
     }
 
-    public boolean checkId(int id) {
-        if (id < 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public String getNome() {
         return nome;
     }
@@ -75,11 +79,11 @@ public class Servidor {
         this.email = email;
     }
 
-    public Campus getCampus() {
+    public int getCampus() {
         return campus;
     }
 
-    public void setCampus(Campus camp) {
+    public void setCampus(int campus) {
         this.campus = campus;
     }
 
@@ -119,7 +123,9 @@ public class Servidor {
 
     @Override
     public String toString() {
-        return "Servidor{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", camp=" + campus + ", cargo=" + cargo + ", papel=" + papel + ", login=" + login + ", senha=" + senha + '}';
+        return "Servidor " + getNome() + "\tAdministrador: " + descreveAdm() + "\tID: " + getId()
+                + "\nE-mail: " + getEmail() + "\nCargo: " + getCargo() + "\tPapel: "
+                + getPapel() + "\nId de Campus: " + getCampus();
     }
 
 }

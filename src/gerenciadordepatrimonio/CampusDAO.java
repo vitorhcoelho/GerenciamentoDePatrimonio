@@ -202,14 +202,14 @@ public class CampusDAO {
     }
 
     public void excluiCampus() {
-        System.out.println("\nDigite o CPF do servidor: ");
+        System.out.println("\nDigite o ID do Campus: ");
         int id = Integer.parseInt(in.nextLine());
 
         if (getCampus(id) == null) {
-            System.out.println("\nServidor Não Encontrado");
+            System.out.println("\nCampus Não Encontrado");
 
         } else {
-            System.out.println("\nServidor " + getCampus(id).getNome() + " Encontrado"
+            System.out.println("\nCampus " + getCampus(id).getNome() + " Encontrado"
                     + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
             int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
@@ -223,10 +223,10 @@ public class CampusDAO {
                 del.setCidade(null);
                 del.setDataCriacao(null);
                 del.setEndereco(null);
-                System.out.println("\nServidor Deletado\n");
+                System.out.println("\nCampus Deletado\n");
 
             } else {
-                System.out.println("\nServidor Mantido\n");
+                System.out.println("\nCampus Mantido\n");
             }
         }
     }

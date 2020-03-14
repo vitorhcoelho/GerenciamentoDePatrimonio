@@ -13,11 +13,17 @@ import java.util.Scanner;
  */
 public class ServidorDAO {
 
-    private Servidor[] servidores = new Servidor[221];
+    private Servidor[] servidores = new Servidor[250];
     private int qtdServidor;
+    private int id = 0;
 
     Scanner in = new Scanner(System.in);
     private Servidor servLogado;
+    
+    public int geraId() {
+        this.id++;
+        return id;
+    }
 
     public Servidor getServLogado() {
         return servLogado;
@@ -46,8 +52,10 @@ public class ServidorDAO {
         for (int x = 0; x < servidores.length; x++) {
             if (servidores[x] == null) {
                 return x;
-            } else {
-
+            } else if(servidores[x].getId() != 0) {
+                return x;
+            }else{
+                
             }
         }
         return -1;
@@ -155,28 +163,57 @@ public class ServidorDAO {
     }
 
     public void insereServ() {
+        
+        Servidor add = new Servidor();
+        
+        for (int x = 0; x < servidores.length; x++) {
+            if (servidores[x] == null) {
+                add.setId(geraId());
+                break;
+            } else if(servidores[x].getId() != 0) {
+                add.setId(servidores[x].getId());
+                break;
+            }else{
+                
+            }
+        }
+        
         String dado;
-        int id = 0;
-        Servidor i = new Servidor();
+        int aux = 0;
 
         System.out.println("\nNome: ");
         dado = in.nextLine();
-        i.setNome(dado);
-
-        while (dado != null) {
-            System.out.println("\nId: ");
-            dado = in.nextLine();
-            if (i.checkId(id)) {
-                i.setId(id);
-                break;
-            } else {
-                System.out.println("\nId Inválido\n");
-            }
-        }
+        add.setNome(dado);
 
         System.out.println("\nE-mail: ");
         dado = in.nextLine();
-        i.setEmail(dado);
+        add.setEmail(dado);
+
+        System.out.println("\nId do Campus: ");
+        aux = Integer.parseInt(in.nextLine());
+        add.setCampus(aux);
+
+        System.out.println("\nCargo: ");
+        dado = in.nextLine();
+        add.setCargo(dado);
+
+        System.out.println("\nPapel: ");
+        dado = in.nextLine();
+        add.setPapel(dado);
+
+        int adm = 0;
+
+        while (adm != 2) {
+            System.out.println("\nEsse usuário tem permissão administrativa?\n1 - Sim\t2 - Não\n");
+            adm = Integer.parseInt(in.nextLine());
+
+            if (adm == 1) {
+                add.setAdm(true);
+                break;
+            } else {
+                add.setAdm(false);
+            }
+        }
 
         System.out.println("\nLogin: ");
         dado = in.nextLine();
@@ -190,18 +227,18 @@ public class ServidorDAO {
             System.out.println("\nConfirme sua Senha: ");
             confirme = in.nextLine();
             if (senha.equals(confirme)) {
-                i.setLoginSenha(dado, senha);
+                add.setLoginSenha(dado, senha);
                 break;
             } else {
                 System.out.println("\nSenhas Diferentes\n");
             }
         }
+        
+        setServidores(add);
 
-        setServidores(i);
+        System.out.println("\nServidor Adicionado\n");
+        System.out.println(add.toString());
 
-        if (setServidores(i)) {
-            System.out.println("\nServidor Adicionado\n");
-        }
     }
 
     public void editaServ() {
@@ -217,7 +254,7 @@ public class ServidorDAO {
 
             int esc;
 
-            System.out.println("\nDeseja mudar o nome:\n1 - Sim\n2 - Não");
+            System.out.println("\nDeseja mudar o nome:\n1 - Sim\t2 - Não");
             esc = Integer.parseInt(in.nextLine());
 
             if (esc == 1) {
@@ -227,25 +264,7 @@ public class ServidorDAO {
                 System.out.println("\nNome Mantido\n");
             }
 
-            System.out.println("\nDeseja mudar o CPF:\n1 - Sim\n2 - Não");
-            esc = Integer.parseInt(in.nextLine());
-
-            if (esc == 1) {
-                while (esc == 1) {
-                    System.out.println("\nNovo CPF: ");
-                    String novoCpf = in.nextLine();
-                    if (edit.checkId(id)) { //ID
-                        edit.setId(id);
-                        break;
-                    } else {
-                        System.out.println("\nCPF Inválido\n");
-                    }
-                }
-            } else {
-                System.out.println("\nCPF Mantido\n");
-            }
-
-            System.out.println("\nDeseja mudar o E-mail:\n1 - Sim\n2 - Não");
+            System.out.println("\nDeseja mudar o E-mail:\n1 - Sim\t2 - Não");
             esc = Integer.parseInt(in.nextLine());
 
             if (esc == 1) {
@@ -253,6 +272,50 @@ public class ServidorDAO {
                 edit.setEmail(in.nextLine());
             } else {
                 System.out.println("\nE-mail Mantido\n");
+            }
+
+            System.out.println("\nDeseja mudar o campus pertencente:\n1 - Sim\t2 - Não");
+            esc = Integer.parseInt(in.nextLine());
+
+            if (esc == 1) {
+                System.out.println("\nNovo Id de Campus: ");
+                edit.setCampus(Integer.parseInt(in.nextLine()));
+            } else {
+                System.out.println("\nCampus Mantido\n");
+            }
+
+            System.out.println("\nDeseja mudar o cargo:\n1 - Sim\t2 - Não");
+            esc = Integer.parseInt(in.nextLine());
+
+            if (esc == 1) {
+                System.out.println("\nNovo Cargo: ");
+                edit.setCargo(in.nextLine());
+            } else {
+                System.out.println("\nCargo Mantido\n");
+            }
+
+            System.out.println("\nDeseja mudar o papel:\n1 - Sim\t2 - Não");
+            esc = Integer.parseInt(in.nextLine());
+
+            if (esc == 1) {
+                System.out.println("\nNovo Papel: ");
+                edit.setPapel(in.nextLine());
+            } else {
+                System.out.println("\nPapel Mantido\n");
+            }
+
+            int aux = 0;
+
+            while (aux != 2) {
+                System.out.println("\nEsse usuário tem permissão administrativa?\n1 - Sim\t2 - Não\n");
+                aux = Integer.parseInt(in.nextLine());
+
+                if (aux == 1) {
+                    edit.setAdm(true);
+                    break;
+                } else {
+                    edit.setAdm(false);
+                }
             }
 
             System.out.println("\nDeseja mudar o Login e Senha:\n1 - Sim\n2 - Não");
@@ -283,14 +346,14 @@ public class ServidorDAO {
             } else {
                 System.out.println("\nLogin e Senha Mantidos\n");
             }
-
+            System.out.println(edit.toString());
             System.out.println("\nServidor Alterado\n");
         }
     }
 
     public void excluiServ() {
         int id;
-        System.out.println("\nDigite o CPF do servidor: ");
+        System.out.println("\nDigite o ID do servidor: ");
         id = Integer.parseInt(in.nextLine());
 
         if (getServidoresId(id) == null) {
@@ -299,53 +362,56 @@ public class ServidorDAO {
             System.out.println("\nVocê não pode deletar esse usuário!\n:user_system:\n");
         } else {
             System.out.println("\nServidor " + getServidoresId(id).getNome() + " Encontrado"
-                    + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
+                    + "\nDeseja Deletar?\n1 - Sim\t2 - Não");
             int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
-                if (getServidoresId(id).getId() == id) {
-                    getServidoresId(id).setLogado(false);
-                    deleteServidor(id);
-                    System.out.println("\nServidor Deletado\n");
-                } else {
-                    deleteServidor(id);
-                    System.out.println("\nServidor Deletado\n");
-                }
+                Servidor del = getServidoresId(id);
+                del.setAdm(false);
+                del.setCampus(0);
+                del.setCargo(null);
+                del.setEmail(null);
+                del.setLoginSenha(null, null);
+                del.setNome("Deletado");
+                del.setPapel(null);
+                del.setSystem(false);
+                del.setLogado(false);
+                System.out.println("\nServidor Deletado\n");
+
             } else {
                 System.out.println("\nServidor Mantido\n");
             }
         }
     }
 
-    public void buscaServ() {
-        System.out.println("\nBuscar por:\n1 - Nome\n2 - ID\n3 - Voltar");
-        int escB = Integer.parseInt(in.nextLine());
-
-        switch (escB) {
-
-            case 1:
-                System.out.println("\nDigite o Nome: ");
-                String buscaNome = in.nextLine();
-
-                if (getServidoresNome(buscaNome) == null) {
-                    System.out.println("\nJogador Não Encontrado\n");
-                } else {
-                    System.out.println(getServidoresNome(buscaNome).toString());
-                }
-                break;
-            case 2:
-                System.out.println("\nDigite o CPF: ");
-                int buscaId = Integer.parseInt(in.nextLine());
-
-                if (getServidoresId(buscaId) == null) {
-                    System.out.println("\nJogador Não Encontrado\n");
-                } else {
-                    System.out.println(getServidoresId(buscaId).toString());
-                }
-
-            default:
-                break;
-
-        }
-    }
-
+//    public void buscaServ() {
+//        System.out.println("\nBuscar por:\n1 - Nome\n2 - ID\n3 - Voltar");
+//        int escB = Integer.parseInt(in.nextLine());
+//
+//        switch (escB) {
+//
+//            case 1:
+//                System.out.println("\nDigite o Nome: ");
+//                String buscaNome = in.nextLine();
+//
+//                if (getServidoresNome(buscaNome) == null) {
+//                    System.out.println("\nJogador Não Encontrado\n");
+//                } else {
+//                    System.out.println(getServidoresNome(buscaNome).toString());
+//                }
+//                break;
+//            case 2:
+//                System.out.println("\nDigite o CPF: ");
+//                int buscaId = Integer.parseInt(in.nextLine());
+//
+//                if (getServidoresId(buscaId) == null) {
+//                    System.out.println("\nJogador Não Encontrado\n");
+//                } else {
+//                    System.out.println(getServidoresId(buscaId).toString());
+//                }
+//
+//            default:
+//                break;
+//
+//        }
+//    }
 }

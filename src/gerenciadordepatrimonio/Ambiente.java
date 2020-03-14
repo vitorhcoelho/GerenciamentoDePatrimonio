@@ -15,7 +15,7 @@ public class Ambiente {
 
     private int id;
     private String descricao;
-    private Campus camp;
+    private int codCamp;
     private LocalDate datacriacao;
     private LocalDate datamodificacao;
 
@@ -35,17 +35,15 @@ public class Ambiente {
         this.descricao = descricaoambiente;
     }
 
-    public Campus getCampus() {
-        return camp;
+    public int getCodCamp() {
+        return codCamp;
     }
 
-    public void setCampus(Campus camp) {
-        this.camp = camp;
+    public void setCodCamp(int codCamp) {
+        this.codCamp = codCamp;
     }
 
-    public LocalDate getDatacriacao() {
-        return datacriacao;
-    }
+    
 
     public void setDatacriacao(LocalDate datacriacao) {
         this.datacriacao = datacriacao;
@@ -61,7 +59,7 @@ public class Ambiente {
 
     @Override
     public String toString() {
-        return "Ambiente{" + "id=" + id + ", descricaoambiente=" + descricao + ", camp=" + camp + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
+        return "Ambiente{" + "id=" + id + ", descricaoambiente=" + descricao + ", camp=" + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
     }
 
 }
