@@ -166,18 +166,7 @@ public class ServidorDAO {
         
         Servidor add = new Servidor();
         
-        for (int x = 0; x < servidores.length; x++) {
-            if (servidores[x] == null) {
-                add.setId(geraId());
-                break;
-            } else if(servidores[x].getId() != 0) {
-                add.setId(servidores[x].getId());
-                break;
-            }else{
-                
-            }
-        }
-        
+              
         String dado;
         int aux = 0;
 
@@ -234,6 +223,7 @@ public class ServidorDAO {
             }
         }
         
+        add.setId(geraId());
         setServidores(add);
 
         System.out.println("\nServidor Adicionado\n");

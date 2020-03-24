@@ -17,7 +17,6 @@ public class CampusDAO {
     private Campus[] campus = new Campus[100];
     private int qtdCampus;
     private int id = 0;
-    private int idlivre = 0;
 
     Scanner in = new Scanner(System.in);
 
@@ -31,11 +30,7 @@ public class CampusDAO {
             if (campus[x] == null) {
                 return x;
             } else {
-                if (campus[x].getNome().equals("Campus Apagado")) {
-                    return x;
-                } else {
 
-                }
             }
         }
         return -1;
@@ -93,12 +88,8 @@ public class CampusDAO {
 
         c.setDataCriacao(LocalDate.now());
 
-        if (this.idlivre != 0) {
-            c.setId(idlivre);
-            idlivre = 0;
-        } else {
-            c.setId(geraId());
-        }
+        c.setId(geraId());
+
         this.setCampus(c);
 
         System.out.println(c.toString() + "\nIncluído com Sucesso!\n");
@@ -215,7 +206,6 @@ public class CampusDAO {
             if (es == 1) {
 
                 Campus del = getCampus(id);
-                this.idlivre = del.getId();
                 del.setNome("Campus Apagado");
                 del.setAbreviacao(null);
                 del.setBairro(null);
