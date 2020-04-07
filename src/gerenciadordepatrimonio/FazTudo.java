@@ -90,7 +90,7 @@ public class FazTudo {
                             servDAO.getServLogado().setLogado(true);
 
                             while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                mainServidor(servDAO);
+                                mainServidor(servDAO, campDAO);
                             }
 
                         } else {
@@ -158,7 +158,7 @@ public class FazTudo {
         }
     }
 
-    public void visualizar(ServidorDAO servDAO) {
+    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO) {
         int aux = 1;
         while (aux != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -168,10 +168,10 @@ public class FazTudo {
 
             switch (aux) {
                 case 1:
-
+                    servDAO.mostraServidores();
                     break;
                 case 2:
-
+                    campDAO.mostraCampus();
                     break;
                 case 3:
                     while (opc != 0) {
@@ -207,7 +207,7 @@ public class FazTudo {
                                 break;
 
                             case 3:
-
+                                
                                 break;
 
                             default:
@@ -392,7 +392,7 @@ public class FazTudo {
         }
     }
 
-    public void mainServidor(ServidorDAO servDAO) {
+    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -402,13 +402,11 @@ public class FazTudo {
 
             switch (opc) {
                 case 1:
-
                     relatorios(servDAO);
                     break;
 
                 case 2:
-
-                    visualizar(servDAO);
+                    visualizar(servDAO, campDAO);
                     break;
 
                 default:
@@ -436,7 +434,7 @@ public class FazTudo {
 
                 case 2:
 
-                    visualizar(servDAO);
+                    visualizar(servDAO, campDAO);
                     break;
 
                 case 3:

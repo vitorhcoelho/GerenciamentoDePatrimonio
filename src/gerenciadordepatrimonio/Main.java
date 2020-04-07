@@ -5,9 +5,6 @@
  */
 package gerenciadordepatrimonio;
 
-import static java.awt.SystemColor.menu;
-
-
 /**
  *
  * @author Vitor Hugo

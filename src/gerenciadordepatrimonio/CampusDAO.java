@@ -114,6 +114,16 @@ public class CampusDAO {
             return campus[x];
         }
     }
+    
+    public void mostraCampus() {
+        for (int x = 0; x < this.qtdCampus; x++) {
+            if (campus[x] != null) {
+                System.out.println(this.campus[x].toString());
+            } else {
+
+            }
+        }
+    }
 
     public void editaCampus() {
         int id;
