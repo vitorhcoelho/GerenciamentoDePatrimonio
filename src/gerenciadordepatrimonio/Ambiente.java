@@ -43,8 +43,6 @@ public class Ambiente {
         this.codCamp = codCamp;
     }
 
-    
-
     public void setDatacriacao(LocalDate datacriacao) {
         this.datacriacao = datacriacao;
     }

@@ -60,7 +60,7 @@ public class FazTudo {
             + "3 - Excluir\n"
             + "0 - Voltar\n";
 
-    public void login(ServidorDAO servDAO, CampusDAO campDAO) {
+    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
 
         serv.setLoginSenha("login", "senha");//user teste
         serv.setAdm(true);
@@ -115,7 +115,7 @@ public class FazTudo {
                                 servDAO.getServLogado().setLogado(true);
 
                                 while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                    mainAdm(servDAO, campDAO);
+                                    mainAdm(servDAO, campDAO, ambDAO);
                                 }
 
                             } else {
@@ -145,11 +145,9 @@ public class FazTudo {
 
             switch (aux) {
                 case 1:
-
                     break;
 
                 case 2:
-
                     break;
 
                 default:
@@ -216,13 +214,13 @@ public class FazTudo {
                     }
                     break;
                 case 5:
-
+                    
                     break;
                 case 6:
-
+                    
                     break;
                 case 7:
-
+                    
                     break;
                 default:
                     break;
@@ -231,7 +229,7 @@ public class FazTudo {
         }
     }
 
-    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO) {
+    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
         int aux = 1;
         while (aux != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -299,15 +297,15 @@ public class FazTudo {
 
                         switch (opc) {
                             case 1:
-
+                                ambDAO.insereAmbiente();
                                 break;
 
                             case 2:
-
+                                ambDAO.editaAmbiente();
                                 break;
 
                             case 3:
-
+                                ambDAO.excluiAmbiente();
                                 break;
 
                             default:
@@ -410,7 +408,6 @@ public class FazTudo {
                     break;
 
                 default:
-
                     break;
             }
         }
@@ -418,7 +415,7 @@ public class FazTudo {
 
     }
 
-    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO) {
+    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -428,22 +425,18 @@ public class FazTudo {
 
             switch (opc) {
                 case 1:
-
                     relatorios(servDAO);
                     break;
 
                 case 2:
-
                     visualizar(servDAO, campDAO);
                     break;
 
                 case 3:
-
-                    gerenciamento(servDAO, campDAO);
+                    gerenciamento(servDAO, campDAO, ambDAO);
                     break;
 
                 default:
-
                     break;
             }
         }

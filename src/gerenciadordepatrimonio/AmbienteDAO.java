@@ -5,6 +5,7 @@
  */
 package gerenciadordepatrimonio;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -18,8 +19,97 @@ public class AmbienteDAO {
     private int id = 0;
     Scanner in = new Scanner(System.in);
     
-    public void insereAmbiente(){
-        
+    public int geraId() {
+        this.id++;
+        return id;
+    }
+    
+    public void insereAmbiente() {
+        String dado;
+        int id;
+        Ambiente a = new Ambiente();
+
+        System.out.println("\nInsira a descricao do ambiente:");
+        dado = in.nextLine();
+        a.setDescricao(dado);
+
+        System.out.println("\nInsira o id do Campus vinculado ao ambiente:");
+        id = Integer.parseInt(in.nextLine());
+        a.setCodCamp(id);
+
+        a.setDatacriacao(LocalDate.now());
+
+        a.setId(geraId());
+
+        this.setAmbiente(a);
+
+        System.out.println(a.toString() + "\nincluído com Sucesso!\n");
+    }
+    
+    public void editaAmbiente() {
+        String dado;
+        int id;
+        Ambiente a = new Ambiente();
+
+        System.out.println("\nInsira nova descricao do ambiente:");
+        dado = in.nextLine();
+        a.setDescricao(dado);
+
+        System.out.println("\nInsira o id do novo Campus vinculado ao ambiente:");
+        id = Integer.parseInt(in.nextLine());
+        a.setCodCamp(id);
+
+        a.setDatamodificacao(LocalDate.now());
+
+        this.setAmbiente(a);
+
+        System.out.println(a.toString() + "\neditado com Sucesso!\n");
+    }
+    
+    public void excluiAmbiente() {
+        System.out.println("\nDigite o ID do Ambiente: ");
+        int id = Integer.parseInt(in.nextLine());
+
+        if (getAmbiente(id) == null) {
+            System.out.println("\nAmbiente Não Encontrado");
+
+        } else {
+            System.out.println("\nAmbiente " + getAmbiente(id).getId()+ getAmbiente(id).getDescricao() + " Encontrado"
+                    + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
+            int es = Integer.parseInt(in.nextLine());
+            if (es == 1) {
+
+                Ambiente del = getAmbiente(id);
+                del.setDescricao("Ambiente Apagado");
+                del.setCodCamp(-1);
+                del.setDatacriacao(null);
+                del.setDatamodificacao(null);
+                System.out.println("\nAmbiente Deletado\n");
+
+            } else {
+                System.out.println("\nAmbiente Mantido\n");
+            }
+        }
+    }
+    
+    public int achaAmbienteId(int id) {
+        for (int x = 0; x < this.qtdAmb; x++) {
+            if (id == ambs[x].getId() && ambs[x] != null) {
+                return x;
+            } else {
+
+            }
+        }
+        return -1;
+    }
+    
+    public Ambiente getAmbiente(int id) {
+        int x = achaAmbienteId(id);
+        if (x == -1) {
+            return null;
+        } else {
+            return ambs[x];
+        }
     }
 
     public int vagaAmbiente() {
