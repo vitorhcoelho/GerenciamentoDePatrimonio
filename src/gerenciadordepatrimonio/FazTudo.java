@@ -313,6 +313,7 @@ public class FazTudo {
                         }
                         break;
                     }
+                    break;
 
                 case 4:
                     while (opc != 0) {

@@ -38,6 +38,7 @@ public class AmbienteDAO {
         a.setCodCamp(id);
 
         a.setDatacriacao(LocalDate.now());
+        a.setDatamodificacao(LocalDate.now());
 
         a.setId(geraId());
 

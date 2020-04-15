@@ -35,11 +35,13 @@ public class ItemDAO {
         dado = in.nextLine();
         i.setEspecificacao(dado);
 
-        System.out.println("\nCódigo de patrimônio (6 digitos): ");
         while (dado.length() < 6) {
+        System.out.println("\nCódigo de patrimônio (6 digitos): ");
+        
             dado = in.nextLine();
-            i.setCodigo(dado);
+            
         }
+        i.setCodigo(dado);
 
         System.out.println("\nEstado de conservação do item: ");
         do {
