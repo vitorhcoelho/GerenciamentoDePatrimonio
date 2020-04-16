@@ -90,7 +90,7 @@ public class FazTudo {
                             servDAO.getServLogado().setLogado(true);
 
                             while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                mainServidor(servDAO, campDAO);
+                                mainServidor(servDAO, campDAO, ambDAO);
                             }
 
                         } else {
@@ -156,8 +156,9 @@ public class FazTudo {
         }
     }
 
-    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO) {
+    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
         int aux = 1;
+        int dado;
         while (aux != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
             System.out.println(menuVisualizar);
@@ -178,11 +179,13 @@ public class FazTudo {
 
                         switch (opc) {
                             case 1:
-
+                                
                                 break;
 
                             case 2:
-
+                                System.out.println("Informe o ID do campus que procura:");
+                                dado = Integer.parseInt(in.nextLine());
+                                ambDAO.mostraAmbientesPorCampus(campDAO.getCampus(dado));
                                 break;
 
                             default:
@@ -391,7 +394,7 @@ public class FazTudo {
         }
     }
 
-    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO) {
+    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -405,7 +408,7 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO);
+                    visualizar(servDAO, campDAO, ambDAO);
                     break;
 
                 default:
@@ -430,7 +433,7 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO);
+                    visualizar(servDAO, campDAO, ambDAO);
                     break;
 
                 case 3:

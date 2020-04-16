@@ -38,7 +38,6 @@ public class AmbienteDAO {
         a.setCodCamp(id);
 
         a.setDatacriacao(LocalDate.now());
-        a.setDatamodificacao(LocalDate.now());
 
         a.setId(geraId());
 
@@ -102,6 +101,29 @@ public class AmbienteDAO {
             }
         }
         return -1;
+    }
+    
+    public void mostraAmbientesPorServ(Servidor s) {
+        for (int x = 0; x < this.qtdAmb; x++) {
+            if (ambs[x] != null) {
+                //if(s.get()==ambs[x].) ???????
+                System.out.println(this.ambs[x].toString());
+            } else {
+
+            }
+        }
+    }
+    
+    public void mostraAmbientesPorCampus(Campus c) {
+        for (int x = 0; x < this.qtdAmb; x++) {
+            if (ambs[x] != null) {
+                if(ambs[x].getCodCamp()==c.getId()){
+                    System.out.println(this.ambs[x].toString());
+                }
+            } else {
+
+            }
+        }
     }
     
     public Ambiente getAmbiente(int id) {
