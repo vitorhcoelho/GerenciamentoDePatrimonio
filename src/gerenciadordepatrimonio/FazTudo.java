@@ -60,7 +60,7 @@ public class FazTudo {
             + "3 - Excluir\n"
             + "0 - Voltar\n";
 
-    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
+    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO) {
 
         serv.setLoginSenha("login", "senha");//user teste
         serv.setAdm(true);
@@ -115,7 +115,7 @@ public class FazTudo {
                                 servDAO.getServLogado().setLogado(true);
 
                                 while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                    mainAdm(servDAO, campDAO, ambDAO);
+                                    mainAdm(servDAO, campDAO, ambDAO, iDAO);
                                 }
 
                             } else {
@@ -229,7 +229,7 @@ public class FazTudo {
         }
     }
 
-    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
+    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO) {
         int aux = 1;
         while (aux != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -322,7 +322,7 @@ public class FazTudo {
                         opc = Integer.parseInt(in.nextLine());
                         switch (opc) {
                             case 1:
-
+                                iDAO.insereItem();
                                 break;
 
                             case 2:
@@ -416,7 +416,7 @@ public class FazTudo {
 
     }
 
-    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
+    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -434,7 +434,7 @@ public class FazTudo {
                     break;
 
                 case 3:
-                    gerenciamento(servDAO, campDAO, ambDAO);
+                    gerenciamento(servDAO, campDAO, ambDAO, iDAO);
                     break;
 
                 default:
