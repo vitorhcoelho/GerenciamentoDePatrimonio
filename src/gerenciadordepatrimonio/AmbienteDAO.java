@@ -18,12 +18,12 @@ public class AmbienteDAO {
     private int qtdAmb = 0;
     private int id = 0;
     Scanner in = new Scanner(System.in);
-    
+
     public int geraId() {
         this.id++;
         return id;
     }
-    
+
     public void insereAmbiente() {
         String dado;
         int id;
@@ -45,7 +45,7 @@ public class AmbienteDAO {
 
         System.out.println(a.toString() + "\nincluído com Sucesso!\n");
     }
-    
+
     public void editaAmbiente() {
         String dado;
         int id;
@@ -65,7 +65,7 @@ public class AmbienteDAO {
 
         System.out.println(a.toString() + "\neditado com Sucesso!\n");
     }
-    
+
     public void excluiAmbiente() {
         System.out.println("\nDigite o ID do Ambiente: ");
         int id = Integer.parseInt(in.nextLine());
@@ -74,7 +74,7 @@ public class AmbienteDAO {
             System.out.println("\nAmbiente Não Encontrado");
 
         } else {
-            System.out.println("\nAmbiente " + getAmbiente(id).getId()+ getAmbiente(id).getDescricao() + " Encontrado"
+            System.out.println("\nAmbiente " + getAmbiente(id).getId() + getAmbiente(id).getDescricao() + " Encontrado"
                     + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
             int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
@@ -91,7 +91,7 @@ public class AmbienteDAO {
             }
         }
     }
-    
+
     public int achaAmbienteId(int id) {
         for (int x = 0; x < this.qtdAmb; x++) {
             if (id == ambs[x].getId() && ambs[x] != null) {
@@ -102,11 +102,11 @@ public class AmbienteDAO {
         }
         return -1;
     }
-    
+
     public void mostraAmbientesPorServ(Servidor s) {
         for (int x = 0; x < this.qtdAmb; x++) {
             if (ambs[x] != null) {
-                if(s.getCampus()== ambs[x].getCodCamp()){
+                if (s.getCampus() == ambs[x].getCodCamp()) {
                     System.out.println(this.ambs[x].toString());
                 }
             } else {
@@ -114,11 +114,11 @@ public class AmbienteDAO {
             }
         }
     }
-    
+
     public void mostraAmbientesPorCampus(Campus c) {
         for (int x = 0; x < this.qtdAmb; x++) {
             if (ambs[x] != null) {
-                if(ambs[x].getCodCamp()==c.getId()){
+                if (ambs[x].getCodCamp() == c.getId()) {
                     System.out.println(this.ambs[x].toString());
                 }
             } else {
@@ -126,7 +126,7 @@ public class AmbienteDAO {
             }
         }
     }
-    
+
     public Ambiente getAmbiente(int id) {
         int x = achaAmbienteId(id);
         if (x == -1) {

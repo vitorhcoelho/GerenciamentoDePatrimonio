@@ -12,6 +12,7 @@ import java.time.LocalDate;
  * @author gusta
  */
 public class MovimentoDono {
+
     private int id;
     private int codItem;
     private int codAmbOrigem;
@@ -84,6 +85,5 @@ public class MovimentoDono {
     public void setEntrada(boolean entrada) {
         this.entrada = entrada;
     }
-    
-    
+
 }

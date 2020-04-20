@@ -10,5 +10,5 @@ package gerenciadordepatrimonio;
  * @author gusta
  */
 public class MovimentoDonoDAO {
-    
+
 }

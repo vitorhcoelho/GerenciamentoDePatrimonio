@@ -19,7 +19,7 @@ public class ServidorDAO {
 
     Scanner in = new Scanner(System.in);
     private Servidor servLogado;
-    
+
     public int geraId() {
         this.id++;
         return id;
@@ -52,10 +52,10 @@ public class ServidorDAO {
         for (int x = 0; x < servidores.length; x++) {
             if (servidores[x] == null) {
                 return x;
-            } else if(servidores[x].getId() != 0) {
+            } else if (servidores[x].getId() != 0) {
                 return x;
-            }else{
-                
+            } else {
+
             }
         }
         return -1;
@@ -162,10 +162,9 @@ public class ServidorDAO {
     }
 
     public void insereServ() {
-        
+
         Servidor add = new Servidor();
-        
-              
+
         String dado;
         int aux = 0;
 
@@ -221,7 +220,7 @@ public class ServidorDAO {
                 System.out.println("\nSenhas Diferentes\n");
             }
         }
-        
+
         add.setId(geraId());
         setServidores(add);
 

@@ -10,7 +10,7 @@ package gerenciadordepatrimonio;
  * @author Vitor Hugo
  */
 public class Main {
-    
+
     public void start() {
         ServidorDAO servDAO = new ServidorDAO();
         CampusDAO campDAO = new CampusDAO();
@@ -20,9 +20,10 @@ public class Main {
         FazTudo inicia = new FazTudo();
         inicia.login(servDAO, campDAO, ambDAO, iDAO);
     }
+
     public static void main(String[] args) {
         Main boost = new Main();
         boost.start();
     }
-    
+
 }

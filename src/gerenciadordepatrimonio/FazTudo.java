@@ -202,15 +202,15 @@ public class FazTudo {
 
                         switch (opc) {
                             case 1:
-                                
+
                                 break;
 
                             case 2:
-                                
+
                                 break;
 
                             case 3:
-                                
+
                                 break;
 
                             default:
@@ -219,13 +219,13 @@ public class FazTudo {
                     }
                     break;
                 case 5:
-                    
+
                     break;
                 case 6:
-                    
+
                     break;
                 case 7:
-                    
+
                     break;
                 default:
                     break;

@@ -12,6 +12,7 @@ import java.time.LocalDate;
  * @author gusta
  */
 public class MovimentoItem {
+
     private int id;
     private int idAmb;
     private int idDonoOrigem;
@@ -75,6 +76,5 @@ public class MovimentoItem {
     public void setDataMod(LocalDate dataMod) {
         this.dataMod = dataMod;
     }
-    
-    
+
 }

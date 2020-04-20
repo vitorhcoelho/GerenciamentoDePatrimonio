@@ -36,10 +36,10 @@ public class ItemDAO {
         i.setEspecificacao(dado);
 
         while (dado.length() < 6) {
-        System.out.println("\nCódigo de patrimônio (6 digitos): ");
-        
+            System.out.println("\nCódigo de patrimônio (6 digitos): ");
+
             dado = in.nextLine();
-            
+
         }
         i.setCodigo(dado);
 
@@ -73,7 +73,6 @@ public class ItemDAO {
 //    public void editaItem() {
 //        
 //    }
-
     public int vagaItem() {
         for (int x = 0; x < itens.length; x++) {
             if (itens[x] == null) {

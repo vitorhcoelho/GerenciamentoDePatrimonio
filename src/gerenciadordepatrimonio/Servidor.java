@@ -22,8 +22,8 @@ public class Servidor {
     private boolean logado;
     private boolean adm;
     private boolean system;
-    
-    public Servidor(){
+
+    public Servidor() {
         this.id = 0;
     }
 
