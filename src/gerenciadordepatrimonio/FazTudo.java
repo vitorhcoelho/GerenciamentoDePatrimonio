@@ -60,7 +60,7 @@ public class FazTudo {
             + "3 - Excluir\n"
             + "0 - Voltar\n";
 
-    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO) {
+    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO) {
 
         serv.setLoginSenha("login", "senha");//user teste
         serv.setAdm(true);
@@ -90,7 +90,7 @@ public class FazTudo {
                             servDAO.getServLogado().setLogado(true);
 
                             while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                mainServidor(servDAO, campDAO, ambDAO);
+                                mainServidor(servDAO, campDAO, ambDAO, itemDAO);
                             }
 
                         } else {
@@ -115,7 +115,7 @@ public class FazTudo {
                                 servDAO.getServLogado().setLogado(true);
 
                                 while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                    mainAdm(servDAO, campDAO, ambDAO, iDAO);
+                                    mainAdm(servDAO, campDAO, ambDAO, itemDAO);
                                 }
 
                             } else {
@@ -156,7 +156,7 @@ public class FazTudo {
         }
     }
 
-    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
+    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO) {
         int aux = 1;
         int dado;
         while (aux != 0) {
@@ -210,7 +210,9 @@ public class FazTudo {
                                 break;
 
                             case 3:
-
+                                System.out.println("Informe o ID do item que procura:");
+                                dado = Integer.parseInt(in.nextLine());
+                                itemDAO.mostraItemPorID(dado);
                                 break;
 
                             default:
@@ -396,7 +398,7 @@ public class FazTudo {
         }
     }
 
-    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
+    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -410,7 +412,7 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO, ambDAO);
+                    visualizar(servDAO, campDAO, ambDAO, itemDAO);
                     break;
 
                 default:
@@ -421,7 +423,7 @@ public class FazTudo {
 
     }
 
-    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO) {
+    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -435,11 +437,11 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO, ambDAO);
+                    visualizar(servDAO, campDAO, ambDAO, itemDAO);
                     break;
 
                 case 3:
-                    gerenciamento(servDAO, campDAO, ambDAO, iDAO);
+                    gerenciamento(servDAO, campDAO, ambDAO, itemDAO);
                     break;
 
                 default:
