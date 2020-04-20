@@ -15,9 +15,10 @@ public class Main {
         ServidorDAO servDAO = new ServidorDAO();
         CampusDAO campDAO = new CampusDAO();
         AmbienteDAO ambDAO = new AmbienteDAO();
+        ItemDAO iDAO = new ItemDAO();
 
         FazTudo inicia = new FazTudo();
-        inicia.login(servDAO, campDAO, ambDAO);
+        inicia.login(servDAO, campDAO, ambDAO, iDAO);
     }
     public static void main(String[] args) {
         Main boost = new Main();
