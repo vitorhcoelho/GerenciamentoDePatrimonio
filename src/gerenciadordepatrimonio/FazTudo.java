@@ -179,7 +179,9 @@ public class FazTudo {
 
                         switch (opc) {
                             case 1:
-                                
+                                System.out.println("Informe o ID do servidor que procura:");
+                                dado = Integer.parseInt(in.nextLine());
+                                ambDAO.mostraAmbientesPorServ(servDAO.getServidoresId(dado));
                                 break;
 
                             case 2:
@@ -200,11 +202,11 @@ public class FazTudo {
 
                         switch (opc) {
                             case 1:
-
+                                
                                 break;
 
                             case 2:
-
+                                
                                 break;
 
                             case 3:

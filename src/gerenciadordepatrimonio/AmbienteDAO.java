@@ -106,8 +106,9 @@ public class AmbienteDAO {
     public void mostraAmbientesPorServ(Servidor s) {
         for (int x = 0; x < this.qtdAmb; x++) {
             if (ambs[x] != null) {
-                //if(s.get()==ambs[x].) ???????
-                System.out.println(this.ambs[x].toString());
+                if(s.getCampus()== ambs[x].getCodCamp()){
+                    System.out.println(this.ambs[x].toString());
+                }
             } else {
 
             }
