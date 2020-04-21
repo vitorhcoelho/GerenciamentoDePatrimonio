@@ -126,6 +126,17 @@ public class AmbienteDAO {
             }
         }
     }
+    
+    public Ambiente getAmbientesPorCampus(Campus c) {
+        for (int x = 0; x < this.qtdAmb; x++) {
+            if (ambs[x] != null) {
+                if (ambs[x].getCodCamp() == c.getId()) {
+                    return ambs[x];
+                }
+            } else {}
+        }
+        return null;
+    }
 
     public Ambiente getAmbiente(int id) {
         int x = achaAmbienteId(id);

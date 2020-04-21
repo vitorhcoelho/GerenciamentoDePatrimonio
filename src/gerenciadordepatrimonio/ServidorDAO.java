@@ -157,6 +157,26 @@ public class ServidorDAO {
         }
     }
 
+    public int achaServidorCampus(int id) {
+        for (int x = 0; x < this.qtdServidor; x++) {
+            if (id == servidores[x].getId() && servidores[x] != null) {
+                return x;
+            } else {
+            }
+        }
+        return -1;
+    }
+
+    public int getServidoresCampus(int id) {
+        int loc = this.achaServidorId(id);
+        if (loc == -1) {
+            return -1;
+        } else {
+            return servidores[loc].getCampus();
+        }
+
+    }
+
     public int getQtdServ() {
         return this.qtdServidor;
     }
@@ -226,7 +246,6 @@ public class ServidorDAO {
 
         System.out.println("\nServidor Adicionado\n");
         System.out.println(add.toString());
-
     }
 
     public void editaServ() {
@@ -370,36 +389,4 @@ public class ServidorDAO {
             }
         }
     }
-
-//    public void buscaServ() {
-//        System.out.println("\nBuscar por:\n1 - Nome\n2 - ID\n3 - Voltar");
-//        int escB = Integer.parseInt(in.nextLine());
-//
-//        switch (escB) {
-//
-//            case 1:
-//                System.out.println("\nDigite o Nome: ");
-//                String buscaNome = in.nextLine();
-//
-//                if (getServidoresNome(buscaNome) == null) {
-//                    System.out.println("\nJogador Não Encontrado\n");
-//                } else {
-//                    System.out.println(getServidoresNome(buscaNome).toString());
-//                }
-//                break;
-//            case 2:
-//                System.out.println("\nDigite o CPF: ");
-//                int buscaId = Integer.parseInt(in.nextLine());
-//
-//                if (getServidoresId(buscaId) == null) {
-//                    System.out.println("\nJogador Não Encontrado\n");
-//                } else {
-//                    System.out.println(getServidoresId(buscaId).toString());
-//                }
-//
-//            default:
-//                break;
-//
-//        }
-//    }
 }

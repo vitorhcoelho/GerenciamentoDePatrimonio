@@ -35,12 +35,12 @@ public class ItemDAO {
         dado = in.nextLine();
         i.setEspecificacao(dado);
 
-        do{
+        do {
             System.out.println("\nCódigo de patrimônio (6 digitos): ");
 
             dado = in.nextLine();
 
-        }while (dado.length() < 6);
+        } while (dado.length() < 6);
         i.setCodigo(dado);
 
         System.out.println("\nEstado de conservação do item: ");
@@ -93,10 +93,30 @@ public class ItemDAO {
         }
     }
 
+    public void mostraItemPorServ(Ambiente a) {
+        for (int x = 0; x < this.qtdItem; x++) {
+            if (itens[x] != null) {
+                if (itens[x].getAmbiente() == a.getId()) {
+                    System.out.println(this.itens[x].toString());
+                }
+            } else {}
+        }
+    }
+
+    public void mostraItemPorCampus(Ambiente a) {
+        for (int x = 0; x < this.qtdItem; x++) {
+            if (itens[x] != null) {
+                if (itens[x].getAmbiente() == a.getId()) {
+                    System.out.println(this.itens[x].toString());
+                }
+            } else {}
+        }
+    }
+
     public void mostraItemPorID(int dado) {
         for (int x = 0; x < this.qtdItem; x++) {
             if (itens[x] != null) {
-                if (itens[x].getId()==dado) {
+                if (itens[x].getId() == dado) {
                     System.out.println(this.itens[x].toString());
                 }
             } else {
@@ -104,5 +124,5 @@ public class ItemDAO {
             }
         }
     }
-    
+
 }
