@@ -15,10 +15,10 @@ public class Main {
         ServidorDAO servDAO = new ServidorDAO();
         CampusDAO campDAO = new CampusDAO();
         AmbienteDAO ambDAO = new AmbienteDAO();
-        ItemDAO iDAO = new ItemDAO();
+        ItemDAO itemDAO = new ItemDAO();
 
         FazTudo inicia = new FazTudo();
-        inicia.login(servDAO, campDAO, ambDAO, iDAO);
+        inicia.login(servDAO, campDAO, ambDAO, itemDAO);
     }
 
     public static void main(String[] args) {
