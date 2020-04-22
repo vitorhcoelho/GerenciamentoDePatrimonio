@@ -14,12 +14,12 @@ import java.time.LocalDate;
 public class MovimentoItem {
 
     private int id;
-    private int idAmb;
-    private int idDonoOrigem;
-    private int idDonoDestino;
+    private Item item;
+    private Ambiente ambienteOrigem;
+    private Ambiente ambienteDestino;
     private String motivo;
     private LocalDate dataCriacao;
-    private LocalDate dataMod;
+    private LocalDate dataModificacao;
 
     public int getId() {
         return id;
@@ -29,28 +29,28 @@ public class MovimentoItem {
         this.id = id;
     }
 
-    public int getIdAmb() {
-        return idAmb;
+    public Item getItem() {
+        return item;
     }
 
-    public void setIdAmb(int idAmb) {
-        this.idAmb = idAmb;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public int getIdDonoOrigem() {
-        return idDonoOrigem;
+    public Ambiente getAmbienteOrigem() {
+        return ambienteOrigem;
     }
 
-    public void setIdDonoOrigem(int idDonoOrigem) {
-        this.idDonoOrigem = idDonoOrigem;
+    public void setAmbienteOrigem(Ambiente ambienteOrigem) {
+        this.ambienteOrigem = ambienteOrigem;
     }
 
-    public int getIdDonoDestino() {
-        return idDonoDestino;
+    public Ambiente getAmbienteDestino() {
+        return ambienteDestino;
     }
 
-    public void setIdDonoDestino(int idDonoDestino) {
-        this.idDonoDestino = idDonoDestino;
+    public void setAmbienteDestino(Ambiente ambienteDestino) {
+        this.ambienteDestino = ambienteDestino;
     }
 
     public String getMotivo() {
@@ -69,12 +69,12 @@ public class MovimentoItem {
         this.dataCriacao = dataCriacao;
     }
 
-    public LocalDate getDataMod() {
-        return dataMod;
+    public LocalDate getDataModificacao() {
+        return dataModificacao;
     }
 
-    public void setDataMod(LocalDate dataMod) {
-        this.dataMod = dataMod;
+    public void setDataModificacao(LocalDate dataModificacao) {
+        this.dataModificacao = dataModificacao;
     }
 
 }

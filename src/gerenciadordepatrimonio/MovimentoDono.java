@@ -14,13 +14,12 @@ import java.time.LocalDate;
 public class MovimentoDono {
 
     private int id;
-    private int codItem;
-    private int codAmbOrigem;
-    private int codAmbDestino;
+    private Item item;
+    private Servidor donoOrigem;
+    private Servidor donoDestino;
     private String motivo;
     private LocalDate dataCriacao;
-    private LocalDate dataMod;
-    private boolean entrada; //true -> entrada -- false -> saida
+    private LocalDate dataModificacao;
 
     public int getId() {
         return id;
@@ -30,28 +29,28 @@ public class MovimentoDono {
         this.id = id;
     }
 
-    public int getCodItem() {
-        return codItem;
+    public Item getItem() {
+        return item;
     }
 
-    public void setCodItem(int codItem) {
-        this.codItem = codItem;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public int getCodAmbOrigem() {
-        return codAmbOrigem;
+    public Servidor getDonoOrigem() {
+        return donoOrigem;
     }
 
-    public void setCodAmbOrigem(int codAmbOrigem) {
-        this.codAmbOrigem = codAmbOrigem;
+    public void setDonoOrigem(Servidor donoOrigem) {
+        this.donoOrigem = donoOrigem;
     }
 
-    public int getCodAmbDestino() {
-        return codAmbDestino;
+    public Servidor getDonoDestino() {
+        return donoDestino;
     }
 
-    public void setCodAmbDestino(int codAmbDestino) {
-        this.codAmbDestino = codAmbDestino;
+    public void setDonoDestino(Servidor donoDestino) {
+        this.donoDestino = donoDestino;
     }
 
     public String getMotivo() {
@@ -70,20 +69,12 @@ public class MovimentoDono {
         this.dataCriacao = dataCriacao;
     }
 
-    public LocalDate getDataMod() {
-        return dataMod;
+    public LocalDate getDataModificacao() {
+        return dataModificacao;
     }
 
-    public void setDataMod(LocalDate dataMod) {
-        this.dataMod = dataMod;
-    }
-
-    public boolean isEntrada() {
-        return entrada;
-    }
-
-    public void setEntrada(boolean entrada) {
-        this.entrada = entrada;
+    public void setDataModificacao(LocalDate dataModificacao) {
+        this.dataModificacao = dataModificacao;
     }
 
 }
