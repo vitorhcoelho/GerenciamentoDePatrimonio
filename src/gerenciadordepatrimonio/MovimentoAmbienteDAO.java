@@ -9,6 +9,6 @@ package gerenciadordepatrimonio;
  *
  * @author gusta
  */
-public class MovimentoItemDAO {
+public class MovimentoAmbienteDAO {
 
 }

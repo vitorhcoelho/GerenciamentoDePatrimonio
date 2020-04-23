@@ -70,6 +70,26 @@ public class ItemDAO {
         System.out.println(i.toString() + "\nIncluído com Sucesso!\n");
     }
 
+    public int achaItemId(int id) {
+        for (int x = 0; x < this.qtdItem; x++) {
+            if (id == itens[x].getId() && itens[x] != null) {
+                return x;
+            } else {
+
+            }
+        }
+        return -1;
+    }
+
+    public Item getItem(int id) {
+        int x = achaItemId(id);
+        if (x == -1) {
+            return null;
+        } else {
+            return itens[x];
+        }
+    }
+
     public int vagaItem() {
         for (int x = 0; x < itens.length; x++) {
             if (itens[x] == null) {
@@ -99,7 +119,8 @@ public class ItemDAO {
                 if (itens[x].getAmbiente() == a.getId()) {
                     System.out.println(this.itens[x].toString());
                 }
-            } else {}
+            } else {
+            }
         }
     }
 
@@ -109,7 +130,8 @@ public class ItemDAO {
                 if (itens[x].getAmbiente() == a.getId()) {
                     System.out.println(this.itens[x].toString());
                 }
-            } else {}
+            } else {
+            }
         }
     }
 

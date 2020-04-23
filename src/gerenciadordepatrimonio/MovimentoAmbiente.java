@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  * @author gusta
  */
-public class MovimentoItem {
+public class MovimentoAmbiente {
 
     private int id;
     private Item item;

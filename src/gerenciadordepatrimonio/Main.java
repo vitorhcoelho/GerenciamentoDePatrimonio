@@ -16,9 +16,10 @@ public class Main {
         CampusDAO campDAO = new CampusDAO();
         AmbienteDAO ambDAO = new AmbienteDAO();
         ItemDAO itemDAO = new ItemDAO();
+        MovimentoDonoDAO mdonoDAO = new MovimentoDonoDAO();
 
         FazTudo inicia = new FazTudo();
-        inicia.login(servDAO, campDAO, ambDAO, itemDAO);
+        inicia.login(servDAO, campDAO, ambDAO, itemDAO, mdonoDAO);
     }
 
     public static void main(String[] args) {
