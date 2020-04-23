@@ -8,7 +8,7 @@ package gerenciadordepatrimonio;
 import java.time.LocalDate;
 
 /**
- *
+ *  cadu
  * @author Vitor Hugo
  */
 public class Item {
