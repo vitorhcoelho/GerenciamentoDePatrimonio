@@ -14,9 +14,9 @@ import java.time.LocalDate;
 public class MovimentoAmbiente {
 
     private int id;
-    private Item item;
-    private Ambiente ambienteOrigem;
-    private Ambiente ambienteDestino;
+    private int idItem;
+    private int ambienteOrigem;
+    private int ambienteDestino;
     private String motivo;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
@@ -29,29 +29,31 @@ public class MovimentoAmbiente {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
+    public int getIdItem() {
+        return idItem;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setIdItem(int idItem) {
+        this.idItem = idItem;
     }
 
-    public Ambiente getAmbienteOrigem() {
+    public int getAmbienteOrigem() {
         return ambienteOrigem;
     }
 
-    public void setAmbienteOrigem(Ambiente ambienteOrigem) {
+    public void setAmbienteOrigem(int ambienteOrigem) {
         this.ambienteOrigem = ambienteOrigem;
     }
 
-    public Ambiente getAmbienteDestino() {
+    public int getAmbienteDestino() {
         return ambienteDestino;
     }
 
-    public void setAmbienteDestino(Ambiente ambienteDestino) {
+    public void setAmbienteDestino(int ambienteDestino) {
         this.ambienteDestino = ambienteDestino;
     }
+
+    
 
     public String getMotivo() {
         return motivo;
@@ -76,5 +78,15 @@ public class MovimentoAmbiente {
     public void setDataModificacao(LocalDate dataModificacao) {
         this.dataModificacao = dataModificacao;
     }
+
+    @Override
+    public String toString() {
+        return "Movimentação de Item Entre Ambientes\tID: " + getId() + "\nID Item: " + getIdItem() + "\nID Ambiente Origem: "
+                + getAmbienteOrigem() + "\tID Ambiente Destino: " + getAmbienteDestino() + 
+                "\nData Criação: " + getDataCriacao() + "\tÚltima Modificação: " + getDataModificacao() +
+                "\nMotivo: " + getMotivo();
+    }
+    
+    
 
 }

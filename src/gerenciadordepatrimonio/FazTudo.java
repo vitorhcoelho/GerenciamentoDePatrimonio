@@ -61,7 +61,7 @@ public class FazTudo {
             + "3 - Excluir\n"
             + "0 - Voltar\n";
 
-    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoDonoDAO mdonoDAO) {
+    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
 
         serv.setLoginSenha("login", "senha");//user teste
         serv.setAdm(true);
@@ -116,7 +116,7 @@ public class FazTudo {
                                 servDAO.getServLogado().setLogado(true);
 
                                 while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                    mainAdm(servDAO, campDAO, ambDAO, itemDAO, mdonoDAO);
+                                    mainAdm(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
                                 }
 
                             } else {
@@ -241,7 +241,7 @@ public class FazTudo {
         }
     }
 
-    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO, MovimentoDonoDAO mdonoDAO) {
+    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
         int aux = 1;
         while (aux != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -352,35 +352,21 @@ public class FazTudo {
                     break;
                 case 5:
                     while (opc != 0) {
-                        System.out.println("\nMovimentações de Itens:\n");
+                        System.out.println("\nMovimentações de Itens Entre Ambientes:\n");
                         System.out.println(menuGerenciar2);
                         opc = Integer.parseInt(in.nextLine());
 
                         switch (opc) {
                             case 1:
-                                int z, x, y;
-                                System.out.println("\nInforme o ID do item que deseja movimentar: ");
-                                z = Integer.parseInt(in.nextLine());
-                                if (iDAO.getItem(z) != null) {
-                                    System.out.println("\nID servidor de origem: ");
-                                    x = Integer.parseInt(in.nextLine());
-                                    if (servDAO.getServidoresId(x) != null) {
-                                        System.out.println("\nID servidor de destino: ");
-                                        y = Integer.parseInt(in.nextLine());
-                                        if (servDAO.getServidoresId(y) != null) {
-                                            mdonoDAO.insereMov(iDAO.getItem(z), servDAO.getServidoresId(x), servDAO.getServidoresId(y));
-                                        }
-                                    }
-                                }
-
+                                mAmbDAO.insereMovAmb();
                                 break;
 
                             case 2:
-
+                                mAmbDAO.editaMovAmb();
                                 break;
 
                             case 3:
-
+                                mAmbDAO.excluiMovimentoAmb();
                                 break;
 
                             default:
@@ -390,12 +376,12 @@ public class FazTudo {
                     break;
                 case 6:
                     while (opc != 0) {
-                        System.out.println("\nMovimentações de Donos:\n");
+                        System.out.println("\nMovimentações de Itens Entre Donos:\n");
                         System.out.println(menuGerenciar2);
                         opc = Integer.parseInt(in.nextLine());
                         switch (opc) {
                             case 1:
-
+                                
                                 break;
 
                             case 2:
@@ -443,7 +429,7 @@ public class FazTudo {
 
     }
 
-    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoDonoDAO mdonoDAO) {
+    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -461,7 +447,7 @@ public class FazTudo {
                     break;
 
                 case 3:
-                    gerenciamento(servDAO, campDAO, ambDAO, itemDAO, mdonoDAO);
+                    gerenciamento(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
                     break;
 
                 default:

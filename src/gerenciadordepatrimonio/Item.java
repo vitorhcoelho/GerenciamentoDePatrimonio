@@ -19,6 +19,7 @@ public class Item {
     private int estado;
     private String datacompra;
     private double valorcompra;
+    private int idDono;
     private int ambienteId;
     private LocalDate datacriacao;
     private LocalDate datamodificacao;
@@ -47,6 +48,22 @@ public class Item {
         this.codigo = codigo;
     }
 
+    public int getIdDono() {
+        return idDono;
+    }
+
+    public void setIdDono(int idDono) {
+        this.idDono = idDono;
+    }
+
+    public int getAmbienteId() {
+        return ambienteId;
+    }
+
+    public void setAmbienteId(int ambienteId) {
+        this.ambienteId = ambienteId;
+    }
+
     public int getEstado() {
         return estado;
     }
@@ -71,14 +88,6 @@ public class Item {
         this.valorcompra = valorcompra;
     }
 
-    public int getAmbiente() {
-        return ambienteId;
-    }
-
-    public void setAmbiente(int ambiente) {
-        this.ambienteId = ambiente;
-    }
-
     public LocalDate getDatacriacao() {
         return datacriacao;
     }
@@ -100,6 +109,6 @@ public class Item {
         return "Id Item: " + this.id + "\tEspecificação: " + this.especificacao + "\nCódigo de Patrimonio: "
                 + this.codigo + "\tEstado: " + this.estado + "\nData da Compra: " + this.datacompra 
                 + "\tValor da Compra: " + this.valorcompra + "\nId de Ambiente: " + this.ambienteId
-                + "\tData Criação: " + this.datacriacao;
+                + "\tData Criação: " + this.datacriacao + "\nId de Dono: " + getIdDono();
     }
 }

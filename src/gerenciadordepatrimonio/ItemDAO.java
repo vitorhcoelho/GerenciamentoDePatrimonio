@@ -60,7 +60,11 @@ public class ItemDAO {
 
         System.out.println("\nAmbiente do item: ");
         idAmbiente = Integer.parseInt(in.nextLine());
-        i.setAmbiente(idAmbiente);
+        i.setAmbienteId(idAmbiente);
+
+        System.out.println("\nId de Servidor Dono: ");
+        int dono = Integer.parseInt(in.nextLine());
+        i.setIdDono(dono);
 
         LocalDate hoje = LocalDate.now();
         i.setDatacriacao(hoje);
@@ -116,7 +120,11 @@ public class ItemDAO {
 
             System.out.println("\nAmbiente do item: ");
             idAmbiente = Integer.parseInt(in.nextLine());
-            i.setAmbiente(idAmbiente);
+            i.setAmbienteId(idAmbiente);
+
+            System.out.println("\nId de Servidor Dono: ");
+            int dono = Integer.parseInt(in.nextLine());
+            i.setIdDono(dono);
 
             i.setDatamodificacao(LocalDate.now());
 
@@ -125,15 +133,15 @@ public class ItemDAO {
         }
 
     }
-    
-    public void excluiItem(){
+
+    public void excluiItem() {
         System.out.println("\nDigite o ID do Item: ");
         int id = Integer.parseInt(in.nextLine());
-        
-        if(getItem(id) == null){
+
+        if (getItem(id) == null) {
             System.out.println("\nItem Não Encontrado!\n");
-        }else{
-            System.out.println("\nItem " + getItem(id).getId() + getItem(id).getEspecificacao()+ " Encontrado"
+        } else {
+            System.out.println("\nItem " + getItem(id).getId() + getItem(id).getEspecificacao() + " Encontrado"
                     + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
             int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
@@ -144,7 +152,8 @@ public class ItemDAO {
                 del.setCodigo(null);
                 del.setDatacompra(null);
                 del.setValorcompra(0);
-                del.setAmbiente(0);
+                del.setAmbienteId(0);
+                del.setIdDono(-1);
                 del.setDatacriacao(null);
                 del.setDatamodificacao(null);
                 System.out.println("\nAmbiente Deletado\n");
@@ -201,7 +210,7 @@ public class ItemDAO {
     public void mostraItemPorServ(Ambiente a) {
         for (int x = 0; x < this.qtdItem; x++) {
             if (itens[x] != null) {
-                if (itens[x].getAmbiente() == a.getId()) {
+                if (itens[x].getAmbienteId() == a.getId()) {
                     System.out.println(this.itens[x].toString());
                 }
             } else {
@@ -212,7 +221,7 @@ public class ItemDAO {
     public void mostraItemPorCampus(Ambiente a) {
         for (int x = 0; x < this.qtdItem; x++) {
             if (itens[x] != null) {
-                if (itens[x].getAmbiente() == a.getId()) {
+                if (itens[x].getAmbienteId() == a.getId()) {
                     System.out.println(this.itens[x].toString());
                 }
             } else {
