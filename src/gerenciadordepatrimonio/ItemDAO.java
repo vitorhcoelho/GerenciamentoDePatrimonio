@@ -46,8 +46,9 @@ public class ItemDAO {
         System.out.println("\nEstado de conservação do item: ");
         do {
             estado = Integer.parseInt(in.nextLine());
-            i.setEstado(estado);
+
         } while (estado < 0 || estado > 8);
+        i.setEstado(estado);
 
         System.out.println("\nData de compra do item (use o padrão dd/MM/yyyy): ");
         dado = in.nextLine();
@@ -68,6 +69,90 @@ public class ItemDAO {
         this.setItem(i);
 
         System.out.println(i.toString() + "\nIncluído com Sucesso!\n");
+    }
+
+    public void editaItem() {
+        String dado;
+        int estado;
+        double valor;
+        int idAmbiente;
+
+        System.out.println("\nDigite o ID do Item: ");
+        int id = Integer.parseInt(in.nextLine());
+
+        if (getItem(id) == null) {
+            System.out.println("\nAmbiente Não Encontrado\n");
+        } else {
+
+            Item i = getItem(id);
+            System.out.println("\nItem:  " + i.getEspecificacao() + " Encontrado");
+
+            System.out.println("\nEspecificação: ");
+            dado = in.nextLine();
+            i.setEspecificacao(dado);
+
+            do {
+                System.out.println("\nCódigo de patrimônio (6 digitos): ");
+
+                dado = in.nextLine();
+
+            } while (dado.length() < 6);
+            i.setCodigo(dado);
+
+            System.out.println("\nEstado de conservação do item: ");
+            do {
+                estado = Integer.parseInt(in.nextLine());
+
+            } while (estado < 0 || estado > 8);
+            i.setEstado(estado);
+
+            System.out.println("\nData de compra do item (use o padrão dd/MM/yyyy): ");
+            dado = in.nextLine();
+            i.setDatacompra(dado);
+
+            System.out.println("\nValor de compra do item: ");
+            valor = Double.parseDouble(in.nextLine());
+            i.setValorcompra(valor);
+
+            System.out.println("\nAmbiente do item: ");
+            idAmbiente = Integer.parseInt(in.nextLine());
+            i.setAmbiente(idAmbiente);
+
+            i.setDatamodificacao(LocalDate.now());
+
+            System.out.println(i.toString() + "\nEditado com Sucesso!\n");
+
+        }
+
+    }
+    
+    public void excluiItem(){
+        System.out.println("\nDigite o ID do Item: ");
+        int id = Integer.parseInt(in.nextLine());
+        
+        if(getItem(id) == null){
+            System.out.println("\nItem Não Encontrado!\n");
+        }else{
+            System.out.println("\nItem " + getItem(id).getId() + getItem(id).getEspecificacao()+ " Encontrado"
+                    + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
+            int es = Integer.parseInt(in.nextLine());
+            if (es == 1) {
+
+                Item del = getItem(id);
+                del.setEspecificacao("Item Apagado");
+                del.setEstado(-1);
+                del.setCodigo(null);
+                del.setDatacompra(null);
+                del.setValorcompra(0);
+                del.setAmbiente(0);
+                del.setDatacriacao(null);
+                del.setDatamodificacao(null);
+                System.out.println("\nAmbiente Deletado\n");
+
+            } else {
+                System.out.println("\nAmbiente Mantido\n");
+            }
+        }
     }
 
     public int achaItemId(int id) {

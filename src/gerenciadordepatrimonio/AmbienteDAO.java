@@ -49,21 +49,29 @@ public class AmbienteDAO {
     public void editaAmbiente() {
         String dado;
         int id;
-        Ambiente a = new Ambiente();
 
-        System.out.println("\nInsira nova descricao do ambiente:");
-        dado = in.nextLine();
-        a.setDescricao(dado);
-
-        System.out.println("\nInsira o id do novo Campus vinculado ao ambiente:");
+        System.out.println("\nDigite o ID do Ambiente: ");
         id = Integer.parseInt(in.nextLine());
-        a.setCodCamp(id);
 
-        a.setDatamodificacao(LocalDate.now());
+        if (getAmbiente(id) == null) {
+            System.out.println("\nAmbiente Não Encontrado\n");
+        } else {
 
-        this.setAmbiente(a);
+            Ambiente a = getAmbiente(id);
+            System.out.println("\nInsira nova descricao do ambiente:");
+            dado = in.nextLine();
+            a.setDescricao(dado);
 
-        System.out.println(a.toString() + "\neditado com Sucesso!\n");
+            System.out.println("\nInsira o id do novo Campus vinculado ao ambiente:");
+            id = Integer.parseInt(in.nextLine());
+            a.setCodCamp(id);
+
+            a.setDatamodificacao(LocalDate.now());
+
+            this.setAmbiente(a);
+
+            System.out.println(a.toString() + "\nEditado com Sucesso!\n");
+        }
     }
 
     public void excluiAmbiente() {
@@ -126,14 +134,15 @@ public class AmbienteDAO {
             }
         }
     }
-    
+
     public Ambiente getAmbientesPorCampus(Campus c) {
         for (int x = 0; x < this.qtdAmb; x++) {
             if (ambs[x] != null) {
                 if (ambs[x].getCodCamp() == c.getId()) {
                     return ambs[x];
                 }
-            } else {}
+            } else {
+            }
         }
         return null;
     }

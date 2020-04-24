@@ -97,6 +97,9 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id + ", especificacao=" + especificacao + ", codigo=" + codigo + ", estado=" + estado + ", datacompra=" + datacompra + ", valorcompra=" + valorcompra + ", ambiente=" + ambienteId + ", datacriacao=" + datacriacao + ", datamodificacao=" + datamodificacao + '}';
+        return "Id Item: " + this.id + "\tEspecificação: " + this.especificacao + "\nCódigo de Patrimonio: "
+                + this.codigo + "\tEstado: " + this.estado + "\nData da Compra: " + this.datacompra 
+                + "\tValor da Compra: " + this.valorcompra + "\nId de Ambiente: " + this.ambienteId
+                + "\tData Criação: " + this.datacriacao;
     }
 }

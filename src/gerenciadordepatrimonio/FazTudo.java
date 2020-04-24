@@ -338,11 +338,11 @@ public class FazTudo {
                                 break;
 
                             case 2:
-
+                                iDAO.editaItem();
                                 break;
 
                             case 3:
-
+                                iDAO.excluiItem();
                                 break;
 
                             default:
