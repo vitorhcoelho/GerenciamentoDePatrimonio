@@ -381,11 +381,11 @@ public class FazTudo {
                         opc = Integer.parseInt(in.nextLine());
                         switch (opc) {
                             case 1:
-                                mDonoDAO.insereMov();
+                                mDonoDAO.insereMov(iDAO);
                                 break;
 
                             case 2:
-                                mDonoDAO.editaMovDono();
+                                mDonoDAO.editaMovDono(iDAO);
                                 break;
 
                             case 3:

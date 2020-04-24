@@ -99,13 +99,11 @@ public class MovimentoDonoDAO {
             MovimentoDono m = getMovimentoDono(aux);
 
             System.out.println(getMovimentoDono(aux).toString() + "\nEncontrado!\n");
-
-            System.out.println("\nDigite o ID do item movido: ");
-            int idItem = Integer.parseInt(in.nextLine());
-            m.setIdItem(idItem);
+            
+            int idItem = getMovimentoDono(aux).getIdItem();
 
             if (iDAO.getItem(idItem) == null) {
-                System.out.println("\nID de Item Inválido!\n");
+                System.out.println("\nItem De Movimentação Não Existe Mais\n");
             } else {
 
                 System.out.println("\nDigite o ID do Dono de destino: ");

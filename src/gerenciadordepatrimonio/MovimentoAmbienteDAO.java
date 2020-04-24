@@ -141,12 +141,12 @@ public class MovimentoAmbienteDAO {
 
             System.out.println(getMovimentoAmb(aux).toString() + "\nEncontrado!\n");
 
-            System.out.println("\nDigite o ID do item movido: ");
-            idItem = Integer.parseInt(in.nextLine());
-            mAmb.setIdItem(idItem);
+            
+            idItem = getMovimentoAmb(aux).getIdItem();
+
 
             if (iDAO.getItem(idItem) == null) {
-                System.out.println("\nID de Item Inválido!\n");
+                System.out.println("\nItem De Movimentação Não Existe Mais\n");
             } else {
 
                 System.out.println("\nDigite o ID do ambiente de destino: ");
