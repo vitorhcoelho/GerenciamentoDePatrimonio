@@ -38,6 +38,7 @@ public class AmbienteDAO {
         a.setCodCamp(id);
 
         a.setDatacriacao(LocalDate.now());
+        a.setDatamodificacao(LocalDate.now());
 
         a.setId(geraId());
 
@@ -58,6 +59,9 @@ public class AmbienteDAO {
         } else {
 
             Ambiente a = getAmbiente(id);
+
+            System.out.println(a.toString() + "\nEncontrado");
+
             System.out.println("\nInsira nova descricao do ambiente:");
             dado = in.nextLine();
             a.setDescricao(dado);

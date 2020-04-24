@@ -241,7 +241,7 @@ public class FazTudo {
         }
     }
 
-    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
+    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mDonoDAO) {
         int aux = 1;
         while (aux != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -323,7 +323,7 @@ public class FazTudo {
                             default:
                                 break;
                         }
-                        break;
+                        
                     }
                     break;
 
@@ -334,15 +334,15 @@ public class FazTudo {
                         opc = Integer.parseInt(in.nextLine());
                         switch (opc) {
                             case 1:
-                                iDAO.insereItem();
+                                iDAO.insereItem(mAmbDAO, mDonoDAO);
                                 break;
 
                             case 2:
-                                iDAO.editaItem();
+                                iDAO.editaItem(mAmbDAO, mDonoDAO);
                                 break;
 
                             case 3:
-                                iDAO.excluiItem();
+                                iDAO.excluiItem(mAmbDAO, mDonoDAO);
                                 break;
 
                             default:
@@ -358,11 +358,11 @@ public class FazTudo {
 
                         switch (opc) {
                             case 1:
-                                mAmbDAO.insereMovAmb();
+                                mAmbDAO.insereMovAmb(iDAO);
                                 break;
 
                             case 2:
-                                mAmbDAO.editaMovAmb();
+                                mAmbDAO.editaMovAmb(iDAO);
                                 break;
 
                             case 3:
@@ -381,15 +381,15 @@ public class FazTudo {
                         opc = Integer.parseInt(in.nextLine());
                         switch (opc) {
                             case 1:
-                                
+                                mDonoDAO.insereMov();
                                 break;
 
                             case 2:
-
+                                mDonoDAO.editaMovDono();
                                 break;
 
                             case 3:
-
+                                mDonoDAO.excluiMovimentoDono();
                                 break;
 
                             default:

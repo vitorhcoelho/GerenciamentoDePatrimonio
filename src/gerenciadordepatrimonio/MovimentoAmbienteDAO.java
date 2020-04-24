@@ -65,44 +65,70 @@ public class MovimentoAmbienteDAO {
         }
     }
 
-    public void insereMovAmb() {
+    public void insereAuto(int item, int ambOrigem, int ambDestino, int mot) {
+        MovimentoAmbiente m = new MovimentoAmbiente();
+
+        m.setId(geraId());
+        m.setIdItem(item);
+        m.setAmbienteOrigem(ambOrigem);
+        m.setAmbienteDestino(ambDestino);
+        m.setDataCriacao(LocalDate.now());
+        m.setDataModificacao(LocalDate.now());
+
+        if (mot == 0) {
+            m.setMotivo("Deletado");
+        } else {
+            m.setMotivo("Novo ou Editado em Itens");
+        }
+        setMovAmb(m);
+
+    }
+
+    public void insereMovAmb(ItemDAO iDAO) {
         String dado;
-        int ids;
+        int idItem;
+        int idAmb;
         MovimentoAmbiente mAmb = new MovimentoAmbiente();
 
         System.out.println("\nDigite o ID do item movido: ");
-        ids = Integer.parseInt(in.nextLine());
-        mAmb.setIdItem(ids);
+        idItem = Integer.parseInt(in.nextLine());
+        mAmb.setIdItem(idItem);
 
-        System.out.println("\nDigite o ID do ambiente de origem: ");
-        ids = Integer.parseInt(in.nextLine());
-        mAmb.setAmbienteOrigem(ids);
-
-        System.out.println("\nDigite o ID do ambiente de destino: ");
-        ids = Integer.parseInt(in.nextLine());
-        mAmb.setAmbienteDestino(ids);
-
-        System.out.println("\nDescreva o motivo da movimentação de item: ");
-        dado = in.nextLine();
-        mAmb.setMotivo(dado);
-
-        mAmb.setDataCriacao(LocalDate.now());
-        mAmb.setDataModificacao(LocalDate.now());
-
-        mAmb.setId(geraId());
-
-        if (mAmb != null) {
-            setMovAmb(mAmb);
-            System.out.println("\nMovimentação Inserida\n");
+        if (iDAO.getItem(idItem) == null) {
+            System.out.println("\nID de Item Inválido!\n");
         } else {
-            System.out.println("\nErro Null\n");
+            mAmb.setAmbienteOrigem(iDAO.getItem(idItem).getAmbienteId());
+
+            System.out.println("\nDigite o ID do ambiente de destino: ");
+            idAmb = Integer.parseInt(in.nextLine());
+            mAmb.setAmbienteDestino(idAmb);
+
+            iDAO.getItem(idItem).setAmbienteId(idAmb);
+
+            System.out.println("\nDescreva o motivo da movimentação de item: ");
+            dado = in.nextLine();
+            mAmb.setMotivo(dado);
+
+            mAmb.setDataCriacao(LocalDate.now());
+            mAmb.setDataModificacao(LocalDate.now());
+
+            mAmb.setId(geraId());
+
+            if (mAmb != null) {
+                setMovAmb(mAmb);
+                System.out.println(mAmb.toString() + "\nMovimentação Inserida\n");
+            } else {
+                System.out.println("\nErro Null\n");
+            }
+
         }
 
     }
 
-    public void editaMovAmb() {
+    public void editaMovAmb(ItemDAO iDAO) {
         String dado;
         int ids;
+        int idItem;
 
         System.out.println("\nDigite o ID da Movimentação que deseja editar: ");
         int aux = Integer.parseInt(in.nextLine());
@@ -116,33 +142,36 @@ public class MovimentoAmbienteDAO {
             System.out.println(getMovimentoAmb(aux).toString() + "\nEncontrado!\n");
 
             System.out.println("\nDigite o ID do item movido: ");
-            ids = Integer.parseInt(in.nextLine());
-            mAmb.setIdItem(ids);
+            idItem = Integer.parseInt(in.nextLine());
+            mAmb.setIdItem(idItem);
 
-            System.out.println("\nDigite o ID do ambiente de origem: ");
-            ids = Integer.parseInt(in.nextLine());
-            mAmb.setAmbienteOrigem(ids);
-
-            System.out.println("\nDigite o ID do ambiente de destino: ");
-            ids = Integer.parseInt(in.nextLine());
-            mAmb.setAmbienteDestino(ids);
-
-            System.out.println("\nDescreva o motivo da movimentação de item: ");
-            dado = in.nextLine();
-            mAmb.setMotivo(dado);
-
-            mAmb.setDataModificacao(LocalDate.now());
-
-            if (mAmb != null) {
-                System.out.println("\nMovimentação Editada\n");
+            if (iDAO.getItem(idItem) == null) {
+                System.out.println("\nID de Item Inválido!\n");
             } else {
-                System.out.println("\nErro Null\n");
-            }
 
+                System.out.println("\nDigite o ID do ambiente de destino: ");
+                ids = Integer.parseInt(in.nextLine());
+                mAmb.setAmbienteDestino(ids);
+                
+                iDAO.getItem(idItem).setAmbienteId(ids);
+
+                System.out.println("\nDescreva o motivo da movimentação de item: ");
+                dado = in.nextLine();
+                mAmb.setMotivo(dado);
+
+                mAmb.setDataModificacao(LocalDate.now());
+
+                if (mAmb != null) {
+                    System.out.println(mAmb.toString() + "\nMovimentação Editada\n");
+                } else {
+                    System.out.println("\nErro Null\n");
+                }
+
+            }
         }
     }
-    
-    public void excluiMovimentoAmb(){
+
+    public void excluiMovimentoAmb() {
         System.out.println("\nDigite o ID da Movimentação que deseja editar: ");
         int aux = Integer.parseInt(in.nextLine());
 
@@ -151,7 +180,7 @@ public class MovimentoAmbienteDAO {
         } else {
             System.out.println(getMovimentoAmb(aux).toString() + "\nEncontrado!\n");
             System.out.println("\nDeseja Deletar?\n1 - Sim\n2 - Não");
-             int es = Integer.parseInt(in.nextLine());
+            int es = Integer.parseInt(in.nextLine());
             if (es == 1) {
 
                 MovimentoAmbiente del = getMovimentoAmb(aux);
@@ -159,6 +188,7 @@ public class MovimentoAmbienteDAO {
                 del.setAmbienteDestino(-1);
                 del.setAmbienteOrigem(-1);
                 del.setDataCriacao(null);
+                del.setDataModificacao(null);
                 del.setIdItem(-1);
                 System.out.println("\nMovimentação Deletada\n");
 

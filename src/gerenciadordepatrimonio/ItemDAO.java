@@ -24,7 +24,7 @@ public class ItemDAO {
         return id;
     }
 
-    public void insereItem() {
+    public void insereItem(MovimentoAmbienteDAO mAmDAO, MovimentoDonoDAO mDoDAO) {
         String dado;
         int estado;
         double valor;
@@ -72,14 +72,19 @@ public class ItemDAO {
         i.setId(geraId());
         this.setItem(i);
 
+        mAmDAO.insereAuto(i.getId(), 0, idAmbiente, 1);
+        mDoDAO.insereAuto(i.getId(), 0, dono, 1);
+
         System.out.println(i.toString() + "\nIncluído com Sucesso!\n");
     }
 
-    public void editaItem() {
+    public void editaItem(MovimentoAmbienteDAO mAmDAO, MovimentoDonoDAO mDoDAO) {
         String dado;
         int estado;
         double valor;
         int idAmbiente;
+        int ambAnterior;
+        int donoAnterior;
 
         System.out.println("\nDigite o ID do Item: ");
         int id = Integer.parseInt(in.nextLine());
@@ -117,10 +122,14 @@ public class ItemDAO {
             System.out.println("\nValor de compra do item: ");
             valor = Double.parseDouble(in.nextLine());
             i.setValorcompra(valor);
+            
+            ambAnterior = i.getAmbienteId();
 
             System.out.println("\nAmbiente do item: ");
             idAmbiente = Integer.parseInt(in.nextLine());
             i.setAmbienteId(idAmbiente);
+            
+            donoAnterior = i.getIdDono();
 
             System.out.println("\nId de Servidor Dono: ");
             int dono = Integer.parseInt(in.nextLine());
@@ -128,13 +137,21 @@ public class ItemDAO {
 
             i.setDatamodificacao(LocalDate.now());
 
+            if(ambAnterior != idAmbiente){
+            mAmDAO.insereAuto(i.getId(), 0, idAmbiente, 1);
+            }
+            
+            if(donoAnterior != dono){
+            mDoDAO.insereAuto(i.getId(), 0, dono, 1);
+            }
+            
             System.out.println(i.toString() + "\nEditado com Sucesso!\n");
 
         }
 
     }
 
-    public void excluiItem() {
+    public void excluiItem(MovimentoAmbienteDAO mAmDAO, MovimentoDonoDAO mDoDAO) {
         System.out.println("\nDigite o ID do Item: ");
         int id = Integer.parseInt(in.nextLine());
 
@@ -157,11 +174,19 @@ public class ItemDAO {
                 del.setDatacriacao(null);
                 del.setDatamodificacao(null);
                 System.out.println("\nAmbiente Deletado\n");
+                
+                mAmDAO.insereAuto(del.getId(), 0, 0, 0);
+                mDoDAO.insereAuto(del.getId(), 0, 0, 0);
+
 
             } else {
                 System.out.println("\nAmbiente Mantido\n");
             }
         }
+    }
+    
+    public void movimentacao(int item){
+        
     }
 
     public int achaItemId(int id) {

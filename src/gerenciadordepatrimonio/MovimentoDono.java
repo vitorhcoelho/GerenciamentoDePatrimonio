@@ -14,9 +14,9 @@ import java.time.LocalDate;
 public class MovimentoDono {
 
     private int id;
-    private Item item;
-    private Servidor donoOrigem;
-    private Servidor donoDestino;
+    private int idItem;
+    private int donoOrigem;
+    private int donoDestino;
     private String motivo;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
@@ -29,27 +29,27 @@ public class MovimentoDono {
         this.id = id;
     }
 
-    public Item getItem() {
-        return item;
+    public int getIdItem() {
+        return idItem;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setIdItem(int idItem) {
+        this.idItem = idItem;
     }
 
-    public Servidor getDonoOrigem() {
+    public int getDonoOrigem() {
         return donoOrigem;
     }
 
-    public void setDonoOrigem(Servidor donoOrigem) {
+    public void setDonoOrigem(int donoOrigem) {
         this.donoOrigem = donoOrigem;
     }
 
-    public Servidor getDonoDestino() {
+    public int getDonoDestino() {
         return donoDestino;
     }
 
-    public void setDonoDestino(Servidor donoDestino) {
+    public void setDonoDestino(int donoDestino) {
         this.donoDestino = donoDestino;
     }
 
@@ -75,6 +75,14 @@ public class MovimentoDono {
 
     public void setDataModificacao(LocalDate dataModificacao) {
         this.dataModificacao = dataModificacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Movimentação de Item Entre Donos\tID: " + getId() + "\nID Item: " + getIdItem() + "\nID Dono Origem: "
+                + getDonoOrigem() + "\tID Dono Destino: " + getDonoDestino()
+                + "\nData Criação: " + getDataCriacao() + "\tÚltima Modificação: " + getDataModificacao()
+                + "\nMotivo: " + getMotivo();
     }
 
 }
