@@ -30,4 +30,9 @@ public class Vinculacao {
         this.codItem = codItem;
     }
 
+    @Override
+    public String toString() {
+        return "\nVinculacao: " + "Ambiente ID: " + codAmb + ", Item ID: " + codItem;
+    }
+
 }

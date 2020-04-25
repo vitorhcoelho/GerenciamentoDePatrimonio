@@ -18,20 +18,20 @@ public class FazTudo {
     Servidor serv = new Servidor();
     Scanner in = new Scanner(System.in);
 
-    private String menuServ = "1 - Gerar Relatório\n"
+    private String menuServ = "\n1 - Gerar Relatório\n"
             + "2 - Visulizar\n"
             + "0 - Sair\n";
 
-    private String menuAdm = "1 - Gerar Relatório\n"
+    private String menuAdm = "\n1 - Gerar Relatório\n"
             + "2 - Visualizar\n"
             + "3 - Gerenciar\n"
             + "0 - Sair\n";
 
-    private String menuRelatorio = "1 - Relatório de Ambientes\n"
+    private String menuRelatorio = "\n1 - Relatório de Ambientes\n"
             + "2 - Relatório de Servidores\n"
             + "0 - Voltar\n";
 
-    private String menuVisualizar = "1 - Visualizar Servidores\n"
+    private String menuVisualizar = "\n1 - Visualizar Servidores\n"
             + "2 - Visualizar Campus\n"
             + "3 - Visualizar Ambientes\n"
             + "4 - Visualizar Itens\n"
@@ -40,20 +40,20 @@ public class FazTudo {
             + "7 - Visualizar Revisões\n"
             + "0 - Voltar\n";
 
-    private String menuVisuAmb = "1 - Filtrar por Servidor\n"
+    private String menuVisuAmb = "\n1 - Filtrar por Servidor\n"
             + "2 - Filtrar por Campus\n"
             + "0 - Voltar\n";
 
-    private String menuVisuItens = "1 - Filtrar por Campus\n"
+    private String menuVisuItens = "\n1 - Filtrar por Campus\n"
             + "2 - Filtrar por Servidor Dono\n"
             + "3 - Buscar por ID\n"
             + "0 - Voltar\n";
 
-    private String menuVisuMov = "1 - Mostrar todos\n"
+    private String menuVisuMov = "\n1 - Mostrar todos\n"
             + "2 - Digite o ID item que deseja ver a movimentacao\n"
-            + "0 - Voltar";
+            + "0 - Voltar\n";
 
-    private String menuGerenciar = "1 - Campus\n"
+    private String menuGerenciar = "\n1 - Campus\n"
             + "2 - Servidores\n"
             + "3 - Ambientes\n"
             + "4 - Itens\n"
@@ -62,12 +62,12 @@ public class FazTudo {
             + "7 - Revisões\n"
             + "0 - Voltar\n";
 
-    private String menuGerenciar2 = "1 - Adicionar\n"
+    private String menuGerenciar2 = "\n1 - Adicionar\n"
             + "2 - Editar\n"
             + "3 - Excluir\n"
             + "0 - Voltar\n";
     
-    private String menuRevisoes = "1 - Criar Revisão\n"
+    private String menuRevisoes = "\n1 - Criar Revisão\n"
             + "2 - Iniciar ou Continuar Revisão\n"
             + "3 - Excluir Revisão\n"
             + "0 - Voltar\n";
@@ -94,15 +94,17 @@ public class FazTudo {
         s1.setNome("Jose");
         s1.setPapel("lecionar");
         s1.setSystem(false);
+        sDAO.setServidores(s1);
         
         s2.setCampus(1);
         s2.setCargo("coordenador");
         s2.setEmail("s2@gmail.com");
-        s2.setId(1);
+        s2.setId(2);
         s2.setLoginSenha("s2", "123");
         s2.setNome("Joao");
         s2.setPapel("coordenar");
         s2.setSystem(false);
+        sDAO.setServidores(s2);
         
         c1.setAbreviacao("camp1");
         c1.setBairro("Univerde");
@@ -112,35 +114,41 @@ public class FazTudo {
         c1.setEndereco("Rua do Grau, 10");
         c1.setId(1);
         c1.setNome("Campus Tecnologico");
+        cDAO.setCampus(c1);
         
         c2.setAbreviacao("camp2");
         c2.setBairro("Distrito");
         c2.setCep("38066333");
         c2.setCidade("Uberaba");
         c2.setDataCriacao(LocalDate.now());
-        c2.setEndereco("Rua dos Govinos, 99");
+        c2.setEndereco("Rua dos Bovinos, 99");
         c2.setId(2);
         c2.setNome("Campus Agroeconomico");
+        cDAO.setCampus(c2);
         
         a1.setCodCamp(1);
         a1.setDatacriacao(LocalDate.now());
         a1.setDescricao("Deposito");
         a1.setId(1);
+        aDAO.setAmbiente(a1);
         
         a2.setCodCamp(1);
         a2.setDatacriacao(LocalDate.now());
         a2.setDescricao("Despensa");
         a2.setId(2);
+        aDAO.setAmbiente(a2);
         
         a3.setCodCamp(2);
         a3.setDatacriacao(LocalDate.now());
         a3.setDescricao("Despensa");
         a3.setId(3);
+        aDAO.setAmbiente(a3);
         
         a4.setCodCamp(2);
         a4.setDatacriacao(LocalDate.now());
         a4.setDescricao("Deposito");
         a4.setId(4);
+        aDAO.setAmbiente(a4);
         
         i1.setAmbienteId(1);
         i1.setCodigo("321654");
@@ -151,6 +159,7 @@ public class FazTudo {
         i1.setId(1);
         i1.setIdDono(1);
         i1.setValorcompra(1000);
+        iDAO.setItem(i1);
         
         i2.setAmbienteId(2);
         i2.setCodigo("987654");
@@ -161,6 +170,7 @@ public class FazTudo {
         i2.setId(2);
         i2.setIdDono(1);
         i2.setValorcompra(200);
+        iDAO.setItem(i2);
         
         i3.setAmbienteId(3);
         i3.setCodigo("123456");
@@ -171,6 +181,7 @@ public class FazTudo {
         i3.setId(3);
         i3.setIdDono(2);
         i3.setValorcompra(3500);
+        iDAO.setItem(i3);
         
         i4.setAmbienteId(4);
         i4.setCodigo("123654");
@@ -181,6 +192,7 @@ public class FazTudo {
         i4.setId(4);
         i4.setIdDono(2);
         i4.setValorcompra(1499);
+        iDAO.setItem(i4);
     }
     
 
@@ -194,7 +206,7 @@ public class FazTudo {
         int opcao = 5;
 
         while (opcao != 0) {
-            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("\n----------IFTM GERENCIAMENTO----------\n");
             System.out.println("Para acessar como:\n\n"
                     + "[1] -> SERVIDOR\n"
                     + "[2] -> ADMINISTRADOR\n"
@@ -264,7 +276,7 @@ public class FazTudo {
     public void relatorios(ServidorDAO servDAO) {
         int aux = 1;
         while (aux != 0) {
-            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("\n----------IFTM GERENCIAMENTO----------\n");
             System.out.println(menuRelatorio);
             aux = Integer.parseInt(in.nextLine());
 
@@ -285,7 +297,7 @@ public class FazTudo {
         int aux = 1;
         int dado;
         while (aux != 0) {
-            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("\n----------IFTM GERENCIAMENTO----------\n");
             System.out.println(menuVisualizar);
             aux = Integer.parseInt(in.nextLine());
             int opc = 1;

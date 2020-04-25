@@ -79,7 +79,7 @@ public class MovimentoAmbiente {
 
     @Override
     public String toString() {
-        return "Movimentação de Item Entre Ambientes\tID: " + getId() + "\nID Item: " + getIdItem() + "\nID Ambiente Origem: "
+        return "\nMovimentação de Item Entre Ambientes\tID: " + getId() + "\nID Item: " + getIdItem() + "\nID Ambiente Origem: "
                 + getAmbienteOrigem() + "\tID Ambiente Destino: " + getAmbienteDestino() + 
                 "\nData Criação: " + getDataCriacao() + "\tÚltima Modificação: " + getDataModificacao() +
                 "\nMotivo: " + getMotivo();
