@@ -47,7 +47,7 @@ public class FazTudo {
             + "2 - Filtrar por Servidor Dono\n"
             + "3 - Buscar por ID\n"
             + "0 - Voltar\n";
-    
+
     private String menuVisuMov = "1 - Mostrar todos\n"
             + "2 - Digite o ID item que deseja ver a movimentacao\n"
             + "0 - Voltar";
@@ -65,8 +65,13 @@ public class FazTudo {
             + "2 - Editar\n"
             + "3 - Excluir\n"
             + "0 - Voltar\n";
+    
+    private String menuRevisoes = "1 - Criar Revisão\n"
+            + "2 - Iniciar ou Continuar Revisão\n"
+            + "3 - Excluir Revisão\n"
+            + "0 - Voltar\n";
 
-    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
+    public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO) {
 
         serv.setNome("zika");
         serv.setLoginSenha("login", "senha");//user teste
@@ -122,7 +127,7 @@ public class FazTudo {
                                 servDAO.getServLogado().setLogado(true);
 
                                 while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                    mainAdm(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
+                                    mainAdm(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO);
                                 }
 
                             } else {
@@ -231,55 +236,55 @@ public class FazTudo {
                         }
                     }
                     break;
-                    
+
                 case 5:
-                    while (opc != 0){
+                    while (opc != 0) {
                         System.out.println(menuVisuMov);
                         opc = Integer.parseInt(in.nextLine());
-                        
-                        switch (opc){
+
+                        switch (opc) {
                             case 1:
                                 mAmbDAO.mostraMovAmbientes();
                                 break;
-                                
+
                             case 2:
                                 System.out.println("Informe o ID do item que procura:");
                                 dado = Integer.parseInt(in.nextLine());
                                 mAmbDAO.getMovAmbientesPorID(dado);
                                 break;
-                                
+
                             default:
                                 break;
                         }
                     }
                     break;
-                    
+
                 case 6:
-                    while (opc != 0){
+                    while (opc != 0) {
                         System.out.println(menuVisuMov);
                         opc = Integer.parseInt(in.nextLine());
-                        
-                        switch (opc){
+
+                        switch (opc) {
                             case 1:
                                 mdonoDAO.mostraMovDonos();
                                 break;
-                                
+
                             case 2:
                                 System.out.println("Informe o ID do item que procura:");
                                 dado = Integer.parseInt(in.nextLine());
                                 mdonoDAO.getMovDonosPorID(dado);
                                 break;
-                                
+
                             default:
                                 break;
                         }
                     }
                     break;
-                    
+
                 case 7:
 
                     break;
-                    
+
                 default:
                     break;
 
@@ -287,7 +292,7 @@ public class FazTudo {
         }
     }
 
-    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mDonoDAO) {
+    public void gerenciamento(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mDonoDAO, RevisaoDAO revDAO) {
         int aux = 1;
         while (aux != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -369,7 +374,7 @@ public class FazTudo {
                             default:
                                 break;
                         }
-                        
+
                     }
                     break;
 
@@ -443,23 +448,50 @@ public class FazTudo {
                         }
                     }
                     break;
-                    
+
                 case 7:
+                    int serv;
                     while (opc != 0) {
                         System.out.println("\nRevisões: \n");
-                        System.out.println(menuGerenciar2);
+                        System.out.println(menuRevisoes);
                         opc = Integer.parseInt(in.nextLine());
                         switch (opc) {
                             case 1:
-                               
+                                int valid = 0;
+                                int amb;
+                                serv = servDAO.getServLogado().getId();
+                                while (valid != 1) {
+                                    System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
+                                    amb = Integer.parseInt(in.nextLine());
+                                    if(ambDAO.getAmbiente(amb) != null){
+                                        revDAO.criaRevisao(serv, amb, iDAO);
+                                        valid = 1;
+                                    }else{
+                                        System.out.println("\nID de Ambiente Não Existente!\n");
+                                        valid = 0;
+                                    }
+                                }
                                 break;
 
                             case 2:
-                                
+                                serv = servDAO.getServLogado().getId();
+                                if(revDAO.getRevisaoServ(serv) != null){
+                                    System.out.println("\nSua Revisão:\nAmbiente de ID: " + revDAO.getRevisaoServ(serv).getIdAmb());
+                                    System.out.println("\nDeseja continuar?\n1 - Sim\n2 - Não");
+                                    int esc = Integer.parseInt(in.nextLine());
+                                    
+                                    if(esc == 1){
+                                        revDAO.andamentoRevisao(iDAO, serv);
+                                    }else{
+                                        System.out.println("\nAbortando...\n");
+                                    }
+                                }else{
+                                    System.out.println("\nVocê Não Possui Revisão Para Iniciar/Continuar\n");
+                                }
                                 break;
 
                             case 3:
-                                
+
                                 break;
 
                             default:
@@ -467,7 +499,7 @@ public class FazTudo {
                         }
                     }
                     break;
-                    
+
                 default:
                     break;
 
@@ -500,7 +532,7 @@ public class FazTudo {
 
     }
 
-    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
+    public void mainAdm(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -518,7 +550,7 @@ public class FazTudo {
                     break;
 
                 case 3:
-                    gerenciamento(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
+                    gerenciamento(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO);
                     break;
 
                 default:

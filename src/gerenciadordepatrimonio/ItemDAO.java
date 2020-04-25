@@ -185,9 +185,6 @@ public class ItemDAO {
         }
     }
     
-    public void movimentacao(int item){
-        
-    }
 
     public int achaItemId(int id) {
         for (int x = 0; x < this.qtdItem; x++) {
@@ -223,7 +220,7 @@ public class ItemDAO {
     public boolean setItem(Item item) {
         int pos = vagaItem();
         if (pos == -1) {
-            System.out.println("\nLista de Campus Cheia\n");
+            System.out.println("\nLista de Itens Cheia\n");
             return false;
         } else {
             itens[pos] = item;
@@ -265,5 +262,25 @@ public class ItemDAO {
             }
         }
     }
+    
+    public void revisaoItem(int amb, Revisao r){
+        for(int x = 0;x < this.qtdItem; x++){
+            if(itens[x].getAmbienteId() == amb && itens[x] != null){
+                r.setItem(itens[x]);
+            }else{
+                
+            }
+        }
+    }
+
+    public int getQtdItem() {
+        return qtdItem;
+    }
+
+    public void setQtdItem(int qtdItem) {
+        this.qtdItem = qtdItem;
+    }
+    
+    
 
 }

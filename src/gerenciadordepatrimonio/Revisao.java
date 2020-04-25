@@ -12,14 +12,18 @@ import java.time.LocalDate;
  * @author gusta
  */
 public class Revisao {
+
     private int id;
     private int ano;
     private int idServ;
     private int idAmb;
-    private String estado;
+    private int estado;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
+    private Item[] itens = new Item[100];
+    private int qtdItem;
 
+    //Estados: 1 - Não Iniciado, 2 - Andamento, 3 - Terminado
     public int getId() {
         return id;
     }
@@ -52,11 +56,11 @@ public class Revisao {
         this.idAmb = idAmb;
     }
 
-    public String getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
@@ -76,14 +80,44 @@ public class Revisao {
         this.dataModificacao = dataModificacao;
     }
 
+    public int getQtdItem() {
+        return qtdItem;
+    }
+
+    public void setQtdItem(int qtdItem) {
+        this.qtdItem = qtdItem;
+    }
+
+    public int vagaItem() {
+        for (int x = 0; x < itens.length; x++) {
+            if (itens[x] == null) {
+                return x;
+            } else {
+
+            }
+        }
+        return -1;
+    }
+
+    public boolean setItem(Item item) {
+        int pos = vagaItem();
+        if (pos == -1) {
+            System.out.println("\nLista de Itens Cheia\n");
+            return false;
+        } else {
+            itens[pos] = item;
+            this.qtdItem++;
+            return true;
+        }
+    }
+
     @Override
     public String toString() {
         return "Revisão ID: " + getId() + "\tAno: " + getAno()
                 + "\nServidor: " + getIdServ() + "\tAmbiente: " + getIdAmb()
-                + "\nEstado: " + getEstado() 
+                + "\nEstado: " + getEstado()
                 + "\nData de Criação: " + getDataCriacao() + "\tÚltima Modificação: "
                 + getDataModificacao();
     }
-    
-    
+
 }
