@@ -58,6 +58,7 @@ public class FazTudo {
             + "4 - Itens\n"
             + "5 - Movimentações de Itens\n"
             + "6 - Movimentações de Donos\n"
+            + "7 - Revisões\n"
             + "0 - Voltar\n";
 
     private String menuGerenciar2 = "1 - Adicionar\n"
@@ -441,6 +442,31 @@ public class FazTudo {
                         }
                     }
                     break;
+                    
+                case 7:
+                    while (opc != 0) {
+                        System.out.println("\nRevisões: \n");
+                        System.out.println(menuGerenciar2);
+                        opc = Integer.parseInt(in.nextLine());
+                        switch (opc) {
+                            case 1:
+                               
+                                break;
+
+                            case 2:
+                                
+                                break;
+
+                            case 3:
+                                
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                    
                 default:
                     break;
 

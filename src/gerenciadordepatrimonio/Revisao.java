@@ -1,0 +1,89 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gerenciadordepatrimonio;
+
+import java.time.LocalDate;
+
+/**
+ *
+ * @author gusta
+ */
+public class Revisao {
+    private int id;
+    private int ano;
+    private int idServ;
+    private int idAmb;
+    private String estado;
+    private LocalDate dataCriacao;
+    private LocalDate dataModificacao;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getAno() {
+        return ano;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public int getIdServ() {
+        return idServ;
+    }
+
+    public void setIdServ(int idServ) {
+        this.idServ = idServ;
+    }
+
+    public int getIdAmb() {
+        return idAmb;
+    }
+
+    public void setIdAmb(int idAmb) {
+        this.idAmb = idAmb;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public LocalDate getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(LocalDate dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public LocalDate getDataModificacao() {
+        return dataModificacao;
+    }
+
+    public void setDataModificacao(LocalDate dataModificacao) {
+        this.dataModificacao = dataModificacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Revisão ID: " + getId() + "\tAno: " + getAno()
+                + "\nServidor: " + getIdServ() + "\tAmbiente: " + getIdAmb()
+                + "\nEstado: " + getEstado() 
+                + "\nData de Criação: " + getDataCriacao() + "\tÚltima Modificação: "
+                + getDataModificacao();
+    }
+    
+    
+}
