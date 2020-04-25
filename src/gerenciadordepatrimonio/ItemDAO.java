@@ -185,6 +185,21 @@ public class ItemDAO {
         }
     }
     
+    public void excluiAuto(int idI, MovimentoAmbienteDAO mAmDAO, MovimentoDonoDAO mDoDAO){
+        Item del = getItem(idI);
+        del.setEspecificacao("Item Apagado");
+                del.setEstado(-1);
+                del.setCodigo(null);
+                del.setDatacompra(null);
+                del.setValorcompra(0);
+                del.setAmbienteId(0);
+                del.setIdDono(-1);
+                del.setDatacriacao(null);
+                del.setDatamodificacao(null);
+                mAmDAO.insereAuto(del.getId(), 0, 0, 0);
+                mDoDAO.insereAuto(del.getId(), 0, 0, 0);
+    }
+    
 
     public int achaItemId(int id) {
         for (int x = 0; x < this.qtdItem; x++) {

@@ -73,6 +73,16 @@ public class Revisao {
     public LocalDate getDataModificacao() {
         return dataModificacao;
     }
+    
+    public String traduzEstado(){
+        if(this.estado == 1){
+            return "Não Iniciada";
+        }else if(this.estado == 2 ){
+            return "Em Andamento";
+        }else{
+            return "Terminada";
+        }
+    }
 
     public void setDataModificacao(LocalDate dataModificacao) {
         this.dataModificacao = dataModificacao;
@@ -82,7 +92,7 @@ public class Revisao {
     public String toString() {
         return "\nRevisão ID: " + getId() + "\tAno: " + getAno()
                 + "\nServidor: " + getIdServ() + "\tAmbiente: " + getIdAmb()
-                + "\nEstado: " + getEstado()
+                + "\nEstado: " + traduzEstado()
                 + "\nData de Criação: " + getDataCriacao() + "\tÚltima Modificação: "
                 + getDataModificacao();
     }

@@ -86,24 +86,29 @@ public class FazTudo {
     Item i4 = new Item();
 
     public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO) {
+        s1.setAdm(false);
         s1.setCampus(1);
         s1.setCargo("professor");
         s1.setEmail("s1@gmail.com");
         s1.setId(sDAO.geraId());
+        s1.setLogado(false);
         s1.setLoginSenha("s1", "123");
         s1.setNome("Jose");
         s1.setPapel("lecionar");
         s1.setSystem(false);
         sDAO.setServidores(s1);
 
-        s2.setCampus(1);
+        s2.setAdm(false);
+        s2.setCampus(2);
         s2.setCargo("coordenador");
         s2.setEmail("s2@gmail.com");
         s2.setId(sDAO.geraId());
+        s2.setLogado(false);
         s2.setLoginSenha("s2", "123");
         s2.setNome("Joao");
         s2.setPapel("coordenar");
         s2.setSystem(false);
+        sDAO.setServidores(s2);
 
         c1.setAbreviacao("camp1");
         c1.setBairro("Univerde");
@@ -113,6 +118,7 @@ public class FazTudo {
         c1.setEndereco("Rua do Grau, 10");
         c1.setId(cDAO.geraId());
         c1.setNome("Campus Tecnologico");
+        cDAO.setCampus(c1);
 
         c2.setAbreviacao("camp2");
         c2.setBairro("Distrito");
@@ -122,26 +128,31 @@ public class FazTudo {
         c2.setEndereco("Rua dos Govinos, 99");
         c2.setId(cDAO.geraId());
         c2.setNome("Campus Agroeconomico");
+        cDAO.setCampus(c2);
 
         a1.setCodCamp(1);
         a1.setDatacriacao(LocalDate.now());
         a1.setDescricao("Deposito");
         a1.setId(aDAO.geraId());
+        aDAO.setAmbiente(a1);
 
         a2.setCodCamp(1);
         a2.setDatacriacao(LocalDate.now());
         a2.setDescricao("Despensa");
         a2.setId(aDAO.geraId());
+        aDAO.setAmbiente(a2);
 
         a3.setCodCamp(2);
         a3.setDatacriacao(LocalDate.now());
         a3.setDescricao("Dispensa");
         a3.setId(aDAO.geraId());
+        aDAO.setAmbiente(a3);
 
         a4.setCodCamp(2);
         a4.setDatacriacao(LocalDate.now());
         a4.setDescricao("Diposito");
         a4.setId(aDAO.geraId());
+        aDAO.setAmbiente(a4);
 
         i1.setAmbienteId(1);
         i1.setCodigo("321654");
@@ -152,6 +163,7 @@ public class FazTudo {
         i1.setId(iDAO.geraId());
         i1.setIdDono(1);
         i1.setValorcompra(1000);
+        iDAO.setItem(i1);
 
         i2.setAmbienteId(2);
         i2.setCodigo("987654");
@@ -162,6 +174,7 @@ public class FazTudo {
         i2.setId(iDAO.geraId());
         i2.setIdDono(1);
         i2.setValorcompra(200);
+        iDAO.setItem(i2);
 
         i3.setAmbienteId(3);
         i3.setCodigo("123456");
@@ -172,6 +185,7 @@ public class FazTudo {
         i3.setId(iDAO.geraId());
         i3.setIdDono(2);
         i3.setValorcompra(3500);
+        iDAO.setItem(i3);
 
         i4.setAmbienteId(4);
         i4.setCodigo("123654");
@@ -183,6 +197,7 @@ public class FazTudo {
         i4.setIdDono(2);
         i4.setValorcompra(1499);
         iDAO.setItem(i4);
+        
     }
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO, ItensRevisaoDAO iRDAO) {
@@ -577,37 +592,60 @@ public class FazTudo {
                                 while (valid != 1) {
                                     System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
                                     amb = Integer.parseInt(in.nextLine());
-                                    if (ambDAO.getAmbiente(amb) != null) {
-                                        revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
-                                        valid = 1;
+
+                                    if (revDAO.getRevisaoAmb(amb) == null) {
+                                        if (ambDAO.getAmbiente(amb) != null) {
+                                            revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
+                                            valid = 1;
+                                        } else {
+                                            System.out.println("\nID de Ambiente Não Existente!\n");
+                                            valid = 0;
+                                        }
                                     } else {
-                                        System.out.println("\nID de Ambiente Não Existente!\n");
-                                        valid = 0;
+                                        System.out.println("\nJá Existe Revisão Desse Ambiente!\nVerifique se é recente e Edite ou Remova!\n");
                                     }
+
                                 }
                                 break;
 
                             case 2:
-                                serv = servDAO.getServLogado().getId();
-                                amb = revDAO.getRevisaoServ(serv).getIdAmb();
-                                if (revDAO.getRevisaoServ(serv) != null) {
-                                    System.out.println("\nSua Revisão:\nAmbiente de ID: " + amb + "\tDescrição: "
+                                System.out.println("\nQual ID do Ambiente em Revisão?");
+                                amb = Integer.parseInt(in.nextLine());
+                                if (revDAO.getRevisaoAmb(amb) != null) {
+                                    System.out.println("\nRevisão de Servidor ID: " + revDAO.getRevisaoAmb(amb).getIdServ()
+                                            + "\nAmbiente de ID: " + amb + "\tDescrição: "
                                             + ambDAO.getAmbiente(amb).getDescricao());
                                     System.out.println("\nDeseja continuar?\n1 - Sim\n2 - Não");
                                     int esc = Integer.parseInt(in.nextLine());
 
                                     if (esc == 1) {
-                                        revDAO.andamentoRevisao(serv, iRDAO);
+                                        revDAO.andamentoRevisao(amb, iRDAO, iDAO, mAmbDAO, mDonoDAO);
                                     } else {
                                         System.out.println("\nAbortando...\n");
                                     }
                                 } else {
-                                    System.out.println("\nVocê Não Possui Revisão Para Iniciar/Continuar\n");
+                                    System.out.println("\nNão Existe Revisão Criada Desse Ambiente\n");
                                 }
                                 break;
 
                             case 3:
+                                System.out.println("\nQual ID do Ambiente em Revisão?");
+                                amb = Integer.parseInt(in.nextLine());
+                                if (revDAO.getRevisaoAmb(amb) != null) {
+                                    System.out.println("\nRevisão de Servidor ID: " + revDAO.getRevisaoAmb(amb).getIdServ()
+                                            + "\nAmbiente de ID: " + amb + "\tDescrição: "
+                                            + ambDAO.getAmbiente(amb).getDescricao());
+                                    System.out.println("\nDeseja Deletar?\n1 - Sim\n2 - Não");
+                                    int esc = Integer.parseInt(in.nextLine());
 
+                                    if (esc == 1) {
+                                        revDAO.excluiRevisao(amb, iRDAO);
+                                    } else {
+                                        System.out.println("\nRevisão Mantida!\n");
+                                    }
+                                } else {
+                                    System.out.println("\nNão Existe Revisão Desse Ambiente Para Deletar\n");
+                                }
                                 break;
 
                             default:
