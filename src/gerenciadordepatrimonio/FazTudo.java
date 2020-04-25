@@ -577,37 +577,60 @@ public class FazTudo {
                                 while (valid != 1) {
                                     System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
                                     amb = Integer.parseInt(in.nextLine());
-                                    if (ambDAO.getAmbiente(amb) != null) {
-                                        revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
-                                        valid = 1;
+
+                                    if (revDAO.getRevisaoAmb(amb) == null) {
+                                        if (ambDAO.getAmbiente(amb) != null) {
+                                            revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
+                                            valid = 1;
+                                        } else {
+                                            System.out.println("\nID de Ambiente Não Existente!\n");
+                                            valid = 0;
+                                        }
                                     } else {
-                                        System.out.println("\nID de Ambiente Não Existente!\n");
-                                        valid = 0;
+                                        System.out.println("\nJá Existe Revisão Desse Ambiente!\nVerifique se é recente e Edite ou Remova!\n");
                                     }
+
                                 }
                                 break;
 
                             case 2:
-                                serv = servDAO.getServLogado().getId();
-                                amb = revDAO.getRevisaoServ(serv).getIdAmb();
-                                if (revDAO.getRevisaoServ(serv) != null) {
-                                    System.out.println("\nSua Revisão:\nAmbiente de ID: " + amb + "\tDescrição: "
+                                System.out.println("\nQual ID do Ambiente em Revisão?");
+                                amb = Integer.parseInt(in.nextLine());
+                                if (revDAO.getRevisaoAmb(amb) != null) {
+                                    System.out.println("\nRevisão de Servidor ID: " + revDAO.getRevisaoAmb(amb).getIdServ()
+                                            + "\nAmbiente de ID: " + amb + "\tDescrição: "
                                             + ambDAO.getAmbiente(amb).getDescricao());
                                     System.out.println("\nDeseja continuar?\n1 - Sim\n2 - Não");
                                     int esc = Integer.parseInt(in.nextLine());
 
                                     if (esc == 1) {
-                                        revDAO.andamentoRevisao(serv, iRDAO);
+                                        revDAO.andamentoRevisao(amb, iRDAO, iDAO, mAmbDAO, mDonoDAO);
                                     } else {
                                         System.out.println("\nAbortando...\n");
                                     }
                                 } else {
-                                    System.out.println("\nVocê Não Possui Revisão Para Iniciar/Continuar\n");
+                                    System.out.println("\nNão Existe Revisão Criada Desse Ambiente\n");
                                 }
                                 break;
 
                             case 3:
+                                System.out.println("\nQual ID do Ambiente em Revisão?");
+                                amb = Integer.parseInt(in.nextLine());
+                                if (revDAO.getRevisaoAmb(amb) != null) {
+                                    System.out.println("\nRevisão de Servidor ID: " + revDAO.getRevisaoAmb(amb).getIdServ()
+                                            + "\nAmbiente de ID: " + amb + "\tDescrição: "
+                                            + ambDAO.getAmbiente(amb).getDescricao());
+                                    System.out.println("\nDeseja Deletar?\n1 - Sim\n2 - Não");
+                                    int esc = Integer.parseInt(in.nextLine());
 
+                                    if (esc == 1) {
+                                        revDAO.excluiRevisao(amb, iRDAO);
+                                    } else {
+                                        System.out.println("\nRevisão Mantida!\n");
+                                    }
+                                } else {
+                                    System.out.println("\nNão Existe Revisão Desse Ambiente Para Deletar\n");
+                                }
                                 break;
 
                             default:

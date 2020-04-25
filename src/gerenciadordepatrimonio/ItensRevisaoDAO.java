@@ -33,7 +33,7 @@ public class ItensRevisaoDAO {
         setItemRevisao(iR);
     }
 
-    public void revisionar(int idRev) {
+    public void revisionar(int idRev, ItemDAO iDAO, MovimentoAmbienteDAO mADAO, MovimentoDonoDAO mDDAO) {
         int opc = 5;
         while (opc != 0) {
             for (int x = 0; x < qtdIRev; x++) {
@@ -41,18 +41,61 @@ public class ItensRevisaoDAO {
                     System.out.println(itRev[x].getItem().getEspecificacao() + "\nCódigo de Patrimônio: " + itRev[x].getItem().getCodigo()
                             + "\nEncontrado?\n1 - Sim\n2 - Não\n0 - Sair");
                     opc = Integer.parseInt(in.nextLine());
-                    if(opc == 2){
-                        System.out.println("\nNão Encontrado!\nItem deve ser pago!\nFoi pago?\n1 - Sim\n2 - Não");
-                        int esc = Integer.parseInt(in.nextLine());
-                        if(esc == 1){
-                            System.out.println("\nItem Pago\n");
-                            itRev[x].setPago(true);
-                        }else{
-                            System.out.println("\nItem Não Pago!\nEncaminhando Próximo Item...");
-                        }
+                    switch (opc) {
+                        case 1:
+                            System.out.println("\nEncontrado!\nEncaminhando Próximo Item...");
+                            itRev[x].setEncontrado(true);
+                            break;
+
+                        case 2:
+                            itRev[x].setEncontrado(false);
+                            System.out.println("\nNão Encontrado!\nItem deve ser pago!\nFoi pago?\n1 - Sim\n2 - Não");
+                            int esc = Integer.parseInt(in.nextLine());
+                            if (esc == 1) {
+                                System.out.println("\nItem Pago\n");
+                                itRev[x].setPago(true);
+                                iDAO.excluiAuto(itRev[x].getItem().getId(), mADAO, mDDAO);
+                            } else {
+                                System.out.println("\nItem Não Pago!\nEncaminhando Próximo Item...");
+                            }
+                            break;
+
+                        default:
+                            break;
                     }
-                    
+
                 }
+            }
+        }
+    }
+
+    public void estadoRevisao(int idRev, Revisao r) {
+        for (int x = 0; x < qtdIRev; x++) {
+            if (itRev[x].getIdRevisao() == idRev) {
+                if (itRev[x].isEncontrado()) {
+                    r.setEstado(3);
+                }else{
+                    if(itRev[x].isPago()){
+                        r.setEstado(3);
+                    }else{
+                        r.setEstado(2);
+                    }
+                }
+            }else{
+                
+            }
+        }
+    }
+
+    public void exclui(int idRev) {
+        for (int x = 0; x < qtdIRev; x++) {
+            if (itRev[x].getIdRevisao() == idRev) {
+                itRev[x].setEncontrado(false);
+                itRev[x].setPago(false);
+                itRev[x].setIdRevisao(-1);
+                itRev[x].setItem(null);
+            } else {
+
             }
         }
     }
