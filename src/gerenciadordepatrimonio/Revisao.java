@@ -80,7 +80,7 @@ public class Revisao {
 
     @Override
     public String toString() {
-        return "Revisão ID: " + getId() + "\tAno: " + getAno()
+        return "\nRevisão ID: " + getId() + "\tAno: " + getAno()
                 + "\nServidor: " + getIdServ() + "\tAmbiente: " + getIdAmb()
                 + "\nEstado: " + getEstado()
                 + "\nData de Criação: " + getDataCriacao() + "\tÚltima Modificação: "

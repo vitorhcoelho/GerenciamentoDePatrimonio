@@ -246,8 +246,7 @@ public class ItemDAO {
                 if (itens[x].getAmbienteId() == a.getId()) {
                     System.out.println(this.itens[x].toString());
                 }
-            } else {
-            }
+            } else {}
         }
     }
 

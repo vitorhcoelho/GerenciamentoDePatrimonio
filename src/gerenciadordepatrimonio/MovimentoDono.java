@@ -79,7 +79,7 @@ public class MovimentoDono {
 
     @Override
     public String toString() {
-        return "Movimentação de Item Entre Donos\tID: " + getId() + "\nID Item: " + getIdItem() + "\nID Dono Origem: "
+        return "\nMovimentação de Item Entre Donos\tID: " + getId() + "\nID Item: " + getIdItem() + "\nID Dono Origem: "
                 + getDonoOrigem() + "\tID Dono Destino: " + getDonoDestino()
                 + "\nData Criação: " + getDataCriacao() + "\tÚltima Modificação: " + getDataModificacao()
                 + "\nMotivo: " + getMotivo();

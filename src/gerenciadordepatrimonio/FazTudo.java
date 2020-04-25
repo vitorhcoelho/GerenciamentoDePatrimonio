@@ -18,20 +18,20 @@ public class FazTudo {
     Servidor serv = new Servidor();
     Scanner in = new Scanner(System.in);
 
-    private String menuServ = "1 - Gerar Relatório\n"
+    private String menuServ = "\n1 - Gerar Relatório\n"
             + "2 - Visulizar\n"
             + "0 - Sair\n";
 
-    private String menuAdm = "1 - Gerar Relatório\n"
+    private String menuAdm = "\n1 - Gerar Relatório\n"
             + "2 - Visualizar\n"
             + "3 - Gerenciar\n"
             + "0 - Sair\n";
 
-    private String menuRelatorio = "1 - Relatório de Ambientes\n"
+    private String menuRelatorio = "\n1 - Relatório de Ambientes\n"
             + "2 - Relatório de Servidores\n"
             + "0 - Voltar\n";
 
-    private String menuVisualizar = "1 - Visualizar Servidores\n"
+    private String menuVisualizar = "\n1 - Visualizar Servidores\n"
             + "2 - Visualizar Campus\n"
             + "3 - Visualizar Ambientes\n"
             + "4 - Visualizar Itens\n"
@@ -40,20 +40,20 @@ public class FazTudo {
             + "7 - Visualizar Revisões\n"
             + "0 - Voltar\n";
 
-    private String menuVisuAmb = "1 - Filtrar por Servidor\n"
+    private String menuVisuAmb = "\n1 - Filtrar por Servidor\n"
             + "2 - Filtrar por Campus\n"
             + "0 - Voltar\n";
 
-    private String menuVisuItens = "1 - Filtrar por Campus\n"
+    private String menuVisuItens = "\n1 - Filtrar por Campus\n"
             + "2 - Filtrar por Servidor Dono\n"
             + "3 - Buscar por ID\n"
             + "0 - Voltar\n";
 
-    private String menuVisuMov = "1 - Mostrar todos\n"
+    private String menuVisuMov = "\n1 - Mostrar todos\n"
             + "2 - Digite o ID item que deseja ver a movimentacao\n"
-            + "0 - Voltar";
+            + "0 - Voltar\n";
 
-    private String menuGerenciar = "1 - Campus\n"
+    private String menuGerenciar = "\n1 - Campus\n"
             + "2 - Servidores\n"
             + "3 - Ambientes\n"
             + "4 - Itens\n"
@@ -62,7 +62,7 @@ public class FazTudo {
             + "7 - Revisões\n"
             + "0 - Voltar\n";
 
-    private String menuGerenciar2 = "1 - Adicionar\n"
+    private String menuGerenciar2 = "\n1 - Adicionar\n"
             + "2 - Editar\n"
             + "3 - Excluir\n"
             + "0 - Voltar\n";
@@ -182,6 +182,7 @@ public class FazTudo {
         i4.setId(iDAO.geraId());
         i4.setIdDono(2);
         i4.setValorcompra(1499);
+        iDAO.setItem(i4);
     }
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO, ItensRevisaoDAO iRDAO) {
@@ -194,7 +195,7 @@ public class FazTudo {
         int opcao = 5;
 
         while (opcao != 0) {
-            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("\n----------IFTM GERENCIAMENTO----------\n");
             System.out.println("Para acessar como:\n\n"
                     + "[1] -> SERVIDOR\n"
                     + "[2] -> ADMINISTRADOR\n"
@@ -264,7 +265,7 @@ public class FazTudo {
     public void relatorios(ServidorDAO servDAO) {
         int aux = 1;
         while (aux != 0) {
-            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("\n----------IFTM GERENCIAMENTO----------\n");
             System.out.println(menuRelatorio);
             aux = Integer.parseInt(in.nextLine());
 
@@ -285,7 +286,7 @@ public class FazTudo {
         int aux = 1;
         int dado;
         while (aux != 0) {
-            System.out.println("----------IFTM GERENCIAMENTO----------\n");
+            System.out.println("\n----------IFTM GERENCIAMENTO----------\n");
             System.out.println(menuVisualizar);
             aux = Integer.parseInt(in.nextLine());
             int opc = 1;
