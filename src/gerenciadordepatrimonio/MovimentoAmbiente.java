@@ -53,8 +53,6 @@ public class MovimentoAmbiente {
         this.ambienteDestino = ambienteDestino;
     }
 
-    
-
     public String getMotivo() {
         return motivo;
     }

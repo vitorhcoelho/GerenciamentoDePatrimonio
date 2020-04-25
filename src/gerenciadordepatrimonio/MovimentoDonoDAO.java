@@ -195,4 +195,21 @@ public class MovimentoDonoDAO {
             return movDono[x];
         }
     }
+    
+    public void mostraMovDonos() {
+        for (int x = 0; x < this.qtdMovDono; x++) {
+            if (movDono[x] != null) {
+                System.out.println(this.movDono[x].toString());
+            } else {}
+        }
+    }
+    
+    public void getMovDonosPorID(int id){
+        for (int i = 0; i < this.qtdMovDono; i++) {
+            if(movDono[i].getIdItem() == id){
+                movDono[i].toString();
+            }
+        }
+    }
+    
 }

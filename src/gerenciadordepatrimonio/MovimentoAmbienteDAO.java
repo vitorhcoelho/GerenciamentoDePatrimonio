@@ -15,6 +15,7 @@ import java.util.Scanner;
 public class MovimentoAmbienteDAO {
 
     private MovimentoAmbiente[] movAmb = new MovimentoAmbiente[100];
+    private int qtdMovAmb;
     private int id = 0;
     Scanner in = new Scanner(System.in);
 
@@ -24,7 +25,7 @@ public class MovimentoAmbienteDAO {
     }
 
     public int vagaMovAmb() {
-        for (int x = 0; x < movAmb.length; x++) {
+        for (int x = 0; x < this.qtdMovAmb; x++) {
             if (movAmb[x] == null) {
                 return x;
             } else {
@@ -41,12 +42,13 @@ public class MovimentoAmbienteDAO {
             return false;
         } else {
             movAmb[pos] = mov;
+            this.qtdMovAmb++;
             return true;
         }
     }
 
     public int achaMovimentoAmb(int id) {
-        for (int x = 0; x < movAmb.length; x++) {
+        for (int x = 0; x < this.qtdMovAmb; x++) {
             if (id == movAmb[x].getId() && movAmb[x] != null) {
                 return x;
             } else {
@@ -191,10 +193,27 @@ public class MovimentoAmbienteDAO {
                 del.setDataModificacao(null);
                 del.setIdItem(-1);
                 System.out.println("\nMovimentação Deletada\n");
-
+                this.qtdMovAmb--;
             } else {
                 System.out.println("\nMovimentação Mantida\n");
             }
         }
     }
+    
+    public void mostraMovAmbientes() {
+        for (int x = 0; x < this.qtdMovAmb; x++) {
+            if (movAmb[x] != null) {
+                System.out.println(this.movAmb[x].toString());
+            } else {}
+        }
+    }
+        
+    public void getMovAmbientesPorID(int id){
+        for (int i = 0; i < this.qtdMovAmb; i++) {
+            if(movAmb[i].getIdItem() == id){
+                movAmb[i].toString();
+            }
+        }
+    }
+    
 }

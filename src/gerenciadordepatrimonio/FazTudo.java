@@ -34,8 +34,8 @@ public class FazTudo {
             + "2 - Visualizar Campus\n"
             + "3 - Visualizar Ambientes\n"
             + "4 - Visualizar Itens\n"
-            + "5 - Visualizar Movimentação de Itens\n"
-            + "6 - Visualizar Movimentação de Donos\n"
+            + "5 - Visualizar Movimentação de itens entre Ambientes\n"
+            + "6 - Visualizar Movimentação de itens entre Donos\n"
             + "7 - Visualizar Revisões\n"
             + "0 - Voltar\n";
 
@@ -47,6 +47,10 @@ public class FazTudo {
             + "2 - Filtrar por Servidor Dono\n"
             + "3 - Buscar por ID\n"
             + "0 - Voltar\n";
+    
+    private String menuVisuMov = "1 - Mostrar todos\n"
+            + "2 - Digite o ID item que deseja ver a movimentacao\n"
+            + "0 - Voltar";
 
     private String menuGerenciar = "1 - Campus\n"
             + "2 - Servidores\n"
@@ -91,7 +95,7 @@ public class FazTudo {
                             servDAO.getServLogado().setLogado(true);
 
                             while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                mainServidor(servDAO, campDAO, ambDAO, itemDAO);
+                                mainServidor(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
                             }
 
                         } else {
@@ -157,7 +161,7 @@ public class FazTudo {
         }
     }
 
-    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO) {
+    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
         int aux = 1;
         int dado;
         while (aux != 0) {
@@ -225,15 +229,55 @@ public class FazTudo {
                         }
                     }
                     break;
+                    
                 case 5:
-
+                    while (opc != 0){
+                        System.out.println(menuVisuMov);
+                        opc = Integer.parseInt(in.nextLine());
+                        
+                        switch (opc){
+                            case 1:
+                                mAmbDAO.mostraMovAmbientes();
+                                break;
+                                
+                            case 2:
+                                System.out.println("Informe o ID do item que procura:");
+                                dado = Integer.parseInt(in.nextLine());
+                                mAmbDAO.getMovAmbientesPorID(dado);
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                    }
                     break;
+                    
                 case 6:
-
+                    while (opc != 0){
+                        System.out.println(menuVisuMov);
+                        opc = Integer.parseInt(in.nextLine());
+                        
+                        switch (opc){
+                            case 1:
+                                mdonoDAO.mostraMovDonos();
+                                break;
+                                
+                            case 2:
+                                System.out.println("Informe o ID do item que procura:");
+                                dado = Integer.parseInt(in.nextLine());
+                                mdonoDAO.getMovDonosPorID(dado);
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                    }
                     break;
+                    
                 case 7:
 
                     break;
+                    
                 default:
                     break;
 
@@ -404,7 +448,7 @@ public class FazTudo {
         }
     }
 
-    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO) {
+    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -418,7 +462,7 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO, ambDAO, itemDAO);
+                    visualizar(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
                     break;
 
                 default:
@@ -443,7 +487,7 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO, ambDAO, itemDAO);
+                    visualizar(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
                     break;
 
                 case 3:
