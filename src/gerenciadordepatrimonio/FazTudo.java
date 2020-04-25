@@ -67,6 +67,7 @@ public class FazTudo {
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
 
+        serv.setNome("zika");
         serv.setLoginSenha("login", "senha");//user teste
         serv.setAdm(true);
         servDAO.setServidores(serv);
@@ -441,6 +442,7 @@ public class FazTudo {
                         }
                     }
                     break;
+                    
                 default:
                     break;
 
