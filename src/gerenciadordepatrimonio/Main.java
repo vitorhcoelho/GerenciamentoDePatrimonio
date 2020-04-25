@@ -21,6 +21,7 @@ public class Main {
         RevisaoDAO revDAO = new RevisaoDAO();
 
         FazTudo inicia = new FazTudo();
+        inicia.database(servDAO, campDAO, ambDAO, itemDAO);
         inicia.login(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO);
     }
 
