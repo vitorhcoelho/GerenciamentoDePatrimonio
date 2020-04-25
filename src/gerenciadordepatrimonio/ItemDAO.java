@@ -263,10 +263,11 @@ public class ItemDAO {
         }
     }
     
-    public void revisaoItem(int amb, Revisao r){
+    public void itemRevisao(int idRev, int amb, ItensRevisaoDAO r){
+        
         for(int x = 0;x < this.qtdItem; x++){
             if(itens[x].getAmbienteId() == amb && itens[x] != null){
-                r.setItem(itens[x]);
+                r.insereItensRev(idRev, itens[x]);
             }else{
                 
             }

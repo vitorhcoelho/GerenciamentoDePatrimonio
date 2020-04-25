@@ -13,22 +13,23 @@ import java.util.Scanner;
  * @author gusta
  */
 public class RevisaoDAO {
-    private Revisao [] revs = new Revisao[30];
+
+    private Revisao[] revs = new Revisao[30];
     private int id = 0;
     Scanner in = new Scanner(System.in);
-    
-    public int geraId(){
+
+    public int geraId() {
         this.id++;
         return id;
     }
-    
-    public void criaRevisao(int serv, int amb, ItemDAO iDAO){
+
+    public void criaRevisao(int serv, int amb, ItemDAO iDAO, ItensRevisaoDAO iRDAO) {
         Revisao rev = new Revisao();
-        
+
         System.out.println("\nDigite o Ano Referente a Revisão: ");
         int aux = Integer.parseInt(in.nextLine());
         rev.setAno(aux);
-        
+
         rev.setAno(aux);
         rev.setEstado(1);
         rev.setIdAmb(amb);
@@ -36,28 +37,23 @@ public class RevisaoDAO {
         rev.setDataCriacao(LocalDate.now());
         rev.setDataModificacao(LocalDate.now());
         rev.setId(geraId());
-        
 
         setRevisao(rev);
-        iDAO.revisaoItem(amb, getRevisaoServ(serv));
+
+        iDAO.itemRevisao(rev.getId(), amb, iRDAO);
+
         System.out.println("\nRevisão Criada: \n" + rev.toString());
-        
+
     }
-    
-    public void andamentoRevisao(ItemDAO iDAO, int serv){
+
+    public void andamentoRevisao(int serv, ItensRevisaoDAO iRDAO) {
         Revisao r = getRevisaoServ(serv);
-        int amb = r.getIdAmb();
-        int aux = 5;
-        
-        for(int x=0;x< r.getQtdItem();x++){
-            System.out.println("\n");
-        }
-        
-        
-        
-        
+        int idRev = r.getId();
+
+        iRDAO.revisionar(idRev);
+
     }
-    
+
     public int vagaRevisao() {
         for (int x = 0; x < revs.length; x++) {
             if (revs[x] == null) {
@@ -79,8 +75,8 @@ public class RevisaoDAO {
             return true;
         }
     }
-    
-        public int achaRevisaoId(int id) {
+
+    public int achaRevisaoId(int id) {
         for (int x = 0; x < this.revs.length; x++) {
             if (id == revs[x].getId() && revs[x] != null) {
                 return x;
@@ -99,8 +95,8 @@ public class RevisaoDAO {
             return revs[x];
         }
     }
-    
-        public int achaRevisaoServ(int serv) {
+
+    public int achaRevisaoServ(int serv) {
         for (int x = 0; x < this.revs.length; x++) {
             if (serv == revs[x].getIdServ() && revs[x] != null) {
                 return x;

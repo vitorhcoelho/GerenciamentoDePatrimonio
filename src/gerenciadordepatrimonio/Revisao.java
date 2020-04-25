@@ -20,8 +20,6 @@ public class Revisao {
     private int estado;
     private LocalDate dataCriacao;
     private LocalDate dataModificacao;
-    private Item[] itens = new Item[100];
-    private int qtdItem;
 
     //Estados: 1 - Não Iniciado, 2 - Andamento, 3 - Terminado
     public int getId() {
@@ -78,37 +76,6 @@ public class Revisao {
 
     public void setDataModificacao(LocalDate dataModificacao) {
         this.dataModificacao = dataModificacao;
-    }
-
-    public int getQtdItem() {
-        return qtdItem;
-    }
-
-    public void setQtdItem(int qtdItem) {
-        this.qtdItem = qtdItem;
-    }
-
-    public int vagaItem() {
-        for (int x = 0; x < itens.length; x++) {
-            if (itens[x] == null) {
-                return x;
-            } else {
-
-            }
-        }
-        return -1;
-    }
-
-    public boolean setItem(Item item) {
-        int pos = vagaItem();
-        if (pos == -1) {
-            System.out.println("\nLista de Itens Cheia\n");
-            return false;
-        } else {
-            itens[pos] = item;
-            this.qtdItem++;
-            return true;
-        }
     }
 
     @Override

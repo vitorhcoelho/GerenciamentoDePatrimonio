@@ -19,10 +19,11 @@ public class Main {
         MovimentoAmbienteDAO mAmbDAO = new MovimentoAmbienteDAO();
         MovimentoDonoDAO mdonoDAO = new MovimentoDonoDAO();
         RevisaoDAO revDAO = new RevisaoDAO();
+        ItensRevisaoDAO iRDAO = new ItensRevisaoDAO();
 
         FazTudo inicia = new FazTudo();
         inicia.database(servDAO, campDAO, ambDAO, itemDAO);
-        inicia.login(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO);
+        inicia.login(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO, iRDAO);
     }
 
     public static void main(String[] args) {
