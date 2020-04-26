@@ -27,6 +27,12 @@ public class FazTudo {
     Item i2 = new Item();
     Item i3 = new Item();
     Item i4 = new Item();
+    MovimentoAmbiente ma1 = new MovimentoAmbiente();
+    MovimentoAmbiente ma2 = new MovimentoAmbiente();
+    MovimentoDono md1 = new MovimentoDono();
+    MovimentoDono md2 = new MovimentoDono();
+    Revisao rev1 = new Revisao();
+    Revisao rev2 = new Revisao();
 
     Servidor serv = new Servidor();
     Scanner in = new Scanner(System.in);
@@ -85,7 +91,27 @@ public class FazTudo {
             + "3 - Excluir Revisão\n"
             + "0 - Voltar\n";
 
-    public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO) {
+    public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO) {
+        c1.setAbreviacao("camp1");
+        c1.setBairro("Univerde");
+        c1.setCep("38066244");
+        c1.setCidade("Uberaba");
+        c1.setDataCriacao(LocalDate.now());
+        c1.setEndereco("Rua do Grau, 1");
+        c1.setId(cDAO.geraId());
+        c1.setNome("Campus Tecnologico");
+        cDAO.setCampus(c1);
+
+        c2.setAbreviacao("camp2");
+        c2.setBairro("Distrito");
+        c2.setCep("38066333");
+        c2.setCidade("Uberaba");
+        c2.setDataCriacao(LocalDate.now());
+        c2.setEndereco("Rua dos Bovinos, 99");
+        c2.setId(cDAO.geraId());
+        c2.setNome("Campus Agroeconomico");
+        cDAO.setCampus(c2);
+
         s1.setAdm(false);
         s1.setCampus(1);
         s1.setCargo("professor");
@@ -110,25 +136,11 @@ public class FazTudo {
         s2.setSystem(false);
         sDAO.setServidores(s2);
 
-        c1.setAbreviacao("camp1");
-        c1.setBairro("Univerde");
-        c1.setCep("38066244");
-        c1.setCidade("Uberaba");
-        c1.setDataCriacao(LocalDate.now());
-        c1.setEndereco("Rua do Grau, 10");
-        c1.setId(cDAO.geraId());
-        c1.setNome("Campus Tecnologico");
-        cDAO.setCampus(c1);
-
-        c2.setAbreviacao("camp2");
-        c2.setBairro("Distrito");
-        c2.setCep("38066333");
-        c2.setCidade("Uberaba");
-        c2.setDataCriacao(LocalDate.now());
-        c2.setEndereco("Rua dos Govinos, 99");
-        c2.setId(cDAO.geraId());
-        c2.setNome("Campus Agroeconomico");
-        cDAO.setCampus(c2);
+        serv.setAdm(true);
+        serv.setLoginSenha("login", "senha");
+        serv.setSystem(true);
+        serv.setNome("user dev");
+        sDAO.setServidores(serv);
 
         a1.setCodCamp(1);
         a1.setDatacriacao(LocalDate.now());
@@ -197,24 +209,58 @@ public class FazTudo {
         i4.setIdDono(2);
         i4.setValorcompra(1499);
         iDAO.setItem(i4);
-        
+
+        ma1.setAmbienteOrigem(1);
+        ma1.setAmbienteDestino(2);
+        ma1.setDataCriacao(LocalDate.now());
+        ma1.setId(mAmbDAO.geraId());
+        ma1.setIdItem(1);
+        ma1.setMotivo("te interessa nao");
+        mAmbDAO.setMovAmb(ma1);
+
+        ma2.setAmbienteOrigem(3);
+        ma2.setAmbienteDestino(4);
+        ma2.setDataCriacao(LocalDate.now());
+        ma2.setId(mAmbDAO.geraId());
+        ma2.setIdItem(2);
+        ma2.setMotivo("te interessa nao");
+        mAmbDAO.setMovAmb(ma2);
+
+        md1.setDataCriacao(LocalDate.now());
+        md1.setDonoDestino(4);
+        md1.setDonoOrigem(1);
+        md1.setId(mdonoDAO.geraId());
+        md1.setIdItem(3);
+        md1.setMotivo("nao te interessa otario");
+        mdonoDAO.setMovDono(md1);
+
+        md2.setDataCriacao(LocalDate.now());
+        md2.setDonoDestino(2);
+        md2.setDonoOrigem(3);
+        md2.setId(mdonoDAO.geraId());
+        md2.setIdItem(4);
+        md2.setMotivo("nao te interessa otario");
+        mdonoDAO.setMovDono(md2);
+
+        rev1.setAno(2020);
+        rev1.setDataCriacao(LocalDate.now());
+        rev1.setEstado(3);
+        rev1.setId(revDAO.geraId());
+        rev1.setIdAmb(1);
+        rev1.setIdServ(1);
+        revDAO.setRevisao(rev1);
+
+        rev2.setAno(2021);
+        rev2.setDataCriacao(LocalDate.now());
+        rev2.setEstado(3);
+        rev2.setId(revDAO.geraId());
+        rev2.setIdAmb(2);
+        rev2.setIdServ(2);
+        revDAO.setRevisao(rev2);
+
     }
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO, ItensRevisaoDAO iRDAO) {
-        
-        
-
-        serv.setLoginSenha("user", "123");
-        serv.setNome("Jose");
-        serv.setAdm(true);
-        servDAO.insereAuto(serv);
-        
-        serv.setNome("zika");
-        serv.setLoginSenha("login", "senha");//user teste
-        serv.setAdm(true);
-        serv.setId(servDAO.geraId());
-        servDAO.insereAuto(serv);
-
         int opcao = 5;
 
         while (opcao != 0) {
@@ -421,8 +467,8 @@ public class FazTudo {
                 case 7:
                     System.out.println("\nDigite o ID do Ambiente da Revisão:");
                     int amb = Integer.parseInt(in.nextLine());
-                    
-                    if(rDAO.getRevisaoAmb(amb) != null){
+
+                    if (rDAO.getRevisaoAmb(amb) != null) {
                         System.out.println("\n" + rDAO.getRevisaoAmb(amb).toString());
                         iRDAO.mostraItens(rDAO.getRevisaoAmb(amb).getId());
                     }
@@ -603,22 +649,21 @@ public class FazTudo {
                                 int valid = 0;
                                 int amb;
                                 serv = servDAO.getServLogado().getId();
-                                    System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
-                                    amb = Integer.parseInt(in.nextLine());
+                                System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
+                                amb = Integer.parseInt(in.nextLine());
 
-                                    if (revDAO.getRevisaoAmb(amb) == null) {
-                                        if (ambDAO.getAmbiente(amb) != null) {
-                                            revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
-                                            valid = 1;
-                                        } else {
-                                            System.out.println("\nID de Ambiente Não Existente!\n");
-                                            valid = 0;
-                                        }
+                                if (revDAO.getRevisaoAmb(amb) == null) {
+                                    if (ambDAO.getAmbiente(amb) != null) {
+                                        revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
+                                        valid = 1;
                                     } else {
-                                        System.out.println("\nJá Existe Revisão Desse Ambiente!\nVerifique se é recente e Edite ou Remova!\n");
+                                        System.out.println("\nID de Ambiente Não Existente!\n");
+                                        valid = 0;
                                     }
+                                } else {
+                                    System.out.println("\nJá Existe Revisão Desse Ambiente!\nVerifique se é recente e Edite ou Remova!\n");
+                                }
 
-                                
                                 break;
 
                             case 2:

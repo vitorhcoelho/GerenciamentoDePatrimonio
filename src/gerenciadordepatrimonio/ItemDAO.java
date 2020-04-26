@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ItemDAO {
 
     private Item[] itens = new Item[221];
-    private int qtdItem;
+    private int qtdItem = 0;
     private int id = 0;
     Scanner in = new Scanner(System.in);
 
@@ -222,7 +222,7 @@ public class ItemDAO {
     }
 
     public int vagaItem() {
-        for (int x = 0; x < itens.length; x++) {
+        for (int x = 0; x < qtdItem; x++) {
             if (itens[x] == null) {
                 return x;
             } else {

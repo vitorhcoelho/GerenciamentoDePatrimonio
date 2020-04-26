@@ -14,11 +14,11 @@ import java.util.Scanner;
 public class ServidorDAO {
 
     private Servidor[] servidores = new Servidor[250];
-    private int qtdServidor;
+    private int qtdServidor = 0;
     private int id = 0;
+    private Servidor servLogado;
 
     Scanner in = new Scanner(System.in);
-    private Servidor servLogado;
 
     public int geraId() {
         this.id++;
@@ -34,7 +34,7 @@ public class ServidorDAO {
     }
 
     public boolean validaLoginServ(String login, String senha) {
-        for (int x = 0; x < servidores.length; x++) {
+        for (int x = 0; x < qtdServidor; x++) {
             if (this.servidores[x].getLogin().equals(login) && servidores[x] != null) {
                 if (this.servidores[x].getSenha().equals(senha)) {
                     return true;
@@ -49,7 +49,7 @@ public class ServidorDAO {
     }
 
     public int posicaoServ() {
-        for (int x = 0; x < servidores.length; x++) {
+        for (int x = 0; x < qtdServidor; x++) {
             if (servidores[x] == null) {
                 return x;
             } else if (servidores[x].getId() != 0) {
@@ -176,11 +176,6 @@ public class ServidorDAO {
         }
 
     }
-    
-    public void insereAuto(Servidor s){
-        setServidores(s);
-    }
-    
 
     public int getQtdServ() {
         return this.qtdServidor;

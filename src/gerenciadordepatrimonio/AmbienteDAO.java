@@ -161,7 +161,7 @@ public class AmbienteDAO {
     }
 
     public int vagaAmbiente() {
-        for (int x = 0; x < ambs.length; x++) {
+        for (int x = 0; x < qtdAmb; x++) {
             if (ambs[x] == null) {
                 return x;
             } else {
