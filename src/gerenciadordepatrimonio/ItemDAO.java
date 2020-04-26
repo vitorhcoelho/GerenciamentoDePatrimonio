@@ -296,6 +296,27 @@ public class ItemDAO {
         this.qtdItem = qtdItem;
     }
     
+        
+    public double valorTotalPorServ(int idServ){
+        double total = 0;
+        for(int x=0;x<this.qtdItem;x++){
+            if(itens[x].getIdDono() == idServ && itens[x]!=null){
+                total = total + itens[x].getValorcompra();
+            }
+        }
+        return total;
+    }
     
+    public double valorPorAmbiente(int idAmb, int idServ){
+        double total = 0;
+        for(int x=0;x<this.qtdItem;x++){
+            if(itens[x].getIdDono() == idServ && itens[x].getAmbienteId() == idAmb && itens[x]!=null){
+                total = total + itens[x].getValorcompra();
+            }else{
+                
+            }
+        }
+        return total;
+    }
 
 }

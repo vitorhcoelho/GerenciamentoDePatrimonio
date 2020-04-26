@@ -15,14 +15,14 @@ public class ServidorDAO {
 
     private Servidor[] servidores = new Servidor[250];
     private int qtdServidor;
-    private int id = 0;
+    private int idS = 0;
 
     Scanner in = new Scanner(System.in);
     private Servidor servLogado;
 
     public int geraId() {
-        this.id++;
-        return id;
+        this.idS++;
+        return idS;
     }
 
     public Servidor getServLogado() {
@@ -34,7 +34,7 @@ public class ServidorDAO {
     }
 
     public boolean validaLoginServ(String login, String senha) {
-        for (int x = 0; x < servidores.length; x++) {
+        for (int x = 0; x < this.qtdServidor; x++) {
             if (this.servidores[x].getLogin().equals(login) && servidores[x] != null) {
                 if (this.servidores[x].getSenha().equals(senha)) {
                     return true;
@@ -52,8 +52,7 @@ public class ServidorDAO {
         for (int x = 0; x < servidores.length; x++) {
             if (servidores[x] == null) {
                 return x;
-            } else if (servidores[x].getId() != 0) {
-                return x;
+
             } else {
 
             }
@@ -134,19 +133,6 @@ public class ServidorDAO {
         }
     }
 
-    public boolean deleteServidor(int id) {
-        for (int x = 0; x < this.qtdServidor; x++) {
-            if (id == servidores[x].getId() && servidores[x] != null) {
-                this.servidores[x] = null;
-                this.qtdServidor--;
-                return true;
-            } else {
-
-            }
-        }
-        return false;
-    }
-
     public void mostraServidores() {
         for (int x = 0; x < this.qtdServidor; x++) {
             if (servidores[x] != null) {
@@ -176,11 +162,6 @@ public class ServidorDAO {
         }
 
     }
-    
-    public void insereAuto(Servidor s){
-        setServidores(s);
-    }
-    
 
     public int getQtdServ() {
         return this.qtdServidor;
@@ -387,11 +368,38 @@ public class ServidorDAO {
                 del.setPapel(null);
                 del.setSystem(false);
                 del.setLogado(false);
+                this.qtdServidor--;
                 System.out.println("\nServidor Deletado\n");
 
             } else {
                 System.out.println("\nServidor Mantido\n");
             }
+        }
+    }
+
+    public void relatorioAmb(CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO iDAO) {
+        int x = 0;
+        while (servidores[x] != null) {
+            if (servidores[x] != null) {
+                System.out.println(servidores[x].getNome() + " - TOTAL: R$" + iDAO.valorTotalPorServ(servidores[x].getId()));
+
+                ambDAO.valorPorAmbiente(iDAO, servidores[x].getId(), campDAO);
+            } else {
+
+            }
+            x++;
+        }
+    }
+
+    public void relatorioTotalFinan(ItemDAO iDAO) {
+        int x = 0;
+        while (servidores[x] != null) {
+            if (servidores[x] != null) {
+                System.out.println(servidores[x].getNome() + " - TOTAL: R$" + iDAO.valorTotalPorServ(servidores[x].getId()));
+            } else {
+
+            }
+            x++;
         }
     }
 }

@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class FazTudo {
 
-    Servidor s1 = new Servidor();
+    Servidor s = new Servidor();
     Servidor s2 = new Servidor();
     Campus c1 = new Campus();
     Campus c2 = new Campus();
@@ -86,29 +86,6 @@ public class FazTudo {
             + "0 - Voltar\n";
 
     public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO) {
-        s1.setAdm(false);
-        s1.setCampus(1);
-        s1.setCargo("professor");
-        s1.setEmail("s1@gmail.com");
-        s1.setId(sDAO.geraId());
-        s1.setLogado(false);
-        s1.setLoginSenha("s1", "123");
-        s1.setNome("Jose");
-        s1.setPapel("lecionar");
-        s1.setSystem(false);
-        sDAO.setServidores(s1);
-
-        s2.setAdm(false);
-        s2.setCampus(2);
-        s2.setCargo("coordenador");
-        s2.setEmail("s2@gmail.com");
-        s2.setId(sDAO.geraId());
-        s2.setLogado(false);
-        s2.setLoginSenha("s2", "123");
-        s2.setNome("Joao");
-        s2.setPapel("coordenar");
-        s2.setSystem(false);
-        sDAO.setServidores(s2);
 
         c1.setAbreviacao("camp1");
         c1.setBairro("Univerde");
@@ -161,7 +138,7 @@ public class FazTudo {
         i1.setEspecificacao("mesa");
         i1.setEstado(5);
         i1.setId(iDAO.geraId());
-        i1.setIdDono(1);
+        i1.setIdDono(3);
         i1.setValorcompra(1000);
         iDAO.setItem(i1);
 
@@ -172,7 +149,7 @@ public class FazTudo {
         i2.setEspecificacao("cadeira");
         i2.setEstado(4);
         i2.setId(iDAO.geraId());
-        i2.setIdDono(1);
+        i2.setIdDono(3);
         i2.setValorcompra(200);
         iDAO.setItem(i2);
 
@@ -197,24 +174,17 @@ public class FazTudo {
         i4.setIdDono(2);
         i4.setValorcompra(1499);
         iDAO.setItem(i4);
-        
+
     }
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO, ItensRevisaoDAO iRDAO) {
-        
-        
 
-        serv.setLoginSenha("user", "123");
-        serv.setNome("Jose");
-        serv.setAdm(true);
-        servDAO.insereAuto(serv);
-        
         serv.setNome("zika");
         serv.setLoginSenha("login", "senha");//user teste
         serv.setAdm(true);
         serv.setId(servDAO.geraId());
-        servDAO.insereAuto(serv);
-
+        servDAO.setServidores(serv);
+        
         int opcao = 5;
 
         while (opcao != 0) {
@@ -222,7 +192,8 @@ public class FazTudo {
             System.out.println("Para acessar como:\n\n"
                     + "[1] -> SERVIDOR\n"
                     + "[2] -> ADMINISTRADOR\n"
-                    + "[0] -> SAIR\n");
+                    + "[0] -> SAIR\n"
+                    + ">> System >> Login: login >> Senha: senha\n");
             opcao = Integer.parseInt(in.nextLine());
 
             switch (opcao) {
@@ -285,7 +256,7 @@ public class FazTudo {
         }
     }
 
-    public void relatorios(ServidorDAO servDAO) {
+    public void relatorios(ServidorDAO servDAO, ItemDAO iDAO, CampusDAO campDAO, AmbienteDAO ambDAO) {
         int aux = 1;
         while (aux != 0) {
             System.out.println("\n----------IFTM GERENCIAMENTO----------\n");
@@ -294,9 +265,11 @@ public class FazTudo {
 
             switch (aux) {
                 case 1:
+                    servDAO.relatorioAmb(campDAO, ambDAO, iDAO);
                     break;
 
                 case 2:
+                    servDAO.relatorioTotalFinan(iDAO);
                     break;
 
                 default:
@@ -304,6 +277,7 @@ public class FazTudo {
             }
         }
     }
+    
 
     public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO rDAO, ItensRevisaoDAO iRDAO) {
         int aux = 1;
@@ -421,8 +395,8 @@ public class FazTudo {
                 case 7:
                     System.out.println("\nDigite o ID do Ambiente da Revisão:");
                     int amb = Integer.parseInt(in.nextLine());
-                    
-                    if(rDAO.getRevisaoAmb(amb) != null){
+
+                    if (rDAO.getRevisaoAmb(amb) != null) {
                         System.out.println("\n" + rDAO.getRevisaoAmb(amb).toString());
                         iRDAO.mostraItens(rDAO.getRevisaoAmb(amb).getId());
                     }
@@ -603,22 +577,21 @@ public class FazTudo {
                                 int valid = 0;
                                 int amb;
                                 serv = servDAO.getServLogado().getId();
-                                    System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
-                                    amb = Integer.parseInt(in.nextLine());
+                                System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
+                                amb = Integer.parseInt(in.nextLine());
 
-                                    if (revDAO.getRevisaoAmb(amb) == null) {
-                                        if (ambDAO.getAmbiente(amb) != null) {
-                                            revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
-                                            valid = 1;
-                                        } else {
-                                            System.out.println("\nID de Ambiente Não Existente!\n");
-                                            valid = 0;
-                                        }
+                                if (revDAO.getRevisaoAmb(amb) == null) {
+                                    if (ambDAO.getAmbiente(amb) != null) {
+                                        revDAO.criaRevisao(serv, amb, iDAO, iRDAO);
+                                        valid = 1;
                                     } else {
-                                        System.out.println("\nJá Existe Revisão Desse Ambiente!\nVerifique se é recente e Edite ou Remova!\n");
+                                        System.out.println("\nID de Ambiente Não Existente!\n");
+                                        valid = 0;
                                     }
+                                } else {
+                                    System.out.println("\nJá Existe Revisão Desse Ambiente!\nVerifique se é recente e Edite ou Remova!\n");
+                                }
 
-                                
                                 break;
 
                             case 2:
@@ -684,7 +657,7 @@ public class FazTudo {
 
             switch (opc) {
                 case 1:
-                    relatorios(servDAO);
+                    relatorios(servDAO, itemDAO, campDAO, ambDAO);
                     break;
 
                 case 2:
@@ -709,7 +682,7 @@ public class FazTudo {
 
             switch (opc) {
                 case 1:
-                    relatorios(servDAO);
+                    relatorios(servDAO, itemDAO, campDAO, ambDAO);
                     break;
 
                 case 2:

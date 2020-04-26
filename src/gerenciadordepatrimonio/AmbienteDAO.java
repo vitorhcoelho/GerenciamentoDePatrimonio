@@ -141,10 +141,8 @@ public class AmbienteDAO {
 
     public Ambiente getAmbientesPorCampus(Campus c) {
         for (int x = 0; x < this.qtdAmb; x++) {
-            if (ambs[x] != null) {
-                if (ambs[x].getCodCamp() == c.getId()) {
-                    return ambs[x];
-                }
+            if (ambs[x].getCodCamp() == c.getId() && ambs[x] != null) {
+                return ambs[x];
             } else {
             }
         }
@@ -180,6 +178,16 @@ public class AmbienteDAO {
             ambs[pos] = amb;
             this.qtdAmb++;
             return true;
+        }
+    }
+
+    public void valorPorAmbiente(ItemDAO iDAO, int idServ, CampusDAO cDAO) {
+        for (int x = 0; x < this.qtdAmb; x++) {
+            double totalAmb = iDAO.valorPorAmbiente(ambs[x].getId(), idServ);
+
+            if (totalAmb != 0) {
+                System.out.println("\t" + ambs[x].getDescricao() + " - " + cDAO.getCampus(ambs[x].getCodCamp()).getNome() + " R$" + totalAmb);
+            }
         }
     }
 }
