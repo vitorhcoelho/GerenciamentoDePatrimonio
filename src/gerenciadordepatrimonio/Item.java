@@ -60,8 +60,8 @@ public class Item {
         return ambienteId;
     }
 
-    public void setAmbienteId(int ambienteId) {
-        this.ambienteId = ambienteId;
+    public void setAmbienteId(int ambiente) {
+        this.ambienteId = ambiente;
     }
 
     public int getEstado() {

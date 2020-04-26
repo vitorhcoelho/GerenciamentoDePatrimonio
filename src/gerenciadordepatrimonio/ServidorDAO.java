@@ -14,11 +14,11 @@ import java.util.Scanner;
 public class ServidorDAO {
 
     private Servidor[] servidores = new Servidor[250];
-    private int qtdServidor;
-    private int idS = 0;
+    private int qtdServidor = 0;
+    private int id = 0;
+    private Servidor servLogado;
 
     Scanner in = new Scanner(System.in);
-    private Servidor servLogado;
 
     public int geraId() {
         this.idS++;
@@ -49,7 +49,7 @@ public class ServidorDAO {
     }
 
     public int posicaoServ() {
-        for (int x = 0; x < servidores.length; x++) {
+        for (int x = 0; x < qtdServidor; x++) {
             if (servidores[x] == null) {
                 return x;
 

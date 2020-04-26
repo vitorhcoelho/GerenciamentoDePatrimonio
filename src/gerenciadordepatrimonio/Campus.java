@@ -12,6 +12,7 @@ import java.time.LocalDate;
  * @author Vitor Hugo
  */
 public class Campus {
+
     private int id;
     private String nome;
     private String abreviacao;
@@ -87,9 +88,9 @@ public class Campus {
 
     @Override
     public String toString() {
-       return "\nCampus: " + this.nome + "  " + this.abreviacao + "\tID: " + this.id + "\n"
-               + this.endereco + ", " + this.bairro + " - " + this.cidade + "\nCEP: " + this.cep 
-               + "\tAdicionado: " + this.dataCriacao;
-    
+        return "\nCampus: " + this.nome + "  " + this.abreviacao + "\tID: " + this.id + "\n"
+                + this.endereco + ", " + this.bairro + " - " + this.cidade + "\nCEP: " + this.cep
+                + "\tAdicionado: " + this.dataCriacao;
+
     }
 }

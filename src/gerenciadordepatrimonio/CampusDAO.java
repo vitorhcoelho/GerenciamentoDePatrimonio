@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class CampusDAO {
 
     private Campus[] campus = new Campus[100];
-    private int qtdCampus;
+    private int qtdCampus = 0;
     private int id = 0;
 
     Scanner in = new Scanner(System.in);
@@ -26,7 +26,7 @@ public class CampusDAO {
     }
 
     public int vagaCampus() {
-        for (int x = 0; x < campus.length; x++) {
+        for (int x = 0; x < qtdCampus; x++) {
             if (campus[x] == null) {
                 return x;
             } else {

@@ -73,13 +73,13 @@ public class Revisao {
     public LocalDate getDataModificacao() {
         return dataModificacao;
     }
-    
-    public String traduzEstado(){
-        if(this.estado == 1){
+
+    public String traduzEstado() {
+        if (this.estado == 1) {
             return "Não Iniciada";
-        }else if(this.estado == 2 ){
+        } else if (this.estado == 2) {
             return "Em Andamento";
-        }else{
+        } else {
             return "Terminada";
         }
     }
