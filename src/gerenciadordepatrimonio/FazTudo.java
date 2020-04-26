@@ -85,28 +85,29 @@ public class FazTudo {
             + "0 - Voltar\n";
 
     public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO) {
+        s1.setAdm(false);
+        s1.setCampus(1);
+        s1.setCargo("professor");
+        s1.setEmail("s1@gmail.com");
+        s1.setId(sDAO.geraId());
+        s1.setLogado(false);
+        s1.setLoginSenha("s1", "123");
+        s1.setNome("Jose");
+        s1.setPapel("lecionar");
+        s1.setSystem(false);
+        sDAO.setServidores(s1);
 
-        s.setCampus(1);
-        s.setCargo("professor");
-        s.setEmail("s1@gmail.com");
-        s.setId(sDAO.geraId());
-        s.setLoginSenha("s1", "123");
-        s.setNome("Jose");
-        s.setPapel("lecionar");
-        s.setSystem(false);
-        s.setAdm(true);
-        sDAO.setServidores(s);
-
-        s.setCampus(1);
-        s.setCargo("coordenador");
-        s.setEmail("s2@gmail.com");
-        s.setId(sDAO.geraId());
-        s.setLoginSenha("s2", "123");
-        s.setNome("Joao");
-        s.setPapel("coordenar");
-        s.setSystem(false);
-        s.setAdm(false);
-        sDAO.setServidores(s);
+        s2.setAdm(false);
+        s2.setCampus(2);
+        s2.setCargo("coordenador");
+        s2.setEmail("s2@gmail.com");
+        s2.setId(sDAO.geraId());
+        s2.setLogado(false);
+        s2.setLoginSenha("s2", "123");
+        s2.setNome("Joao");
+        s2.setPapel("coordenar");
+        s2.setSystem(false);
+        sDAO.setServidores(s2);
 
         c1.setAbreviacao("camp1");
         c1.setBairro("Univerde");
@@ -195,6 +196,7 @@ public class FazTudo {
         i4.setIdDono(2);
         i4.setValorcompra(1499);
         iDAO.setItem(i4);
+        
     }
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO, ItensRevisaoDAO iRDAO) {
