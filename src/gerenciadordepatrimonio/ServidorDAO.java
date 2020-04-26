@@ -176,6 +176,11 @@ public class ServidorDAO {
         }
 
     }
+    
+    public void insereAuto(Servidor s){
+        setServidores(s);
+    }
+    
 
     public int getQtdServ() {
         return this.qtdServidor;

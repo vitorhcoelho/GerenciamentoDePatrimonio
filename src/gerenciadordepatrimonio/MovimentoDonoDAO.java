@@ -139,7 +139,7 @@ public class MovimentoDonoDAO {
             if (es == 1) {
 
                 MovimentoDono del = getMovimentoDono(aux);
-                del.setMotivo("Campus Apagado");
+                del.setMotivo("Motivo Apagado");
                 del.setDonoOrigem(-1);
                 del.setDonoDestino(-1);
                 del.setDataCriacao(null);
@@ -167,7 +167,7 @@ public class MovimentoDonoDAO {
     public boolean setMovDono(MovimentoDono movimentacoes) {
         int pos = vagaMovDono();
         if (pos == -1) {
-            System.out.println("\nLista de Campus Cheia\n");
+            System.out.println("\nLista de Movimentações Cheia\n");
             return false;
         } else {
             movDono[pos] = movimentacoes;

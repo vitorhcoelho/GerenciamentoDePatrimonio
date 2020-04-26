@@ -15,6 +15,18 @@ import java.util.Scanner;
  */
 public class FazTudo {
 
+    Servidor s = new Servidor();
+    Campus c1 = new Campus();
+    Campus c2 = new Campus();
+    Ambiente a1 = new Ambiente();
+    Ambiente a2 = new Ambiente();
+    Ambiente a3 = new Ambiente();
+    Ambiente a4 = new Ambiente();
+    Item i1 = new Item();
+    Item i2 = new Item();
+    Item i3 = new Item();
+    Item i4 = new Item();
+
     Servidor serv = new Servidor();
     Scanner in = new Scanner(System.in);
 
@@ -72,38 +84,29 @@ public class FazTudo {
             + "3 - Excluir Revisão\n"
             + "0 - Voltar\n";
 
-    Servidor s1 = new Servidor();
-    Servidor s2 = new Servidor();
-    Campus c1 = new Campus();
-    Campus c2 = new Campus();
-    Ambiente a1 = new Ambiente();
-    Ambiente a2 = new Ambiente();
-    Ambiente a3 = new Ambiente();
-    Ambiente a4 = new Ambiente();
-    Item i1 = new Item();
-    Item i2 = new Item();
-    Item i3 = new Item();
-    Item i4 = new Item();
-
     public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO) {
-        s1.setCampus(1);
-        s1.setCargo("professor");
-        s1.setEmail("s1@gmail.com");
-        s1.setId(sDAO.geraId());
-        s1.setLoginSenha("s1", "123");
-        s1.setNome("Jose");
-        s1.setPapel("lecionar");
-        s1.setSystem(false);
-        sDAO.setServidores(s1);
 
-        s2.setCampus(1);
-        s2.setCargo("coordenador");
-        s2.setEmail("s2@gmail.com");
-        s2.setId(sDAO.geraId());
-        s2.setLoginSenha("s2", "123");
-        s2.setNome("Joao");
-        s2.setPapel("coordenar");
-        s2.setSystem(false);
+        s.setCampus(1);
+        s.setCargo("professor");
+        s.setEmail("s1@gmail.com");
+        s.setId(sDAO.geraId());
+        s.setLoginSenha("s1", "123");
+        s.setNome("Jose");
+        s.setPapel("lecionar");
+        s.setSystem(false);
+        s.setAdm(true);
+        sDAO.setServidores(s);
+
+        s.setCampus(1);
+        s.setCargo("coordenador");
+        s.setEmail("s2@gmail.com");
+        s.setId(sDAO.geraId());
+        s.setLoginSenha("s2", "123");
+        s.setNome("Joao");
+        s.setPapel("coordenar");
+        s.setSystem(false);
+        s.setAdm(false);
+        sDAO.setServidores(s);
 
         c1.setAbreviacao("camp1");
         c1.setBairro("Univerde");
@@ -113,6 +116,7 @@ public class FazTudo {
         c1.setEndereco("Rua do Grau, 10");
         c1.setId(cDAO.geraId());
         c1.setNome("Campus Tecnologico");
+        cDAO.setCampus(c1);
 
         c2.setAbreviacao("camp2");
         c2.setBairro("Distrito");
@@ -122,26 +126,31 @@ public class FazTudo {
         c2.setEndereco("Rua dos Govinos, 99");
         c2.setId(cDAO.geraId());
         c2.setNome("Campus Agroeconomico");
+        cDAO.setCampus(c2);
 
         a1.setCodCamp(1);
         a1.setDatacriacao(LocalDate.now());
         a1.setDescricao("Deposito");
         a1.setId(aDAO.geraId());
+        aDAO.setAmbiente(a1);
 
         a2.setCodCamp(1);
         a2.setDatacriacao(LocalDate.now());
         a2.setDescricao("Despensa");
         a2.setId(aDAO.geraId());
+        aDAO.setAmbiente(a2);
 
         a3.setCodCamp(2);
         a3.setDatacriacao(LocalDate.now());
         a3.setDescricao("Dispensa");
         a3.setId(aDAO.geraId());
+        aDAO.setAmbiente(a3);
 
         a4.setCodCamp(2);
         a4.setDatacriacao(LocalDate.now());
         a4.setDescricao("Diposito");
         a4.setId(aDAO.geraId());
+        aDAO.setAmbiente(a4);
 
         i1.setAmbienteId(1);
         i1.setCodigo("321654");
@@ -152,6 +161,7 @@ public class FazTudo {
         i1.setId(iDAO.geraId());
         i1.setIdDono(1);
         i1.setValorcompra(1000);
+        iDAO.setItem(i1);
 
         i2.setAmbienteId(2);
         i2.setCodigo("987654");
@@ -162,6 +172,7 @@ public class FazTudo {
         i2.setId(iDAO.geraId());
         i2.setIdDono(1);
         i2.setValorcompra(200);
+        iDAO.setItem(i2);
 
         i3.setAmbienteId(3);
         i3.setCodigo("123456");
@@ -172,6 +183,7 @@ public class FazTudo {
         i3.setId(iDAO.geraId());
         i3.setIdDono(2);
         i3.setValorcompra(3500);
+        iDAO.setItem(i3);
 
         i4.setAmbienteId(4);
         i4.setCodigo("123654");
@@ -186,11 +198,19 @@ public class FazTudo {
     }
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO, ItensRevisaoDAO iRDAO) {
+        
+        
 
+        serv.setLoginSenha("user", "123");
+        serv.setNome("Jose");
+        serv.setAdm(true);
+        servDAO.insereAuto(serv);
+        
         serv.setNome("zika");
         serv.setLoginSenha("login", "senha");//user teste
         serv.setAdm(true);
-        servDAO.setServidores(serv);
+        serv.setId(servDAO.geraId());
+        servDAO.insereAuto(serv);
 
         int opcao = 5;
 
@@ -216,7 +236,7 @@ public class FazTudo {
                             servDAO.getServLogado().setLogado(true);
 
                             while (servDAO.getServLogado().isLogado() != false && servDAO.getServLogado() != null) {
-                                mainServidor(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
+                                mainServidor(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO, iRDAO);
                             }
 
                         } else {
@@ -282,7 +302,7 @@ public class FazTudo {
         }
     }
 
-    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
+    public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO rDAO, ItensRevisaoDAO iRDAO) {
         int aux = 1;
         int dado;
         while (aux != 0) {
@@ -396,7 +416,13 @@ public class FazTudo {
                     break;
 
                 case 7:
-
+                    System.out.println("\nDigite o ID do Ambiente da Revisão:");
+                    int amb = Integer.parseInt(in.nextLine());
+                    
+                    if(rDAO.getRevisaoAmb(amb) != null){
+                        System.out.println("\n" + rDAO.getRevisaoAmb(amb).toString());
+                        iRDAO.mostraItens(rDAO.getRevisaoAmb(amb).getId());
+                    }
                     break;
 
                 default:
@@ -574,7 +600,6 @@ public class FazTudo {
                                 int valid = 0;
                                 int amb;
                                 serv = servDAO.getServLogado().getId();
-                                while (valid != 1) {
                                     System.out.println("\nDigite o ID do Ambiente a ser Revisado: ");
                                     amb = Integer.parseInt(in.nextLine());
 
@@ -590,7 +615,7 @@ public class FazTudo {
                                         System.out.println("\nJá Existe Revisão Desse Ambiente!\nVerifique se é recente e Edite ou Remova!\n");
                                     }
 
-                                }
+                                
                                 break;
 
                             case 2:
@@ -646,7 +671,7 @@ public class FazTudo {
         }
     }
 
-    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO) {
+    public void mainServidor(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO rDAO, ItensRevisaoDAO iRDAO) {
         int opc = 1;
         while (opc != 0) {
             System.out.println("----------IFTM GERENCIAMENTO----------\n");
@@ -660,7 +685,7 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
+                    visualizar(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, rDAO, iRDAO);
                     break;
 
                 default:
@@ -685,7 +710,7 @@ public class FazTudo {
                     break;
 
                 case 2:
-                    visualizar(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO);
+                    visualizar(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO, iRDAO);
                     break;
 
                 case 3:

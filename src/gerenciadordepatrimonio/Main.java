@@ -22,7 +22,7 @@ public class Main {
         ItensRevisaoDAO iRDAO = new ItensRevisaoDAO();
 
         FazTudo inicia = new FazTudo();
-        inicia.database(servDAO, campDAO, ambDAO, itemDAO);
+        //inicia.database(servDAO, campDAO, ambDAO, itemDAO);
         inicia.login(servDAO, campDAO, ambDAO, itemDAO, mAmbDAO, mdonoDAO, revDAO, iRDAO);
     }
 

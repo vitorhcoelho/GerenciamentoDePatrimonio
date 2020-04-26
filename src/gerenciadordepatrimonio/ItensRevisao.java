@@ -56,5 +56,30 @@ public class ItensRevisao {
     public void setPago(boolean pago) {
         this.pago = pago;
     }
+    
+    public String traduzEncontrado(){
+        if(this.encontrado){
+            return "Sim";
+        }else{
+            return "Não";
+        }
+    }
+    
+    public String traduzPago(){
+        if(this.pago){
+            return "Sim";
+        }else{
+            return "Não";
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Item: " + item.getEspecificacao() + "\tID: " + item.getId() +
+                "\nEncontrado? > " + traduzEncontrado() + "\tPago? > " + traduzPago()
+                + "\n-----------------------------------------------------------\n";
+    }
+    
+    
 
 }

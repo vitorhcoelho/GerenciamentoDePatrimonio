@@ -38,7 +38,7 @@ public class MovimentoAmbienteDAO {
     public boolean setMovAmb(MovimentoAmbiente mov) {
         int pos = vagaMovAmb();
         if (pos == -1) {
-            System.out.println("\nLista de Campus Cheia\n");
+            System.out.println("\nLista de Movimentações Cheia\n");
             return false;
         } else {
             movAmb[pos] = mov;

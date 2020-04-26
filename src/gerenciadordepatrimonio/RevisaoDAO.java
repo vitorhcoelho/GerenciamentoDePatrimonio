@@ -17,6 +17,7 @@ public class RevisaoDAO {
 
     private Revisao[] revs = new Revisao[30];
     private int id = 0;
+    private int qtdRev = 0;
     Scanner in = new Scanner(System.in);
 
     public int geraId() {
@@ -43,19 +44,33 @@ public class RevisaoDAO {
 
         iDAO.itemRevisao(rev.getId(), amb, iRDAO);
 
-        System.out.println("\nRevisão Criada: \n" + rev.toString());
+        System.out.println("\nRevisão Criada: \n" + getRevisaoAmb(amb));
 
     }
 
     public void andamentoRevisao(int amb, ItensRevisaoDAO iRDAO, ItemDAO iDAO, MovimentoAmbienteDAO mADAO, MovimentoDonoDAO mDDAO) {
         Revisao r = getRevisaoAmb(amb);
         int idRev = r.getId();
-        r.setEstado(2);
-
+        
+        if(r.getEstado() == 1){
+            r.setEstado(2);
+        
+        System.out.println("\n");
         iRDAO.revisionar(idRev, iDAO, mADAO, mDDAO);
         r.setDataModificacao(LocalDate.now());
 
         iRDAO.estadoRevisao(idRev, r);
+        }else if(r.getEstado() == 2){
+            System.out.println("\n");
+        iRDAO.revisionar(idRev, iDAO, mADAO, mDDAO);
+        r.setDataModificacao(LocalDate.now());
+
+        iRDAO.estadoRevisao(idRev, r);
+        }else{
+            System.out.println("\nEssa Revisão Foi Terminada\n");
+        }
+        
+        
 
     }
 
@@ -95,6 +110,7 @@ public class RevisaoDAO {
             System.out.println("\nLista de Revisões Cheia\n");
             return false;
         } else {
+            this.qtdRev++;
             revs[pos] = rev;
             return true;
         }
@@ -141,7 +157,7 @@ public class RevisaoDAO {
     }
     
     public int achaRevisaoAmb(int amb) {
-        for (int x = 0; x < this.revs.length; x++) {
+        for (int x = 0; x < this.qtdRev; x++) {
             if (amb == revs[x].getIdAmb() && revs[x] != null) {
                 return x;
             } else {
