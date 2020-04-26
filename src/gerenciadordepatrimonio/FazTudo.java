@@ -27,12 +27,6 @@ public class FazTudo {
     Item i2 = new Item();
     Item i3 = new Item();
     Item i4 = new Item();
-    MovimentoAmbiente ma1 = new MovimentoAmbiente();
-    MovimentoAmbiente ma2 = new MovimentoAmbiente();
-    MovimentoDono md1 = new MovimentoDono();
-    MovimentoDono md2 = new MovimentoDono();
-    Revisao rev1 = new Revisao();
-    Revisao rev2 = new Revisao();
 
     Servidor serv = new Servidor();
     Scanner in = new Scanner(System.in);
@@ -93,11 +87,25 @@ public class FazTudo {
 
     public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO) {
 
-        serv.setAdm(true);
-        serv.setLoginSenha("login", "senha");
-        serv.setSystem(true);
-        serv.setNome("user dev");
-        sDAO.setServidores(serv);
+        c1.setAbreviacao("camp1");
+        c1.setBairro("Univerde");
+        c1.setCep("38066244");
+        c1.setCidade("Uberaba");
+        c1.setDataCriacao(LocalDate.now());
+        c1.setEndereco("Rua do Grau, 10");
+        c1.setId(cDAO.geraId());
+        c1.setNome("Campus Tecnologico");
+        cDAO.setCampus(c1);
+
+        c2.setAbreviacao("camp2");
+        c2.setBairro("Distrito");
+        c2.setCep("38066333");
+        c2.setCidade("Uberaba");
+        c2.setDataCriacao(LocalDate.now());
+        c2.setEndereco("Rua dos Govinos, 99");
+        c2.setId(cDAO.geraId());
+        c2.setNome("Campus Agroeconomico");
+        cDAO.setCampus(c2);
 
         a1.setCodCamp(1);
         a1.setDatacriacao(LocalDate.now());

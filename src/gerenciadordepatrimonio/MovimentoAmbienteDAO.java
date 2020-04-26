@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class MovimentoAmbienteDAO {
 
     private MovimentoAmbiente[] movAmb = new MovimentoAmbiente[100];
-    private int qtdMovAmb = 0;
+    private int qtdMovAmb;
     private int id = 0;
     Scanner in = new Scanner(System.in);
 
@@ -143,7 +143,9 @@ public class MovimentoAmbienteDAO {
 
             System.out.println(getMovimentoAmb(aux).toString() + "\nEncontrado!\n");
 
+            
             idItem = getMovimentoAmb(aux).getIdItem();
+
 
             if (iDAO.getItem(idItem) == null) {
                 System.out.println("\nItem De Movimentação Não Existe Mais\n");
@@ -152,7 +154,7 @@ public class MovimentoAmbienteDAO {
                 System.out.println("\nDigite o ID do ambiente de destino: ");
                 ids = Integer.parseInt(in.nextLine());
                 mAmb.setAmbienteDestino(ids);
-
+                
                 iDAO.getItem(idItem).setAmbienteId(ids);
 
                 System.out.println("\nDescreva o motivo da movimentação de item: ");
@@ -197,22 +199,21 @@ public class MovimentoAmbienteDAO {
             }
         }
     }
-
+    
     public void mostraMovAmbientes() {
         for (int x = 0; x < this.qtdMovAmb; x++) {
             if (movAmb[x] != null) {
                 System.out.println(this.movAmb[x].toString());
-            } else {
-            }
+            } else {}
         }
     }
-
-    public void getMovAmbientesPorID(int id) {
+        
+    public void getMovAmbientesPorID(int id){
         for (int i = 0; i < this.qtdMovAmb; i++) {
-            if (movAmb[i].getIdItem() == id) {
+            if(movAmb[i].getIdItem() == id){
                 movAmb[i].toString();
             }
         }
     }
-
+    
 }

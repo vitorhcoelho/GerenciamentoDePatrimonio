@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class MovimentoDonoDAO {
 
     private MovimentoDono[] movDono = new MovimentoDono[221];
-    private int qtdMovDono = 0;
+    private int qtdMovDono;
     private int id = 0;
     Scanner in = new Scanner(System.in);
 
@@ -99,7 +99,7 @@ public class MovimentoDonoDAO {
             MovimentoDono m = getMovimentoDono(aux);
 
             System.out.println(getMovimentoDono(aux).toString() + "\nEncontrado!\n");
-
+            
             int idItem = getMovimentoDono(aux).getIdItem();
 
             if (iDAO.getItem(idItem) == null) {
@@ -154,7 +154,7 @@ public class MovimentoDonoDAO {
     }
 
     public int vagaMovDono() {
-        for (int x = 0; x < qtdMovDono; x++) {
+        for (int x = 0; x < movDono.length; x++) {
             if (movDono[x] == null) {
                 return x;
             } else {
@@ -177,7 +177,7 @@ public class MovimentoDonoDAO {
     }
 
     public int achaMovimentoDono(int id) {
-        for (int x = 0; x < qtdMovDono; x++) {
+        for (int x = 0; x < movDono.length; x++) {
             if (id == movDono[x].getId() && movDono[x] != null) {
                 return x;
             } else {
@@ -195,22 +195,21 @@ public class MovimentoDonoDAO {
             return movDono[x];
         }
     }
-
+    
     public void mostraMovDonos() {
         for (int x = 0; x < this.qtdMovDono; x++) {
             if (movDono[x] != null) {
                 System.out.println(this.movDono[x].toString());
-            } else {
-            }
+            } else {}
         }
     }
-
-    public void getMovDonosPorID(int id) {
+    
+    public void getMovDonosPorID(int id){
         for (int i = 0; i < this.qtdMovDono; i++) {
-            if (movDono[i].getIdItem() == id) {
+            if(movDono[i].getIdItem() == id){
                 movDono[i].toString();
             }
         }
     }
-
+    
 }

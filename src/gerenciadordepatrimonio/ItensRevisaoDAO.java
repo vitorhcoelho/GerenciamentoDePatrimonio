@@ -112,17 +112,17 @@ public class ItensRevisaoDAO {
             }
         }
     }
-
-    public void mostraItens(int idR) {
-        for (int x = 0; x < this.qtdIRev; x++) {
-            if (itRev[x].getIdRevisao() == idR) {
+    
+    public void mostraItens(int idR){
+        for(int x= 0;x< this.qtdIRev; x++){
+            if(itRev[x].getIdRevisao() == idR){
                 System.out.println(itRev[x].toString());
             }
         }
     }
 
     public int vagaItemRevisao() {
-        for (int x = 0; x < qtdIRev; x++) {
+        for (int x = 0; x < itRev.length; x++) {
             if (itRev[x] == null) {
                 return x;
             } else {
@@ -145,7 +145,7 @@ public class ItensRevisaoDAO {
     }
 
     public int achaIRevIdRev(int idRev) {
-        for (int x = 0; x < this.qtdIRev; x++) {
+        for (int x = 0; x < this.itRev.length; x++) {
             if (idRev == itRev[x].getIdRevisao() && itRev[x] != null) {
                 return x;
             } else {
