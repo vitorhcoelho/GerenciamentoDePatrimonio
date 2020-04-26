@@ -204,10 +204,10 @@ public class MovimentoDonoDAO {
         }
     }
     
-    public void getMovDonosPorID(int id){
+    public void mostraMovDonosPorID(int id){
         for (int i = 0; i < this.qtdMovDono; i++) {
             if(movDono[i].getIdItem() == id){
-                movDono[i].toString();
+                System.out.println(movDono[i].toString());
             }
         }
     }

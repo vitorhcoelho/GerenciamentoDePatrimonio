@@ -184,7 +184,7 @@ public class FazTudo {
         serv.setAdm(true);
         serv.setId(servDAO.geraId());
         servDAO.setServidores(serv);
-        
+
         int opcao = 5;
 
         while (opcao != 0) {
@@ -277,7 +277,6 @@ public class FazTudo {
             }
         }
     }
-    
 
     public void visualizar(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO rDAO, ItensRevisaoDAO iRDAO) {
         int aux = 1;
@@ -333,7 +332,7 @@ public class FazTudo {
                             case 2:
                                 System.out.println("Informe o ID do servidor que procura:");
                                 dado = Integer.parseInt(in.nextLine());
-                                itemDAO.mostraItemPorServ(ambDAO.getAmbientesPorCampus(campDAO.getCampus(servDAO.getServidoresCampus(dado))));
+                                itemDAO.mostraItemPorServ(servDAO.getServidoresId(dado));
                                 break;
 
                             case 3:
@@ -361,7 +360,7 @@ public class FazTudo {
                             case 2:
                                 System.out.println("Informe o ID do item que procura:");
                                 dado = Integer.parseInt(in.nextLine());
-                                mAmbDAO.getMovAmbientesPorID(dado);
+                                mAmbDAO.mostraMovAmbientesPorID(dado);
                                 break;
 
                             default:
@@ -383,7 +382,7 @@ public class FazTudo {
                             case 2:
                                 System.out.println("Informe o ID do item que procura:");
                                 dado = Integer.parseInt(in.nextLine());
-                                mdonoDAO.getMovDonosPorID(dado);
+                                mdonoDAO.mostraMovDonosPorID(dado);
                                 break;
 
                             default:

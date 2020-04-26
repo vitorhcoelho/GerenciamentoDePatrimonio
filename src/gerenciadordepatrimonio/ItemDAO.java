@@ -244,10 +244,10 @@ public class ItemDAO {
         }
     }
 
-    public void mostraItemPorServ(Ambiente a) {
+    public void mostraItemPorServ(Servidor s) {
         for (int x = 0; x < this.qtdItem; x++) {
             if (itens[x] != null) {
-                if (itens[x].getAmbienteId() == a.getId()) {
+                if (itens[x].getIdDono() == s.getId()) {
                     System.out.println(this.itens[x].toString());
                 }
             } else {
@@ -255,10 +255,10 @@ public class ItemDAO {
         }
     }
 
-    public void mostraItemPorCampus(Ambiente a) {
+    public void mostraItemPorCampus(Ambiente[] a) {
         for (int x = 0; x < this.qtdItem; x++) {
             if (itens[x] != null) {
-                if (itens[x].getAmbienteId() == a.getId()) {
+                if (itens[x].getAmbienteId() == a[x].getId()) {
                     System.out.println(this.itens[x].toString());
                 }
             } else {}

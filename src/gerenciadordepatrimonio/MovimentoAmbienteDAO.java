@@ -208,10 +208,10 @@ public class MovimentoAmbienteDAO {
         }
     }
         
-    public void getMovAmbientesPorID(int id){
+    public void mostraMovAmbientesPorID(int id){
         for (int i = 0; i < this.qtdMovAmb; i++) {
             if(movAmb[i].getIdItem() == id){
-                movAmb[i].toString();
+                System.out.println(movAmb[i].toString());
             }
         }
     }

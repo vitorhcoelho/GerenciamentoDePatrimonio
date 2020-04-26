@@ -139,14 +139,17 @@ public class AmbienteDAO {
         }
     }
 
-    public Ambiente getAmbientesPorCampus(Campus c) {
+    public Ambiente[] getAmbientesPorCampus(Campus c) {
+        int cont = 0;
+        Ambiente[] vetaux = new Ambiente[100];
         for (int x = 0; x < this.qtdAmb; x++) {
             if (ambs[x].getCodCamp() == c.getId() && ambs[x] != null) {
-                return ambs[x];
+                vetaux[cont] = ambs[x];
+                cont++;
             } else {
             }
         }
-        return null;
+        return vetaux;
     }
 
     public Ambiente getAmbiente(int id) {
