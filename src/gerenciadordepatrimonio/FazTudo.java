@@ -15,7 +15,8 @@ import java.util.Scanner;
  */
 public class FazTudo {
 
-    Servidor s = new Servidor();
+    Servidor s1 = new Servidor();
+    Servidor s2 = new Servidor();
     Campus c1 = new Campus();
     Campus c2 = new Campus();
     Ambiente a1 = new Ambiente();
