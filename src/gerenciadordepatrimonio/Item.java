@@ -8,7 +8,8 @@ package gerenciadordepatrimonio;
 import java.time.LocalDate;
 
 /**
- *  cadu
+ * cadu
+ *
  * @author Vitor Hugo
  */
 public class Item {
@@ -107,7 +108,7 @@ public class Item {
     @Override
     public String toString() {
         return "\nId Item: " + this.id + "\tEspecificação: " + this.especificacao + "\nCódigo de Patrimonio: "
-                + this.codigo + "\tEstado: " + this.estado + "\nData da Compra: " + this.datacompra 
+                + this.codigo + "\tEstado: " + this.estado + "\nData da Compra: " + this.datacompra
                 + "\tValor da Compra: " + this.valorcompra + "\nId de Ambiente: " + this.ambienteId
                 + "\tData Criação: " + this.datacriacao + "\nId de Dono: " + getIdDono();
     }

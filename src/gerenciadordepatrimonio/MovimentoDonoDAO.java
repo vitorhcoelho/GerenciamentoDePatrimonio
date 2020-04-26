@@ -99,7 +99,7 @@ public class MovimentoDonoDAO {
             MovimentoDono m = getMovimentoDono(aux);
 
             System.out.println(getMovimentoDono(aux).toString() + "\nEncontrado!\n");
-            
+
             int idItem = getMovimentoDono(aux).getIdItem();
 
             if (iDAO.getItem(idItem) == null) {
@@ -167,7 +167,7 @@ public class MovimentoDonoDAO {
     public boolean setMovDono(MovimentoDono movimentacoes) {
         int pos = vagaMovDono();
         if (pos == -1) {
-            System.out.println("\nLista de Movimentações Cheia\n");
+            System.out.println("\nLista de Movimentações de Donos cheia\n");
             return false;
         } else {
             movDono[pos] = movimentacoes;
@@ -195,21 +195,22 @@ public class MovimentoDonoDAO {
             return movDono[x];
         }
     }
-    
+
     public void mostraMovDonos() {
         for (int x = 0; x < this.qtdMovDono; x++) {
             if (movDono[x] != null) {
                 System.out.println(this.movDono[x].toString());
-            } else {}
+            } else {
+            }
         }
     }
-    
-    public void mostraMovDonosPorID(int id){
+
+    public void mostraMovDonosPorID(int id) {
         for (int i = 0; i < this.qtdMovDono; i++) {
-            if(movDono[i].getIdItem() == id){
+            if (movDono[i].getIdItem() == id) {
                 System.out.println(movDono[i].toString());
             }
         }
     }
-    
+
 }

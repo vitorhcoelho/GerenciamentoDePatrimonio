@@ -139,17 +139,16 @@ public class AmbienteDAO {
         }
     }
 
-    public Ambiente[] getAmbientesPorCampus(Campus c) {
-        int cont = 0;
-        Ambiente[] vetaux = new Ambiente[100];
+    public void mostraConteudoAmbientesPorCampus(Campus c, ItemDAO iDAO) {
         for (int x = 0; x < this.qtdAmb; x++) {
-            if (ambs[x].getCodCamp() == c.getId() && ambs[x] != null) {
-                vetaux[cont] = ambs[x];
-                cont++;
-            } else {
+            if (this.ambs[x].getCodCamp() == c.getId() && this.ambs[x] != null) {
+                for (int i = 1; i < iDAO.getQtdItem(); i++) {
+                    if (iDAO.getItem(i).getAmbienteId() == this.ambs[x].getId()) {
+                        System.out.println(iDAO.getItem(i).toString());
+                    }
+                }
             }
         }
-        return vetaux;
     }
 
     public Ambiente getAmbiente(int id) {

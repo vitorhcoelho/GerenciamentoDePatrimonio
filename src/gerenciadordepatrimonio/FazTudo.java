@@ -15,7 +15,7 @@ import java.util.Scanner;
  */
 public class FazTudo {
 
-    Servidor s = new Servidor();
+    Servidor s1 = new Servidor();
     Servidor s2 = new Servidor();
     Campus c1 = new Campus();
     Campus c2 = new Campus();
@@ -27,6 +27,9 @@ public class FazTudo {
     Item i2 = new Item();
     Item i3 = new Item();
     Item i4 = new Item();
+    MovimentoAmbiente ma1 = new MovimentoAmbiente();
+    MovimentoDono md1 = new MovimentoDono();
+    Revisao r1 = new Revisao();
 
     Servidor serv = new Servidor();
     Scanner in = new Scanner(System.in);
@@ -70,7 +73,7 @@ public class FazTudo {
             + "2 - Servidores\n"
             + "3 - Ambientes\n"
             + "4 - Itens\n"
-            + "5 - Movimentações de Itens\n"
+            + "5 - Movimentações de Ambientes\n"
             + "6 - Movimentações de Donos\n"
             + "7 - Revisões\n"
             + "0 - Voltar\n";
@@ -85,14 +88,49 @@ public class FazTudo {
             + "3 - Excluir Revisão\n"
             + "0 - Voltar\n";
 
-    public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO) {
+    public void database(ServidorDAO sDAO, CampusDAO cDAO, AmbienteDAO aDAO, ItemDAO iDAO, MovimentoAmbienteDAO maDAO, MovimentoDonoDAO mdDAO, RevisaoDAO rDAO) {
+        serv.setAdm(true);
+        serv.setCampus(1);
+        serv.setCargo("N/A");
+        serv.setEmail("N/A");
+        serv.setId(0);
+        serv.setLogado(false);
+        serv.setLoginSenha("login", "senha");
+        serv.setNome("N/A");
+        serv.setPapel("N/A");
+        serv.setSystem(true);
+        sDAO.setServidores(serv);
+
+        s1.setAdm(false);
+        s1.setCampus(1);
+        s1.setCargo("professor");
+        s1.setEmail("s1@gmail.com");
+        s1.setId(sDAO.geraId());
+        s1.setLogado(false);
+        s1.setLoginSenha("s1", "123");
+        s1.setNome("Jose");
+        s1.setPapel("lecionar");
+        s1.setSystem(false);
+        sDAO.setServidores(s1);
+
+        s2.setAdm(false);
+        s2.setCampus(2);
+        s2.setCargo("coordenador");
+        s2.setEmail("s2@gmail.com");
+        s2.setId(sDAO.geraId());
+        s2.setLogado(false);
+        s2.setLoginSenha("s2", "123");
+        s2.setNome("Joao");
+        s2.setPapel("coordenar");
+        s2.setSystem(false);
+        sDAO.setServidores(s2);
 
         c1.setAbreviacao("camp1");
         c1.setBairro("Univerde");
         c1.setCep("38066244");
         c1.setCidade("Uberaba");
         c1.setDataCriacao(LocalDate.now());
-        c1.setEndereco("Rua do Grau, 10");
+        c1.setEndereco("Rua do Grau, 1");
         c1.setId(cDAO.geraId());
         c1.setNome("Campus Tecnologico");
         cDAO.setCampus(c1);
@@ -102,7 +140,7 @@ public class FazTudo {
         c2.setCep("38066333");
         c2.setCidade("Uberaba");
         c2.setDataCriacao(LocalDate.now());
-        c2.setEndereco("Rua dos Govinos, 99");
+        c2.setEndereco("Rua dos Bovinos, 99");
         c2.setId(cDAO.geraId());
         c2.setNome("Campus Agroeconomico");
         cDAO.setCampus(c2);
@@ -121,13 +159,13 @@ public class FazTudo {
 
         a3.setCodCamp(2);
         a3.setDatacriacao(LocalDate.now());
-        a3.setDescricao("Dispensa");
+        a3.setDescricao("Despensa");
         a3.setId(aDAO.geraId());
         aDAO.setAmbiente(a3);
 
         a4.setCodCamp(2);
         a4.setDatacriacao(LocalDate.now());
-        a4.setDescricao("Diposito");
+        a4.setDescricao("Deposito");
         a4.setId(aDAO.geraId());
         aDAO.setAmbiente(a4);
 
@@ -138,7 +176,7 @@ public class FazTudo {
         i1.setEspecificacao("mesa");
         i1.setEstado(5);
         i1.setId(iDAO.geraId());
-        i1.setIdDono(3);
+        i1.setIdDono(1);
         i1.setValorcompra(1000);
         iDAO.setItem(i1);
 
@@ -149,7 +187,7 @@ public class FazTudo {
         i2.setEspecificacao("cadeira");
         i2.setEstado(4);
         i2.setId(iDAO.geraId());
-        i2.setIdDono(3);
+        i2.setIdDono(1);
         i2.setValorcompra(200);
         iDAO.setItem(i2);
 
@@ -175,16 +213,32 @@ public class FazTudo {
         i4.setValorcompra(1499);
         iDAO.setItem(i4);
 
+        ma1.setAmbienteOrigem(1);
+        ma1.setAmbienteDestino(2);
+        ma1.setDataCriacao(LocalDate.now());
+        ma1.setId(maDAO.geraId());
+        ma1.setIdItem(1);
+        ma1.setMotivo("Não está sendo utilizado");
+        maDAO.setMovAmb(ma1);
+
+        md1.setDataCriacao(LocalDate.now());
+        md1.setDonoOrigem(1);
+        md1.setDonoDestino(2);
+        md1.setId(mdDAO.geraId());
+        md1.setIdItem(2);
+        md1.setMotivo("Já temos outro da mesma unidade");
+        mdDAO.setMovDono(md1);
+        
+        r1.setAno(2021);
+        r1.setDataCriacao(LocalDate.now());
+        r1.setEstado(4);
+        r1.setId(rDAO.geraId());
+        r1.setIdAmb(2);
+        r1.setIdServ(2);
+        rDAO.setRevisao(r1);
     }
 
     public void login(ServidorDAO servDAO, CampusDAO campDAO, AmbienteDAO ambDAO, ItemDAO itemDAO, MovimentoAmbienteDAO mAmbDAO, MovimentoDonoDAO mdonoDAO, RevisaoDAO revDAO, ItensRevisaoDAO iRDAO) {
-
-        serv.setNome("zika");
-        serv.setLoginSenha("login", "senha");//user teste
-        serv.setAdm(true);
-        serv.setId(servDAO.geraId());
-        servDAO.setServidores(serv);
-
         int opcao = 5;
 
         while (opcao != 0) {
@@ -326,7 +380,7 @@ public class FazTudo {
                             case 1:
                                 System.out.println("Informe o ID do campus que procura:");
                                 dado = Integer.parseInt(in.nextLine());
-                                itemDAO.mostraItemPorCampus(ambDAO.getAmbientesPorCampus(campDAO.getCampus(dado)));
+                                ambDAO.mostraConteudoAmbientesPorCampus(campDAO.getCampus(dado), itemDAO);
                                 break;
 
                             case 2:

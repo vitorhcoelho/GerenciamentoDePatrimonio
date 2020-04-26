@@ -122,13 +122,13 @@ public class ItemDAO {
             System.out.println("\nValor de compra do item: ");
             valor = Double.parseDouble(in.nextLine());
             i.setValorcompra(valor);
-            
+
             ambAnterior = i.getAmbienteId();
 
             System.out.println("\nAmbiente do item: ");
             idAmbiente = Integer.parseInt(in.nextLine());
             i.setAmbienteId(idAmbiente);
-            
+
             donoAnterior = i.getIdDono();
 
             System.out.println("\nId de Servidor Dono: ");
@@ -137,14 +137,14 @@ public class ItemDAO {
 
             i.setDatamodificacao(LocalDate.now());
 
-            if(ambAnterior != idAmbiente){
-            mAmDAO.insereAuto(i.getId(), 0, idAmbiente, 1);
+            if (ambAnterior != idAmbiente) {
+                mAmDAO.insereAuto(i.getId(), 0, idAmbiente, 1);
             }
-            
-            if(donoAnterior != dono){
-            mDoDAO.insereAuto(i.getId(), 0, dono, 1);
+
+            if (donoAnterior != dono) {
+                mDoDAO.insereAuto(i.getId(), 0, dono, 1);
             }
-            
+
             System.out.println(i.toString() + "\nEditado com Sucesso!\n");
 
         }
@@ -174,32 +174,30 @@ public class ItemDAO {
                 del.setDatacriacao(null);
                 del.setDatamodificacao(null);
                 System.out.println("\nAmbiente Deletado\n");
-                
+
                 mAmDAO.insereAuto(del.getId(), 0, 0, 0);
                 mDoDAO.insereAuto(del.getId(), 0, 0, 0);
-
 
             } else {
                 System.out.println("\nAmbiente Mantido\n");
             }
         }
     }
-    
-    public void excluiAuto(int idI, MovimentoAmbienteDAO mAmDAO, MovimentoDonoDAO mDoDAO){
+
+    public void excluiAuto(int idI, MovimentoAmbienteDAO mAmDAO, MovimentoDonoDAO mDoDAO) {
         Item del = getItem(idI);
         del.setEspecificacao("Item Apagado");
-                del.setEstado(-1);
-                del.setCodigo(null);
-                del.setDatacompra(null);
-                del.setValorcompra(0);
-                del.setAmbienteId(0);
-                del.setIdDono(-1);
-                del.setDatacriacao(null);
-                del.setDatamodificacao(null);
-                mAmDAO.insereAuto(del.getId(), 0, 0, 0);
-                mDoDAO.insereAuto(del.getId(), 0, 0, 0);
+        del.setEstado(-1);
+        del.setCodigo(null);
+        del.setDatacompra(null);
+        del.setValorcompra(0);
+        del.setAmbienteId(0);
+        del.setIdDono(-1);
+        del.setDatacriacao(null);
+        del.setDatamodificacao(null);
+        mAmDAO.insereAuto(del.getId(), 0, 0, 0);
+        mDoDAO.insereAuto(del.getId(), 0, 0, 0);
     }
-    
 
     public int achaItemId(int id) {
         for (int x = 0; x < this.qtdItem; x++) {
@@ -255,16 +253,6 @@ public class ItemDAO {
         }
     }
 
-    public void mostraItemPorCampus(Ambiente[] a) {
-        for (int x = 0; x < this.qtdItem; x++) {
-            if (itens[x] != null) {
-                if (itens[x].getAmbienteId() == a[x].getId()) {
-                    System.out.println(this.itens[x].toString());
-                }
-            } else {}
-        }
-    }
-
     public void mostraItemPorID(int dado) {
         for (int x = 0; x < this.qtdItem; x++) {
             if (itens[x] != null) {
@@ -276,14 +264,14 @@ public class ItemDAO {
             }
         }
     }
-    
-    public void itemRevisao(int idRev, int amb, ItensRevisaoDAO r){
-        
-        for(int x = 0;x < this.qtdItem; x++){
-            if(itens[x].getAmbienteId() == amb && itens[x] != null){
+
+    public void itemRevisao(int idRev, int amb, ItensRevisaoDAO r) {
+
+        for (int x = 0; x < this.qtdItem; x++) {
+            if (itens[x].getAmbienteId() == amb && itens[x] != null) {
                 r.insereItensRev(idRev, itens[x]);
-            }else{
-                
+            } else {
+
             }
         }
     }
@@ -295,25 +283,24 @@ public class ItemDAO {
     public void setQtdItem(int qtdItem) {
         this.qtdItem = qtdItem;
     }
-    
-        
-    public double valorTotalPorServ(int idServ){
+
+    public double valorTotalPorServ(int idServ) {
         double total = 0;
-        for(int x=0;x<this.qtdItem;x++){
-            if(itens[x].getIdDono() == idServ && itens[x]!=null){
+        for (int x = 0; x < this.qtdItem; x++) {
+            if (itens[x].getIdDono() == idServ && itens[x] != null) {
                 total = total + itens[x].getValorcompra();
             }
         }
         return total;
     }
-    
-    public double valorPorAmbiente(int idAmb, int idServ){
+
+    public double valorPorAmbiente(int idAmb, int idServ) {
         double total = 0;
-        for(int x=0;x<this.qtdItem;x++){
-            if(itens[x].getIdDono() == idServ && itens[x].getAmbienteId() == idAmb && itens[x]!=null){
+        for (int x = 0; x < this.qtdItem; x++) {
+            if (itens[x].getIdDono() == idServ && itens[x].getAmbienteId() == idAmb && itens[x] != null) {
                 total = total + itens[x].getValorcompra();
-            }else{
-                
+            } else {
+
             }
         }
         return total;

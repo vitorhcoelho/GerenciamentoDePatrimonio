@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class MovimentoAmbienteDAO {
 
     private MovimentoAmbiente[] movAmb = new MovimentoAmbiente[100];
-    private int qtdMovAmb;
+    private int qtdMovAmb = 1;
     private int id = 0;
     Scanner in = new Scanner(System.in);
 
@@ -38,7 +38,7 @@ public class MovimentoAmbienteDAO {
     public boolean setMovAmb(MovimentoAmbiente mov) {
         int pos = vagaMovAmb();
         if (pos == -1) {
-            System.out.println("\nLista de Movimentações Cheia\n");
+            System.out.println("\nLista de Movimentações de Ambiente cheia\n");
             return false;
         } else {
             movAmb[pos] = mov;
@@ -83,7 +83,6 @@ public class MovimentoAmbienteDAO {
             m.setMotivo("Novo ou Editado em Itens");
         }
         setMovAmb(m);
-
     }
 
     public void insereMovAmb(ItemDAO iDAO) {
@@ -100,6 +99,7 @@ public class MovimentoAmbienteDAO {
             System.out.println("\nID de Item Inválido!\n");
         } else {
             mAmb.setAmbienteOrigem(iDAO.getItem(idItem).getAmbienteId());
+            System.out.println("\nO ITEM " + idItem + " ESTÁ NO AMBIENTE " + iDAO.getItem(idItem).getAmbienteId());
 
             System.out.println("\nDigite o ID do ambiente de destino: ");
             idAmb = Integer.parseInt(in.nextLine());
@@ -113,16 +113,11 @@ public class MovimentoAmbienteDAO {
 
             mAmb.setDataCriacao(LocalDate.now());
             mAmb.setDataModificacao(LocalDate.now());
-
             mAmb.setId(geraId());
+            
+            this.setMovAmb(mAmb);
 
-            if (mAmb != null) {
-                setMovAmb(mAmb);
-                System.out.println(mAmb.toString() + "\nMovimentação Inserida\n");
-            } else {
-                System.out.println("\nErro Null\n");
-            }
-
+            System.out.println(mAmb.toString() + "\nMovimentação Inserida\n");
         }
 
     }
@@ -143,9 +138,7 @@ public class MovimentoAmbienteDAO {
 
             System.out.println(getMovimentoAmb(aux).toString() + "\nEncontrado!\n");
 
-            
             idItem = getMovimentoAmb(aux).getIdItem();
-
 
             if (iDAO.getItem(idItem) == null) {
                 System.out.println("\nItem De Movimentação Não Existe Mais\n");
@@ -154,7 +147,7 @@ public class MovimentoAmbienteDAO {
                 System.out.println("\nDigite o ID do ambiente de destino: ");
                 ids = Integer.parseInt(in.nextLine());
                 mAmb.setAmbienteDestino(ids);
-                
+
                 iDAO.getItem(idItem).setAmbienteId(ids);
 
                 System.out.println("\nDescreva o motivo da movimentação de item: ");
@@ -199,21 +192,22 @@ public class MovimentoAmbienteDAO {
             }
         }
     }
-    
+
     public void mostraMovAmbientes() {
         for (int x = 0; x < this.qtdMovAmb; x++) {
             if (movAmb[x] != null) {
                 System.out.println(this.movAmb[x].toString());
-            } else {}
+            } else {
+            }
         }
     }
-        
-    public void mostraMovAmbientesPorID(int id){
+
+    public void mostraMovAmbientesPorID(int id) {
         for (int i = 0; i < this.qtdMovAmb; i++) {
-            if(movAmb[i].getIdItem() == id){
+            if (movAmb[i].getIdItem() == id) {
                 System.out.println(movAmb[i].toString());
             }
         }
     }
-    
+
 }

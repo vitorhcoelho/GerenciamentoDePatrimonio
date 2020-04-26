@@ -112,10 +112,10 @@ public class ItensRevisaoDAO {
             }
         }
     }
-    
-    public void mostraItens(int idR){
-        for(int x= 0;x< this.qtdIRev; x++){
-            if(itRev[x].getIdRevisao() == idR){
+
+    public void mostraItens(int idR) {
+        for (int x = 0; x < this.qtdIRev; x++) {
+            if (itRev[x].getIdRevisao() == idR) {
                 System.out.println(itRev[x].toString());
             }
         }

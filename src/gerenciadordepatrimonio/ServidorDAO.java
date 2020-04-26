@@ -134,7 +134,7 @@ public class ServidorDAO {
     }
 
     public void mostraServidores() {
-        for (int x = 0; x < this.qtdServidor; x++) {
+        for (int x = 1; x < this.qtdServidor; x++) {
             if (servidores[x] != null) {
                 System.out.println(this.servidores[x].toString());
             } else {

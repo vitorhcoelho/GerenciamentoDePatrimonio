@@ -51,26 +51,24 @@ public class RevisaoDAO {
     public void andamentoRevisao(int amb, ItensRevisaoDAO iRDAO, ItemDAO iDAO, MovimentoAmbienteDAO mADAO, MovimentoDonoDAO mDDAO) {
         Revisao r = getRevisaoAmb(amb);
         int idRev = r.getId();
-        
-        if(r.getEstado() == 1){
+
+        if (r.getEstado() == 1) {
             r.setEstado(2);
-        
-        System.out.println("\n");
-        iRDAO.revisionar(idRev, iDAO, mADAO, mDDAO);
-        r.setDataModificacao(LocalDate.now());
 
-        iRDAO.estadoRevisao(idRev, r);
-        }else if(r.getEstado() == 2){
             System.out.println("\n");
-        iRDAO.revisionar(idRev, iDAO, mADAO, mDDAO);
-        r.setDataModificacao(LocalDate.now());
+            iRDAO.revisionar(idRev, iDAO, mADAO, mDDAO);
+            r.setDataModificacao(LocalDate.now());
 
-        iRDAO.estadoRevisao(idRev, r);
-        }else{
+            iRDAO.estadoRevisao(idRev, r);
+        } else if (r.getEstado() == 2) {
+            System.out.println("\n");
+            iRDAO.revisionar(idRev, iDAO, mADAO, mDDAO);
+            r.setDataModificacao(LocalDate.now());
+
+            iRDAO.estadoRevisao(idRev, r);
+        } else {
             System.out.println("\nEssa Revisão Foi Terminada\n");
         }
-        
-        
 
     }
 
@@ -88,8 +86,8 @@ public class RevisaoDAO {
             r.setIdAmb(-1);
             r.setIdServ(-1);
             System.out.println("\nRevisão Deletada!\n");
-        }else{
-            
+        } else {
+
         }
     }
 
@@ -155,7 +153,7 @@ public class RevisaoDAO {
             return revs[x];
         }
     }
-    
+
     public int achaRevisaoAmb(int amb) {
         for (int x = 0; x < this.qtdRev; x++) {
             if (amb == revs[x].getIdAmb() && revs[x] != null) {
