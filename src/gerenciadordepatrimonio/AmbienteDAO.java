@@ -5,7 +5,14 @@
  */
 package gerenciadordepatrimonio;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,182 +21,286 @@ import java.util.Scanner;
  */
 public class AmbienteDAO {
 
-    private Ambiente[] ambs = new Ambiente[100];
-    private int qtdAmb = 0;
-    private int id = 0;
-    Scanner in = new Scanner(System.in);
+//    private Ambiente[] ambs = new Ambiente[100];
+//    private int qtdAmb = 0;
+//    private int id = 0;
+//    Scanner in = new Scanner(System.in);
+//
+//    public int geraId() {
+//        this.id++;
+//        return id;
+//    }
+    public void adiciona(Ambiente novo) {
+        String sql = "insert into ambiente "
+                + "(descricao, codcamp, datacriacao, datamodificacao)"
+                + " values (?,?,?,?)";
 
-    public int geraId() {
-        this.id++;
-        return id;
-    }
+        try (Connection con = new ConnectionFactory().Conn()) {
+            PreparedStatement stmt;
+            stmt = con.prepareStatement(sql);
 
-    public void insereAmbiente() {
-        String dado;
-        int id;
-        Ambiente a = new Ambiente();
+            stmt.setString(1, novo.getDescricao());
+            stmt.setInt(2, novo.getCodCamp());
+            stmt.setDate(3, novo.getDatacriacao());
+            stmt.setDate(4, novo.getDatamodificacao());
 
-        System.out.println("\nInsira a descricao do ambiente:");
-        dado = in.nextLine();
-        a.setDescricao(dado);
+            stmt.execute();
+            stmt.close();
 
-        System.out.println("\nInsira o id do Campus vinculado ao ambiente:");
-        id = Integer.parseInt(in.nextLine());
-        a.setCodCamp(id);
+            System.out.println("ok");
 
-        a.setDatacriacao(LocalDate.now());
-        a.setDatamodificacao(LocalDate.now());
-
-        a.setId(geraId());
-
-        this.setAmbiente(a);
-
-        System.out.println(a.toString() + "\nincluído com Sucesso!\n");
-    }
-
-    public void editaAmbiente() {
-        String dado;
-        int id;
-
-        System.out.println("\nDigite o ID do Ambiente: ");
-        id = Integer.parseInt(in.nextLine());
-
-        if (getAmbiente(id) == null) {
-            System.out.println("\nAmbiente Não Encontrado\n");
-        } else {
-
-            Ambiente a = getAmbiente(id);
-
-            System.out.println(a.toString() + "\nEncontrado");
-
-            System.out.println("\nInsira nova descricao do ambiente:");
-            dado = in.nextLine();
-            a.setDescricao(dado);
-
-            System.out.println("\nInsira o id do novo Campus vinculado ao ambiente:");
-            id = Integer.parseInt(in.nextLine());
-            a.setCodCamp(id);
-
-            a.setDatamodificacao(LocalDate.now());
-
-            this.setAmbiente(a);
-
-            System.out.println(a.toString() + "\nEditado com Sucesso!\n");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    public void excluiAmbiente() {
-        System.out.println("\nDigite o ID do Ambiente: ");
-        int id = Integer.parseInt(in.nextLine());
+    public void altera(Ambiente alterado, int id) {
+        String sql = "UPDATE ambiente SET descricao = ?,"
+                + " codcamp = ? , datacriacao = ? , datamodificacao = ? WHERE (idamb = ?)";
 
-        if (getAmbiente(id) == null) {
-            System.out.println("\nAmbiente Não Encontrado");
+        try (Connection con = new ConnectionFactory().Conn()) {
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, alterado.getDescricao());
+            stmt.setInt(2, alterado.getCodCamp());
+            stmt.setDate(3, alterado.getDatacriacao());
+            stmt.setDate(4, alterado.getDatamodificacao());
+            stmt.setInt(5, id);
 
-        } else {
-            System.out.println("\nAmbiente " + getAmbiente(id).getId() + getAmbiente(id).getDescricao() + " Encontrado"
-                    + "\nDeseja Deletar?\n1 - Sim\n2 - Não");
-            int es = Integer.parseInt(in.nextLine());
-            if (es == 1) {
+            stmt.execute();
+            stmt.close();
 
-                Ambiente del = getAmbiente(id);
-                del.setDescricao("Ambiente Apagado");
-                del.setCodCamp(-1);
-                del.setDatacriacao(null);
-                del.setDatamodificacao(null);
-                System.out.println("\nAmbiente Deletado\n");
+            System.out.println("ok");
 
-            } else {
-                System.out.println("\nAmbiente Mantido\n");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public void exclui(Ambiente amb) {
+        String sql = "delete from ambiente where idamb = ?";
+
+        try (Connection con = new ConnectionFactory().Conn()) {
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, amb.getId());
+
+            stmt.execute();
+            stmt.close();
+
+            System.out.println("ok");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public List<Ambiente> lista() {
+        List<Ambiente> listAmb = new ArrayList<>();
+        try (Connection con = new ConnectionFactory().Conn()) {
+            PreparedStatement stmt;
+            stmt = con.prepareStatement("select * from ambiente");
+            ResultSet rs;
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idamb");
+                String descricao = rs.getString("descricao");
+                int codcamp = rs.getInt("codcamp");
+                Date dataCriacao = rs.getDate("datacriacao");
+                Date dataModificacao = rs.getDate("datamodificacao");
+
+                Ambiente a = new Ambiente();
+                a.setId(id);
+                a.setDescricao(descricao);
+                a.setCodCamp(codcamp);
+                a.setDatacriacao(dataCriacao);
+                a.setDatamodificacao(dataModificacao);
+
+                listAmb.add(a);
             }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listAmb;
+    }
+
+    public void imprime(List<Ambiente> amb) {
+        for (Ambiente a : amb) {
+            System.out.println(a);
         }
     }
 
-    public int achaAmbienteId(int id) {
-        for (int x = 0; x < this.qtdAmb; x++) {
-            if (id == ambs[x].getId() && ambs[x] != null) {
-                return x;
-            } else {
+    public List<Ambiente> listaAmbPorServ(int idServ) {
+        List<Ambiente> listAmb = new ArrayList<>();
+        try (Connection con = new ConnectionFactory().Conn()) {
+            int codCmpServ = 0;
+            PreparedStatement st;
+            st = con.prepareStatement("select codcampus from servidor where idservidor = ?");
+            st.setInt(1, idServ);
+            ResultSet res;
+            res = st.executeQuery();
 
+            while (res.next()) {
+                codCmpServ = res.getInt("codcampus");
             }
-        }
-        return -1;
-    }
 
-    public void mostraAmbientesPorServ(Servidor s) {
-        for (int x = 0; x < this.qtdAmb; x++) {
-            if (ambs[x] != null) {
-                if (s.getCampus() == ambs[x].getCodCamp()) {
-                    System.out.println(this.ambs[x].toString());
-                }
-            } else {
+            res.close();
+            st.close();
 
+            PreparedStatement stmt;
+            stmt = con.prepareStatement("select * from ambiente where codcamp = ?");
+            stmt.setInt(1, codCmpServ);
+            ResultSet rs;
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int idamb = rs.getInt("idamb");
+                String descricao = rs.getString("descricao");
+                int codcamp = rs.getInt("codcamp");
+                Date dataCriacao = rs.getDate("datacriacao");
+                Date dataModificacao = rs.getDate("datamodificacao");
+
+                Ambiente a = new Ambiente();
+                a.setId(idamb);
+                a.setDescricao(descricao);
+                a.setCodCamp(codcamp);
+                a.setDatacriacao(dataCriacao);
+                a.setDatamodificacao(dataModificacao);
+
+                listAmb.add(a);
             }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return listAmb;
     }
 
-    public void mostraAmbientesPorCampus(Campus c) {
-        for (int x = 0; x < this.qtdAmb; x++) {
-            if (ambs[x] != null) {
-                if (ambs[x].getCodCamp() == c.getId()) {
-                    System.out.println(this.ambs[x].toString());
-                }
-            } else {
+    public List<Ambiente> listaPorCampus(int idCampus) {
+        List<Ambiente> listAmb = new ArrayList<>();
+        try (Connection con = new ConnectionFactory().Conn()) {
+            PreparedStatement stmt;
+            stmt = con.prepareStatement("select * from ambiente where codcamp = ?");
+            stmt.setInt(1, idCampus);
+            ResultSet rs;
+            rs = stmt.executeQuery();
 
+            while (rs.next()) {
+                int id = rs.getInt("idamb");
+                String descricao = rs.getString("descricao");
+                int codcamp = rs.getInt("codcamp");
+                Date dataCriacao = rs.getDate("datacriacao");
+                Date dataModificacao = rs.getDate("datamodificacao");
+
+                Ambiente a = new Ambiente();
+                a.setId(id);
+                a.setDescricao(descricao);
+                a.setCodCamp(codcamp);
+                a.setDatacriacao(dataCriacao);
+                a.setDatamodificacao(dataModificacao);
+
+                listAmb.add(a);
             }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+        return listAmb;
     }
 
-    public void mostraConteudoAmbientesPorCampus(Campus c, ItemDAO iDAO) {
-        for (int x = 0; x < this.qtdAmb; x++) {
-            if (this.ambs[x].getCodCamp() == c.getId() && this.ambs[x] != null) {
-                for (int i = 1; i < iDAO.getQtdItem(); i++) {
-                    if (iDAO.getItem(i).getAmbienteId() == this.ambs[x].getId()) {
-                        System.out.println(iDAO.getItem(i).toString());
-                    }
-                }
-            }
-        }
-    }
-
-    public Ambiente getAmbiente(int id) {
-        int x = achaAmbienteId(id);
-        if (x == -1) {
-            return null;
-        } else {
-            return ambs[x];
-        }
-    }
-
-    public int vagaAmbiente() {
-        for (int x = 0; x < ambs.length; x++) {
-            if (ambs[x] == null) {
-                return x;
-            } else {
-
-            }
-        }
-        return -1;
-    }
-
-    public boolean setAmbiente(Ambiente amb) {
-        int pos = vagaAmbiente();
-        if (pos == -1) {
-            System.out.println("\nLista de Campus Cheia\n");
-            return false;
-        } else {
-            ambs[pos] = amb;
-            this.qtdAmb++;
-            return true;
-        }
-    }
-
-    public void valorPorAmbiente(ItemDAO iDAO, int idServ, CampusDAO cDAO) {
-        for (int x = 0; x < this.qtdAmb; x++) {
-            double totalAmb = iDAO.valorPorAmbiente(ambs[x].getId(), idServ);
-
-            if (totalAmb != 0) {
-                System.out.println("\t" + ambs[x].getDescricao() + " - " + cDAO.getCampus(ambs[x].getCodCamp()).getNome() + " R$" + totalAmb);
-            }
-        }
-    }
+    //    public int achaAmbienteId(int id) {
+//        for (int x = 0; x < this.qtdAmb; x++) {
+//            if (id == ambs[x].getId() && ambs[x] != null) {
+//                return x;
+//            } else {
+//
+//            }
+//        }
+//        return -1;
+//    }
+//    public void mostraAmbientesPorServ(Servidor s) {
+//        List<Ambiente> listAmbServ = new ArrayList<>();
+//        
+//        for (int x = 0; x < this.qtdAmb; x++) {
+//            if (ambs[x] != null) {
+//                if (s.getCampus() == ambs[x].getCodCamp()) {
+//                    System.out.println(this.ambs[x].toString());
+//                }
+//            } else {
+//
+//            }
+//        }
+//    }
+//
+//    public void mostraAmbientesPorCampus(Campus c) {
+//        for (int x = 0; x < this.qtdAmb; x++) {
+//            if (ambs[x] != null) {
+//                if (ambs[x].getCodCamp() == c.getId()) {
+//                    System.out.println(this.ambs[x].toString());
+//                }
+//            } else {
+//
+//            }
+//        }
+//    }
+//
+//    public void mostraConteudoAmbientesPorCampus(Campus c, ItemDAO iDAO) {
+//        for (int x = 0; x < this.qtdAmb; x++) {
+//            if (this.ambs[x].getCodCamp() == c.getId() && this.ambs[x] != null) {
+//                for (int i = 1; i < iDAO.getQtdItem(); i++) {
+//                    if (iDAO.getItem(i).getAmbienteId() == this.ambs[x].getId()) {
+//                        System.out.println(iDAO.getItem(i).toString());
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    public Ambiente getAmbiente(int id) {
+//        int x = achaAmbienteId(id);
+//        if (x == -1) {
+//            return null;
+//        } else {
+//            return ambs[x];
+//        }
+//    }
+//
+//    public int vagaAmbiente() {
+//        for (int x = 0; x < ambs.length; x++) {
+//            if (ambs[x] == null) {
+//                return x;
+//            } else {
+//
+//            }
+//        }
+//        return -1;
+//    }
+//
+//    public boolean setAmbiente(Ambiente amb) {
+//        int pos = vagaAmbiente();
+//        if (pos == -1) {
+//            System.out.println("\nLista de Campus Cheia\n");
+//            return false;
+//        } else {
+//            ambs[pos] = amb;
+//            this.qtdAmb++;
+//            return true;
+//        }
+//    }
+//
+//    public void valorPorAmbiente(ItemDAO iDAO, int idServ, CampusDAO cDAO) {
+//        for (int x = 0; x < this.qtdAmb; x++) {
+//            double totalAmb = iDAO.valorPorAmbiente(ambs[x].getId(), idServ);
+//
+//            if (totalAmb != 0) {
+//                System.out.println("\t" + ambs[x].getDescricao() + " - " + cDAO.getCampus(ambs[x].getCodCamp()).getNome() + " R$" + totalAmb);
+//            }
+//        }
+//    }
 }

@@ -13,9 +13,9 @@ public class ItensRevisao {
 
     private int id;
     private int idRevisao;
-    private Item item = new Item();
-    private boolean encontrado;
-    private boolean pago;
+    private int item;
+    private int encontrado;
+    private int pago;
 
     public int getId() {
         return id;
@@ -33,32 +33,32 @@ public class ItensRevisao {
         this.idRevisao = idRevisao;
     }
 
-    public Item getItem() {
+    public int getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(int item) {
         this.item = item;
     }
 
-    public boolean isEncontrado() {
+    public int isEncontrado() {
         return encontrado;
     }
 
-    public void setEncontrado(boolean encontrado) {
+    public void setEncontrado(int encontrado) {
         this.encontrado = encontrado;
     }
 
-    public boolean isPago() {
+    public int isPago() {
         return pago;
     }
 
-    public void setPago(boolean pago) {
+    public void setPago(int pago) {
         this.pago = pago;
     }
 
     public String traduzEncontrado() {
-        if (this.encontrado) {
+        if (this.encontrado == 1) {
             return "Sim";
         } else {
             return "Não";
@@ -66,18 +66,18 @@ public class ItensRevisao {
     }
 
     public String traduzPago() {
-        if (this.pago) {
+        if (this.pago == 1) {
             return "Sim";
         } else {
             return "Não";
         }
     }
 
-    @Override
-    public String toString() {
-        return "Item: " + item.getEspecificacao() + "\tID: " + item.getId()
-                + "\nEncontrado? > " + traduzEncontrado() + "\tPago? > " + traduzPago()
-                + "\n-----------------------------------------------------------\n";
-    }
+//    @Override
+//    public String toString() {
+//        return "Item: " + item.getEspecificacao() + "\tID: " + item.getId()
+//                + "\nEncontrado? > " + traduzEncontrado() + "\tPago? > " + traduzPago()
+//                + "\n-----------------------------------------------------------\n";
+//    }
 
 }

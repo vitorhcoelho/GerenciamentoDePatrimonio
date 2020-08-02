@@ -5,10 +5,11 @@
  */
 package gerenciadordepatrimonio;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
- * cadu
+ * 
  *
  * @author Vitor Hugo
  */
@@ -22,8 +23,8 @@ public class Item {
     private double valorcompra;
     private int idDono;
     private int ambienteId;
-    private LocalDate datacriacao;
-    private LocalDate datamodificacao;
+    private Date datacriacao;
+    private Date datamodificacao;
 
     public int getId() {
         return id;
@@ -89,19 +90,19 @@ public class Item {
         this.valorcompra = valorcompra;
     }
 
-    public LocalDate getDatacriacao() {
+    public Date getDatacriacao() {
         return datacriacao;
     }
 
-    public void setDatacriacao(LocalDate datacriacao) {
+    public void setDatacriacao(Date datacriacao) {
         this.datacriacao = datacriacao;
     }
 
-    public LocalDate getDatamodificacao() {
+    public Date getDatamodificacao() {
         return datamodificacao;
     }
 
-    public void setDatamodificacao(LocalDate datamodificacao) {
+    public void setDatamodificacao(Date datamodificacao) {
         this.datamodificacao = datamodificacao;
     }
 

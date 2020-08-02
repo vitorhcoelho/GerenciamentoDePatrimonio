@@ -5,6 +5,7 @@
  */
 package gerenciadordepatrimonio;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -16,8 +17,8 @@ public class Ambiente {
     private int id;
     private String descricao;
     private int codCamp;
-    private LocalDate datacriacao;
-    private LocalDate datamodificacao;
+    private Date datacriacao;
+    private Date datamodificacao;
 
     public int getId() {
         return id;
@@ -43,16 +44,20 @@ public class Ambiente {
         this.codCamp = codCamp;
     }
 
-    public void setDatacriacao(LocalDate datacriacao) {
+    public void setDatacriacao(Date datacriacao) {
         this.datacriacao = datacriacao;
     }
 
-    public LocalDate getDatamodificacao() {
+    public Date getDatamodificacao() {
         return datamodificacao;
     }
 
-    public void setDatamodificacao(LocalDate datamodificacao) {
+    public void setDatamodificacao(Date datamodificacao) {
         this.datamodificacao = datamodificacao;
+    }
+
+    public Date getDatacriacao() {
+        return datacriacao;
     }
 
     @Override

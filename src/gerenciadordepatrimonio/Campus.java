@@ -5,7 +5,7 @@
  */
 package gerenciadordepatrimonio;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -16,7 +16,7 @@ public class Campus {
     private int id;
     private String nome;
     private String abreviacao;
-    private LocalDate dataCriacao;
+    private Date dataCriacao;
     private String cidade;
     private String bairro;
     private String endereco;
@@ -46,11 +46,11 @@ public class Campus {
         this.abreviacao = abreviacao;
     }
 
-    public LocalDate getDataCriacao() {
+    public Date getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate data) {
+    public void setDataCriacao(Date data) {
         this.dataCriacao = data;
     }
 

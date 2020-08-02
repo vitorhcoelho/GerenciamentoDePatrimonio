@@ -19,39 +19,39 @@ public class Servidor {
     private String papel;
     private String login;
     private String senha;
-    private boolean logado;
-    private boolean adm;
-    private boolean system;
+    private int logado;
+    private int adm;
+    private int system;
 
     public Servidor() {
         this.id = 0;
     }
 
-    public boolean isSystem() {
+    public int isSystem() {
         return system;
     }
 
-    public void setSystem(boolean system) {
+    public void setSystem(int system) {
         this.system = system;
     }
 
     public String descreveAdm() {
-        if (isAdm()) {
+        if (isAdm()==1) {
             return "Sim";
         } else {
             return "Não";
         }
     }
 
-    public boolean isAdm() {
+    public int isAdm() {
         return adm;
     }
 
-    public void setAdm(boolean adm) {
+    public void setAdm(int adm) {
         this.adm = adm;
     }
 
-    public boolean isLogado() {
+    public int isLogado() {
         return logado;
     }
 
@@ -114,10 +114,10 @@ public class Servidor {
     public void setLoginSenha(String login, String senha) {
         this.login = login;
         this.senha = senha;
-        this.logado = false;
+        this.logado = 0;
     }
 
-    public void setLogado(boolean logado) {
+    public void setLogado(int logado) {
         this.logado = logado;
     }
 

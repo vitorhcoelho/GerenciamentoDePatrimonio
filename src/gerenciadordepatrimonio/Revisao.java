@@ -5,6 +5,7 @@
  */
 package gerenciadordepatrimonio;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -18,8 +19,8 @@ public class Revisao {
     private int idServ;
     private int idAmb;
     private int estado;
-    private LocalDate dataCriacao;
-    private LocalDate dataModificacao;
+    private Date dataCriacao;
+    private Date dataModificacao;
 
     //Estados: 1 - Não Iniciado, 2 - Andamento, 3 - Terminado
     public int getId() {
@@ -62,15 +63,15 @@ public class Revisao {
         this.estado = estado;
     }
 
-    public LocalDate getDataCriacao() {
+    public Date getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDate dataCriacao) {
+    public void setDataCriacao(Date dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
 
-    public LocalDate getDataModificacao() {
+    public Date getDataModificacao() {
         return dataModificacao;
     }
 
@@ -84,7 +85,7 @@ public class Revisao {
         }
     }
 
-    public void setDataModificacao(LocalDate dataModificacao) {
+    public void setDataModificacao(Date dataModificacao) {
         this.dataModificacao = dataModificacao;
     }
 
