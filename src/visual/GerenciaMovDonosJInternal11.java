@@ -5,38 +5,38 @@
  */
 package visual;
 
-import gerenciadordepatrimonio.MovimentoAmbiente;
-import gerenciadordepatrimonio.MovimentoAmbienteDAO;
+import gerenciadordepatrimonio.MovimentoDono;
+import gerenciadordepatrimonio.MovimentoDonoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
-import tabelas.TableModelMovAmb;
+import tabelas.TableModelMovDonos;
 
 /**
  *
  * @author Vitor Hugo
  */
-public class GerenciaMovAmbJInternal1 extends javax.swing.JInternalFrame {
+public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
 
-    TableModelMovAmb tableModelAmbs;
-    MovimentoAmbienteDAO movAmbDAO = new MovimentoAmbienteDAO();
-    
+    TableModelMovDonos tableModelMovDonos;
+    MovimentoDonoDAO movDonoDAO = new MovimentoDonoDAO();
+
     /**
      * Creates new form FrameInterno
      */
-    public GerenciaMovAmbJInternal1() {
+    public GerenciaMovDonosJInternal11() {
         initComponents();
         setClosable(true);
         setSize(700, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
-        this.tableModelAmbs = new TableModelMovAmb();
-        this.jTable3.setModel(tableModelAmbs);
-        this.jTable4.setModel(tableModelAmbs);
+
+        this.tableModelMovDonos = new TableModelMovDonos();
+        this.jTable4.setModel(tableModelMovDonos);
+        this.jTable5.setModel(tableModelMovDonos);
 
         /*trazendo os dados do banco*/
-        List<MovimentoAmbiente> inicial = this.movAmbDAO.lista();
-        for (MovimentoAmbiente i : inicial) {
-            this.tableModelAmbs.add(i);
+        List<MovimentoDono> inicial = this.movDonoDAO.lista();
+        for (MovimentoDono i : inicial) {
+            this.tableModelMovDonos.add(i);
         }
     }
 
@@ -52,11 +52,11 @@ public class GerenciaMovAmbJInternal1 extends javax.swing.JInternalFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable5 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,38 +73,6 @@ public class GerenciaMovAmbJInternal1 extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Adicionar", jPanel1);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane3.setViewportView(jTable3);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(257, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Editar", jPanel2);
-
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -118,20 +86,52 @@ public class GerenciaMovAmbJInternal1 extends javax.swing.JInternalFrame {
         ));
         jScrollPane4.setViewportView(jTable4);
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(257, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Editar", jPanel2);
+
+        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(jTable5);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(257, Short.MAX_VALUE))
         );
 
@@ -174,14 +174,22 @@ public class GerenciaMovAmbJInternal1 extends javax.swing.JInternalFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GerenciaMovAmbJInternal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciaMovDonosJInternal11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GerenciaMovAmbJInternal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciaMovDonosJInternal11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GerenciaMovAmbJInternal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciaMovDonosJInternal11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GerenciaMovAmbJInternal1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GerenciaMovDonosJInternal11.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -194,7 +202,7 @@ public class GerenciaMovAmbJInternal1 extends javax.swing.JInternalFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GerenciaMovAmbJInternal1().setVisible(true);
+                new GerenciaMovDonosJInternal11().setVisible(true);
             }
         });
     }
@@ -203,10 +211,10 @@ public class GerenciaMovAmbJInternal1 extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
+    private javax.swing.JTable jTable5;
     // End of variables declaration//GEN-END:variables
 }

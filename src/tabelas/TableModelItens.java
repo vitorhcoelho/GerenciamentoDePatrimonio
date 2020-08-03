@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visual;
+package tabelas;
 
-import gerenciadordepatrimonio.Servidor;
+import gerenciadordepatrimonio.Item;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class TableModelServidor extends AbstractTableModel {
+public class TableModelItens extends AbstractTableModel {
 
-    private List<Servidor> listaDeServidores;
-    private final String[] colunas = {"ID", "Nome", "E-mail", "Campus", "Cargo", "Papel", "Administrador"};
+    private List<Item> listaDeItens;
+    private final String[] colunas = {"ID", "Especificação", "Código", "Estado", "Data de compra", "Valor de compra", "ID do dono", "ID do ambiente", "Data de criação", "Data de modificação"};
 
-    public TableModelServidor() {
-        this.listaDeServidores = new ArrayList<>();
+    public TableModelItens() {
+        this.listaDeItens = new ArrayList<>();
     }
 
     /**
@@ -26,8 +26,8 @@ public class TableModelServidor extends AbstractTableModel {
      * @param rowIndex
      * @return Cidade
      */
-    public Servidor get(int rowIndex) {
-        return this.listaDeServidores.get(rowIndex);
+    public Item get(int rowIndex) {
+        return this.listaDeItens.get(rowIndex);
     }
 
     /**
@@ -35,8 +35,8 @@ public class TableModelServidor extends AbstractTableModel {
      *
      * @param cidade
      */
-    public void add(Servidor serv) {
-        this.listaDeServidores.add(serv);
+    public void add(Item serv) {
+        this.listaDeItens.add(serv);
         fireTableDataChanged();
     }
 
@@ -45,16 +45,16 @@ public class TableModelServidor extends AbstractTableModel {
      *
      * @param cidade
      */
-    public void edita(Servidor serv) {
+    public void edita(Item serv) {
         int position = 0;
-        for (int i = 0; i < listaDeServidores.size(); i++) {
-            Servidor get = listaDeServidores.get(i);
+        for (int i = 0; i < listaDeItens.size(); i++) {
+            Item get = listaDeItens.get(i);
             if (get.getId() == (serv.getId())) {
                 position = i;
                 break;
             }
         }
-        this.listaDeServidores.set(position, serv);
+        this.listaDeItens.set(position, serv);
         /*
         Iterator<Cidade> it = this.listaDeCidades.iterator();
         while (it.hasNext()) {
@@ -72,7 +72,7 @@ public class TableModelServidor extends AbstractTableModel {
      * @param rowIndex
      */
     public void remove(int rowIndex) {
-        this.listaDeServidores.remove(rowIndex);
+        this.listaDeItens.remove(rowIndex);
         fireTableDataChanged();
     }
 
@@ -83,7 +83,7 @@ public class TableModelServidor extends AbstractTableModel {
      */
     @Override
     public int getRowCount() {
-        return this.listaDeServidores.size();
+        return this.listaDeItens.size();
     }
 
     /**
@@ -110,28 +110,37 @@ public class TableModelServidor extends AbstractTableModel {
         switch (columnIndex) {
 
             case 0:
-                return this.listaDeServidores.get(rowIndex).getId();
+                return this.listaDeItens.get(rowIndex).getId();
 
             case 1:
-                return this.listaDeServidores.get(rowIndex).getNome();
+                return this.listaDeItens.get(rowIndex).getEspecificacao();
 
             case 2:
-                return this.listaDeServidores.get(rowIndex).getEmail();
+                return this.listaDeItens.get(rowIndex).getCodigo();
 
             case 3:
-                return this.listaDeServidores.get(rowIndex).getCampus();
+                return this.listaDeItens.get(rowIndex).getEstado();
 
             case 4:
-                return this.listaDeServidores.get(rowIndex).getCargo();
+                return this.listaDeItens.get(rowIndex).getDatacompra();
 
             case 5:
-                return this.listaDeServidores.get(rowIndex).getPapel();
+                return this.listaDeItens.get(rowIndex).getValorcompra();
 
             case 6:
-                return this.listaDeServidores.get(rowIndex).isAdm();
+                return this.listaDeItens.get(rowIndex).getIdDono();
+
+            case 7:
+                return this.listaDeItens.get(rowIndex).getAmbienteId();
+
+            case 8:
+                return this.listaDeItens.get(rowIndex).getDatacriacao();
+
+            case 9:
+                return this.listaDeItens.get(rowIndex).getDatamodificacao();
 
             default:
-                return this.listaDeServidores.get(rowIndex);
+                return this.listaDeItens.get(rowIndex);
         }
     }
 

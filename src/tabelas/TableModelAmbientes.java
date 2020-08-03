@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package visual;
+package tabelas;
 
-import gerenciadordepatrimonio.Campus;
+import gerenciadordepatrimonio.Ambiente;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
-public class TableModelCampus extends AbstractTableModel {
+public class TableModelAmbientes extends AbstractTableModel {
 
-    private List<Campus> listaDeCampus;
-    private final String[] colunas = {"ID", "Nome", "E-mail", "Campus", "Cargo", "Papel", "Administrador"};
+    private List<Ambiente> listaDeAmbientes;
+    private final String[] colunas = {"ID", "Descrição", "Campus pertencente", "Data de criação", "Data de alteração"};
 
-    public TableModelCampus() {
-        this.listaDeCampus = new ArrayList<>();
+    public TableModelAmbientes() {
+        this.listaDeAmbientes = new ArrayList<>();
     }
 
     /**
@@ -26,8 +26,8 @@ public class TableModelCampus extends AbstractTableModel {
      * @param rowIndex
      * @return Cidade
      */
-    public Campus get(int rowIndex) {
-        return this.listaDeCampus.get(rowIndex);
+    public Ambiente get(int rowIndex) {
+        return this.listaDeAmbientes.get(rowIndex);
     }
 
     /**
@@ -35,8 +35,8 @@ public class TableModelCampus extends AbstractTableModel {
      *
      * @param cidade
      */
-    public void add(Campus serv) {
-        this.listaDeCampus.add(serv);
+    public void add(Ambiente serv) {
+        this.listaDeAmbientes.add(serv);
         fireTableDataChanged();
     }
 
@@ -45,16 +45,16 @@ public class TableModelCampus extends AbstractTableModel {
      *
      * @param cidade
      */
-    public void edita(Campus serv) {
+    public void edita(Ambiente serv) {
         int position = 0;
-        for (int i = 0; i < listaDeCampus.size(); i++) {
-            Campus get = listaDeCampus.get(i);
+        for (int i = 0; i < listaDeAmbientes.size(); i++) {
+            Ambiente get = listaDeAmbientes.get(i);
             if (get.getId() == (serv.getId())) {
                 position = i;
                 break;
             }
         }
-        this.listaDeCampus.set(position, serv);
+        this.listaDeAmbientes.set(position, serv);
         /*
         Iterator<Cidade> it = this.listaDeCidades.iterator();
         while (it.hasNext()) {
@@ -72,7 +72,7 @@ public class TableModelCampus extends AbstractTableModel {
      * @param rowIndex
      */
     public void remove(int rowIndex) {
-        this.listaDeCampus.remove(rowIndex);
+        this.listaDeAmbientes.remove(rowIndex);
         fireTableDataChanged();
     }
 
@@ -83,7 +83,7 @@ public class TableModelCampus extends AbstractTableModel {
      */
     @Override
     public int getRowCount() {
-        return this.listaDeCampus.size();
+        return this.listaDeAmbientes.size();
     }
 
     /**
@@ -110,28 +110,22 @@ public class TableModelCampus extends AbstractTableModel {
         switch (columnIndex) {
 
             case 0:
-                return this.listaDeCampus.get(rowIndex).getId();
+                return this.listaDeAmbientes.get(rowIndex).getId();
 
             case 1:
-                return this.listaDeCampus.get(rowIndex).getNome();
+                return this.listaDeAmbientes.get(rowIndex).getDescricao();
 
             case 2:
-                
+                return this.listaDeAmbientes.get(rowIndex).getCodCamp();
 
             case 3:
-                
+                return this.listaDeAmbientes.get(rowIndex).getDatacriacao();
 
             case 4:
-                
-
-            case 5:
-                
-
-            case 6:
-                
+                return this.listaDeAmbientes.get(rowIndex).getDatamodificacao();
 
             default:
-                return this.listaDeCampus.get(rowIndex);
+                return this.listaDeAmbientes.get(rowIndex);
         }
     }
 

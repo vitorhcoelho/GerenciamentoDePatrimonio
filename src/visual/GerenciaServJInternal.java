@@ -5,6 +5,7 @@
  */
 package visual;
 
+import tabelas.TableModelServidor;
 import gerenciadordepatrimonio.Campus;
 import gerenciadordepatrimonio.CampusDAO;
 import gerenciadordepatrimonio.Servidor;
@@ -21,7 +22,7 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
     ServidorDAO servDAO = new ServidorDAO();
     CampusDAO campDAO = new CampusDAO();
     TableModelServidor tableModelServ;
-    
+
     /**
      * Creates new form FrameInterno
      */
@@ -30,6 +31,10 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         setClosable(true);
         setSize(700, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        for (Campus c : campDAO.lista()) {
+            jComboBoxCampus.addItem(c);
+        }
 
         this.tableModelServ = new TableModelServidor();
         this.jTable1.setModel(tableModelServ);
@@ -42,7 +47,6 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -86,7 +90,7 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
 
         jLabel2.setText("E-mail:");
 
-        jComboBoxCampus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCampus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um Campus>" }));
 
         jLabel3.setText("Campus:");
 
@@ -292,16 +296,44 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         String senha2 = new String(jPasswordField2.getPassword());
         //UPDATE NO BANCO
         if (senha1.equals(senha2)) {
-            jTextFieldNome.getText();
-            jTextFieldEmail.getText();
-            jComboBoxCampus.getSelectedItem();
-            jTextFieldCargo.getText();
-            jTextFieldPapel.getText();
-            jTextFieldLogin.getText();
-            jPasswordField1.getText();
-            jCheckBoxAdmPerm.isSelected();
+            Servidor s = new Servidor();
+            ServidorDAO sDAO = new ServidorDAO();
 
-            JOptionPane.showMessageDialog(null, "Servidor adicionado", "", JOptionPane.INFORMATION_MESSAGE);
+            s.setNome(jTextFieldNome.getText());
+            s.setEmail(jTextFieldEmail.getText());
+            s.setCampus(1);
+            s.setCargo(jTextFieldCargo.getText());
+            s.setPapel(jTextFieldPapel.getText());
+            s.setLoginSenha(jTextFieldLogin.getText(), jPasswordField1.getText());
+
+            if (jCheckBoxAdmPerm.isSelected()) {
+                s.setAdm(1);
+            } else {
+                s.setAdm(0);
+            }
+            s.setLogado(0);
+            s.setSystem(0);
+
+            if (jComboBoxCampus.getSelectedItem().equals("<Selecione um Campus>")) {
+                JOptionPane.showMessageDialog(null, "Selecione um Campus", "", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Campus c = new Campus();
+                c = (Campus) jComboBoxCampus.getSelectedItem();
+                s.setCampus(c.getId());
+
+                sDAO.adiciona(s);
+
+                jTextFieldNome.setText("");
+                jTextFieldEmail.setText("");
+                jComboBoxCampus.setSelectedItem("<Selecione um Campus>");
+                jTextFieldCargo.setText("");
+                jTextFieldPapel.setText("");
+                jTextFieldLogin.setText("");
+                jPasswordField1.setText("");
+                jPasswordField2.setText("");
+                jCheckBoxAdmPerm.setSelected(false);
+            }
+
         } else {
             JOptionPane.showMessageDialog(null, "Senha incompatível", "", JOptionPane.ERROR_MESSAGE);
         }
@@ -311,7 +343,7 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         jTextFieldNome.setText("");
         jTextFieldEmail.setText("");
-        jComboBoxCampus.setSelectedItem(null);
+        jComboBoxCampus.setSelectedItem("<Selecione um Campus>");
         jTextFieldCargo.setText("");
         jTextFieldPapel.setText("");
         jTextFieldLogin.setText("");
@@ -321,10 +353,10 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    public void adicionaCombo(String nomeCampus){
+    public void adicionaCombo(String nomeCampus) {
         jComboBoxCampus.addItem(nomeCampus);
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -367,7 +399,7 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonSalvar;
     private javax.swing.JCheckBox jCheckBoxAdmPerm;
-    private javax.swing.JComboBox<String> jComboBoxCampus;
+    private javax.swing.JComboBox<Object> jComboBoxCampus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

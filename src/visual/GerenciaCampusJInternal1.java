@@ -5,6 +5,10 @@
  */
 package visual;
 
+import tabelas.TableModelCampus;
+import gerenciadordepatrimonio.Campus;
+import gerenciadordepatrimonio.CampusDAO;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,6 +18,8 @@ import javax.swing.JOptionPane;
 public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
 
     GerenciaServJInternal gs = null;
+    TableModelCampus tableModelCampus;
+    CampusDAO campDAO = new CampusDAO();
 
     /**
      * Creates new form FrameInterno
@@ -23,6 +29,17 @@ public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
         setClosable(true);
         setSize(700, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        this.tableModelCampus = new TableModelCampus();
+        this.jTable2.setModel(tableModelCampus);
+        this.jTable3.setModel(tableModelCampus);
+
+        /*trazendo os dados do banco*/
+        List<Campus> inicial = this.campDAO.lista();
+        for (Campus i : inicial) {
+            this.tableModelCampus.add(i);
+        }
+        
     }
 
     /**
@@ -51,7 +68,11 @@ public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
         jButtonCancelar = new javax.swing.JButton();
         jFormattedTextFieldCEP = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -159,28 +180,66 @@ public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Adicionar", jPanel1);
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Editar", jPanel2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Excluir", jPanel3);
@@ -279,7 +338,11 @@ public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextFieldAbreviacao;
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;

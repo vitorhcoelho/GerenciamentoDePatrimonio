@@ -259,14 +259,26 @@ public class TelaAdm extends javax.swing.JFrame {
 
     private void jMenuItemGereMovAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGereMovAmbActionPerformed
         // TODO add your handling code here:
+        GerenciaMovAmbJInternal1 frameInterno = new GerenciaMovAmbJInternal1();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
     }//GEN-LAST:event_jMenuItemGereMovAmbActionPerformed
 
     private void jMenuItemGereMovDonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGereMovDonosActionPerformed
         // TODO add your handling code here:
+        GerenciaMovDonosJInternal11 frameInterno = new GerenciaMovDonosJInternal11();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
     }//GEN-LAST:event_jMenuItemGereMovDonosActionPerformed
 
     private void jMenuItemGereRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemGereRevActionPerformed
         // TODO add your handling code here:
+        GerenciaRevisoesJInternal11 frameInterno = new GerenciaRevisoesJInternal11();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
     }//GEN-LAST:event_jMenuItemGereRevActionPerformed
 
     private void jMenuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuLogoutActionPerformed

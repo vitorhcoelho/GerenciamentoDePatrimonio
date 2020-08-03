@@ -5,13 +5,24 @@
  */
 package visual;
 
+import gerenciadordepatrimonio.Ambiente;
+import gerenciadordepatrimonio.AmbienteDAO;
+import gerenciadordepatrimonio.Campus;
+import gerenciadordepatrimonio.CampusDAO;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
 import javax.swing.JOptionPane;
+import tabelas.TableModelAmbientes;
 
 /**
  *
  * @author Vitor Hugo
  */
 public class GerenciaAmbientesJInternal1 extends javax.swing.JInternalFrame {
+
+    TableModelAmbientes tableModelAmbientes;
+    AmbienteDAO ambDAO = new AmbienteDAO();
 
     /**
      * Creates new form FrameInterno
@@ -21,6 +32,22 @@ public class GerenciaAmbientesJInternal1 extends javax.swing.JInternalFrame {
         setClosable(true);
         setSize(700, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        CampusDAO cDAO = new CampusDAO();
+        
+        for (Campus c : cDAO.lista()) {
+            jComboBoxCampus.addItem(c);
+        }
+
+        this.tableModelAmbientes = new TableModelAmbientes();
+        this.jTable2.setModel(tableModelAmbientes);
+        this.jTable3.setModel(tableModelAmbientes);
+
+        /*trazendo os dados do banco*/
+        List<Ambiente> inicial = this.ambDAO.lista();
+        for (Ambiente i : inicial) {
+            this.tableModelAmbientes.add(i);
+        }
     }
 
     /**
@@ -41,13 +68,17 @@ public class GerenciaAmbientesJInternal1 extends javax.swing.JInternalFrame {
         jButtonSalvar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Descrição:");
 
-        jComboBoxCampus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxCampus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um Campus>" }));
 
         jLabel3.setText("Campus:");
 
@@ -107,28 +138,66 @@ public class GerenciaAmbientesJInternal1 extends javax.swing.JInternalFrame {
 
         jTabbedPane1.addTab("Adicionar", jPanel1);
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(jTable2);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Editar", jPanel2);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(257, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Excluir", jPanel3);
@@ -156,16 +225,31 @@ public class GerenciaAmbientesJInternal1 extends javax.swing.JInternalFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         //UPDATE NO BANCO
-       jTextFieldDescricao.getText();
-       jComboBoxCampus.getSelectedItem();
+        AmbienteDAO aDAO = new AmbienteDAO();
+        Ambiente a = new Ambiente();
+        
+       a.setDescricao(jTextFieldDescricao.getText());
+       a.setDatacriacao(Date.valueOf(LocalDate.now()));
+       a.setDatamodificacao(Date.valueOf(LocalDate.now()));
        
-       JOptionPane.showMessageDialog(null, "Servidor adicionado", "", JOptionPane.INFORMATION_MESSAGE);
+       if (jComboBoxCampus.getSelectedItem().equals("<Selecione um Campus>")) {
+                JOptionPane.showMessageDialog(null, "Selecione um Campus", "", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Campus c = new Campus();
+                c = (Campus) jComboBoxCampus.getSelectedItem();
+                a.setCodCamp(c.getId());
+                
+                aDAO.adiciona(a);
+                
+                jTextFieldDescricao.setText("");
+                jComboBoxCampus.setSelectedItem("<Selecione um Campus>");
+       }
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
         jTextFieldDescricao.setText("");
-        jComboBoxCampus.setSelectedItem(null);
+        jComboBoxCampus.setSelectedItem("<Selecione um Campus>");
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
@@ -208,13 +292,17 @@ public class GerenciaAmbientesJInternal1 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonSalvar;
-    private javax.swing.JComboBox<String> jComboBoxCampus;
+    private javax.swing.JComboBox<Object> jComboBoxCampus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextFieldDescricao;
     // End of variables declaration//GEN-END:variables
 }
