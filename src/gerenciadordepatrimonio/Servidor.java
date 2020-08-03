@@ -123,9 +123,7 @@ public class Servidor {
 
     @Override
     public String toString() {
-        return "\nServidor " + getNome() + "\tAdministrador: " + descreveAdm() + "\tID: " + getId()
-                + "\nE-mail: " + getEmail() + "\nCargo: " + getCargo() + "\tPapel: "
-                + getPapel() + "\nId de Campus: " + getCampus();
+        return getId() + " - " + getNome();
     }
 
 }

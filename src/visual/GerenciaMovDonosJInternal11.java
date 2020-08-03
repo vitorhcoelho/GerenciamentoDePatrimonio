@@ -5,8 +5,15 @@
  */
 package visual;
 
+import gerenciadordepatrimonio.Ambiente;
 import gerenciadordepatrimonio.MovimentoDono;
 import gerenciadordepatrimonio.MovimentoDonoDAO;
+import gerenciadordepatrimonio.Item;
+import gerenciadordepatrimonio.ItemDAO;
+import gerenciadordepatrimonio.Servidor;
+import gerenciadordepatrimonio.ServidorDAO;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
 import tabelas.TableModelMovDonos;
@@ -19,6 +26,8 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
 
     TableModelMovDonos tableModelMovDonos;
     MovimentoDonoDAO movDonoDAO = new MovimentoDonoDAO();
+    ItemDAO iDAO = new ItemDAO();
+    ServidorDAO sDAO = new ServidorDAO();
 
     /**
      * Creates new form FrameInterno
@@ -28,6 +37,14 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
         setClosable(true);
         setSize(700, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        
+        for (Item i : iDAO.lista()) {
+            jComboBoxItem.addItem(i);
+        }
+
+        for (Servidor s : sDAO.lista()) {
+            jComboBoxDonoDestino.addItem(s);
+        }
 
         this.tableModelMovDonos = new TableModelMovDonos();
         this.jTable4.setModel(tableModelMovDonos);
@@ -51,6 +68,16 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBoxItem = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldDonoOrigem = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxDonoDestino = new javax.swing.JComboBox<>();
+        jTextFieldMotivo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
@@ -60,15 +87,95 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setText("Item:");
+
+        jComboBoxItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um Item>" }));
+        jComboBoxItem.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxItemItemStateChanged(evt);
+            }
+        });
+        jComboBoxItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxItemActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Dono Origem:");
+
+        jTextFieldDonoOrigem.setEditable(false);
+        jTextFieldDonoOrigem.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel3.setText("Dono Destino:");
+
+        jComboBoxDonoDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um Servidor>" }));
+
+        jLabel4.setText("Motivo:");
+
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxDonoDestino, 0, 213, Short.MAX_VALUE)
+                            .addComponent(jComboBoxItem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldMotivo)
+                            .addComponent(jTextFieldDonoOrigem)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(215, 215, 215)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton2)))
+                .addGap(158, 158, 158))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldDonoOrigem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxDonoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextFieldMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(134, 134, 134)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adicionar", jPanel1);
@@ -157,6 +264,72 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxItemItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxItemItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxItemItemStateChanged
+
+    private void jComboBoxItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxItemActionPerformed
+        // TODO add your handling code here:
+        Item i = new Item();
+        Servidor s = new Servidor();
+
+        if (jComboBoxItem.getSelectedItem().equals("<Selecione um Item>")) {
+            jTextFieldDonoOrigem.setText("");
+        } else {
+            i = (Item) jComboBoxItem.getSelectedItem();
+            s = sDAO.listaPorID(i.getIdDono());
+            jTextFieldDonoOrigem.setText(s.toString());
+        }
+    }//GEN-LAST:event_jComboBoxItemActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (jComboBoxItem.getSelectedItem().equals("<Selecione um Item>")) {
+            if (jComboBoxDonoDestino.getSelectedItem().equals("<Selecione um Servidor>")) {
+                JOptionPane.showMessageDialog(null, "Selecione um Item e Servidor", "", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um Item", "", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if (jComboBoxDonoDestino.getSelectedItem().equals("<Selecione um Servidor>")) {
+                JOptionPane.showMessageDialog(null, "Selecione um Servidor", "", JOptionPane.ERROR_MESSAGE);
+            } else {
+                Item i = new Item();
+                MovimentoDono mDono = new MovimentoDono();
+                Servidor a = new Servidor();
+                i = (Item) jComboBoxItem.getSelectedItem();
+                a = (Servidor) jComboBoxDonoDestino.getSelectedItem();
+                mDono.setIdItem(i.getId());
+                mDono.setDonoOrigem(i.getIdDono());
+                mDono.setDonoDestino(a.getId());
+                mDono.setMotivo(jTextFieldMotivo.getText());
+                mDono.setDataCriacao(Date.valueOf(LocalDate.now()));
+                mDono.setDataModificacao(Date.valueOf(LocalDate.now()));
+
+                i.setIdDono(a.getId());
+                i.setDatamodificacao(Date.valueOf(LocalDate.now()));
+
+                movDonoDAO.adiciona(mDono);
+                iDAO.altera(i);
+
+                jComboBoxItem.setSelectedItem("<Selecione um Item>");
+                jTextFieldDonoOrigem.setText("");
+                jComboBoxDonoDestino.setSelectedItem("<Selecione um Servidor>");
+                jTextFieldMotivo.setText("");
+
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jComboBoxItem.setSelectedItem("<Selecione um Item>");
+        jTextFieldDonoOrigem.setText("");
+        jComboBoxDonoDestino.setSelectedItem("<Selecione um Servidor>");
+        jTextFieldMotivo.setText("");
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -208,6 +381,14 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<Object> jComboBoxDonoDestino;
+    private javax.swing.JComboBox<Object> jComboBoxItem;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -216,5 +397,7 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
+    private javax.swing.JTextField jTextFieldDonoOrigem;
+    private javax.swing.JTextField jTextFieldMotivo;
     // End of variables declaration//GEN-END:variables
 }

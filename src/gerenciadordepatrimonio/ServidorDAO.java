@@ -200,6 +200,49 @@ public class ServidorDAO {
         }
         return null;
     }
+    
+    public Servidor listaPorID(int idserv){
+        String sql = "select * from servidor where idservidor = ?";
+        
+        try(Connection con = new ConnectionFactory().Conn()){
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setInt(1, idserv);
+            ResultSet rs;
+            rs = st.executeQuery();
+            
+            while(rs.next()){
+                int id = rs.getInt("idservidor");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                int codcamp = rs.getInt("codcampus");
+                String cargo = rs.getString("cargo");
+                String papel = rs.getString("papel");
+                String login = rs.getString("login");
+                String senha = rs.getString("senha");
+                int adm = rs.getInt("adm");
+                int logado = rs.getInt("logado");
+                int system = rs.getInt("definitivo");
+                
+                Servidor a = new Servidor();
+                a.setId(id);
+                a.setAdm(adm);
+                a.setCampus(codcamp);
+                a.setCargo(cargo);
+                a.setEmail(email);
+                a.setLogado(logado);
+                a.setLoginSenha(login, senha);
+                a.setNome(nome);
+                a.setPapel(papel);
+                a.setSystem(system);
+                
+                return a;
+            }
+            
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
 
 //    public int geraId() {
 //        this.idS++;
