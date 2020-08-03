@@ -29,7 +29,7 @@ public class ServidorDAO {
 
     public void adiciona(Servidor novo) {
         String sql = "insert into servidor "
-                + "(nome, email, codcampus, cargo, papel, login, senha, adm, logado, system)"
+                + "(nome, email, codcampus, cargo, papel, login, senha, adm, logado, definitivo)"
                 + " values (?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection con = new ConnectionFactory().Conn()) {
@@ -59,7 +59,7 @@ public class ServidorDAO {
 
     public void altera(Servidor alterado, int id) {
         String sql = "UPDATE servidor SET nome = ?, email = ?, "
-                + "codcampus = ?, cargo = ?, papel = ?, login = ?, senha = ?, adm = ?, logado = ?, system = ?"
+                + "codcampus = ?, cargo = ?, papel = ?, login = ?, senha = ?, adm = ?, logado = ?, definitivo = ?"
                 + " WHERE (idservidor = ?)";
 
         try (Connection con = new ConnectionFactory().Conn()) {
@@ -125,7 +125,7 @@ public class ServidorDAO {
                 String senha = rs.getString("senha");
                 int adm = rs.getInt("adm");
                 int logado = rs.getInt("logado");
-                int system = rs.getInt("system");
+                int system = rs.getInt("definitivo");
 
                 Servidor a = new Servidor();
                 a.setId(id);
@@ -176,7 +176,7 @@ public class ServidorDAO {
                 String senha = rs.getString("senha");
                 int adm = rs.getInt("adm");
                 int logado = rs.getInt("logado");
-                int system = rs.getInt("system");
+                int system = rs.getInt("definitivo");
                 
                 Servidor a = new Servidor();
                 a.setId(id);

@@ -34,7 +34,7 @@ public class ItemDAO {
             stmt.setString(2, novo.getCodigo());
             stmt.setInt(3, novo.getEstado());
             stmt.setString(4, novo.getDatacompra());
-            stmt.setDouble(5, novo.getValorcompra());
+            stmt.setString(5, novo.getValorcompra());
             stmt.setInt(6, novo.getIdDono());
             stmt.setInt(7, novo.getAmbienteId());
             stmt.setDate(8, novo.getDatacriacao());
@@ -61,7 +61,7 @@ public class ItemDAO {
             stmt.setString(2, alterado.getCodigo());
             stmt.setInt(3, alterado.getEstado());
             stmt.setString(4, alterado.getDatacompra());
-            stmt.setDouble(5, alterado.getValorcompra());
+            stmt.setString(5, alterado.getValorcompra());
             stmt.setInt(6, alterado.getIdDono());
             stmt.setInt(7, alterado.getAmbienteId());
             stmt.setDate(8, alterado.getDatacriacao());
@@ -112,7 +112,7 @@ public class ItemDAO {
                 String codigo = rs.getString("codigo");
                 int estado = rs.getInt("estado");
                 String datacompra = rs.getString("datacompra");
-                double valor = rs.getDouble("valor");
+                String valor = rs.getString("valor");
                 int iddono = rs.getInt("iddono");
                 int idamb = rs.getInt("ambienteid");
                 Date datacriacao = rs.getDate("datacriacao");

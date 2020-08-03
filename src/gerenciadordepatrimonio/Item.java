@@ -20,7 +20,7 @@ public class Item {
     private String codigo;
     private int estado;
     private String datacompra;
-    private double valorcompra;
+    private String valorcompra;
     private int idDono;
     private int ambienteId;
     private Date datacriacao;
@@ -82,11 +82,11 @@ public class Item {
         this.datacompra = datacompra;
     }
 
-    public double getValorcompra() {
+    public String getValorcompra() {
         return valorcompra;
     }
 
-    public void setValorcompra(double valorcompra) {
+    public void setValorcompra(String valorcompra) {
         this.valorcompra = valorcompra;
     }
 
