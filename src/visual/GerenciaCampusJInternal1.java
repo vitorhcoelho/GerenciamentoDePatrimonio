@@ -8,6 +8,8 @@ package visual;
 import tabelas.TableModelCampus;
 import gerenciadordepatrimonio.Campus;
 import gerenciadordepatrimonio.CampusDAO;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -17,7 +19,6 @@ import javax.swing.JOptionPane;
  */
 public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
 
-    GerenciaServJInternal gs = null;
     TableModelCampus tableModelCampus;
     CampusDAO campDAO = new CampusDAO();
 
@@ -267,16 +268,28 @@ public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
     private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
         // TODO add your handling code here:
         //UPDATE NO BANCO
-        jTextFieldNomeCampus.getText();
-        jTextFieldAbreviacao.getText();
-        jTextFieldCidade.getText();
-        jTextFieldBairro.getText();
-        jTextFieldEndereco.getText();
-        jFormattedTextFieldCEP.getText();
+        Campus c = new Campus();
+        CampusDAO cDAO = new CampusDAO();
+        
+        c.setNome(jTextFieldNomeCampus.getText());
+        c.setAbreviacao(jTextFieldAbreviacao.getText());
+        c.setCidade(jTextFieldCidade.getText());
+        c.setBairro(jTextFieldBairro.getText());
+        c.setEndereco(jTextFieldEndereco.getText());
+        c.setCep(jFormattedTextFieldCEP.getText());
+        c.setDataCriacao(Date.valueOf(LocalDate.now()));
+        
+        cDAO.adiciona(c);
+        
+        jTextFieldNomeCampus.setText("");
+        jTextFieldAbreviacao.setText("");
+        jTextFieldCidade.setText("");
+        jTextFieldBairro.setText("");
+        jTextFieldEndereco.setText("");
+        jFormattedTextFieldCEP.setText("");
 
-        gs.adicionaCombo(jTextFieldNomeCampus.getText());
+        
 
-        JOptionPane.showMessageDialog(null, "Servidor adicionado", "", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButtonSalvarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

@@ -336,7 +336,7 @@ public class GerenciaItensJInternal1 extends javax.swing.JInternalFrame {
         jTextFieldEspecifica.setText("");
         jFormattedTextFieldCodPatri.setText("");
         jFormattedTextFieldEstdConserv.setText("");
-        jFormattedTextFieldDataCompra.setText("");//temporario
+        jFormattedTextFieldDataCompra.setText("");
         jFormattedTextFieldValorCompra.setText("");
         jComboBoxAmbiente.setSelectedItem(null);
         jComboBoxServidorDono.setSelectedItem(null);

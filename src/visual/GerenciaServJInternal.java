@@ -353,9 +353,6 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-    public void adicionaCombo(String nomeCampus) {
-        jComboBoxCampus.addItem(nomeCampus);
-    }
 
     /**
      * @param args the command line arguments
