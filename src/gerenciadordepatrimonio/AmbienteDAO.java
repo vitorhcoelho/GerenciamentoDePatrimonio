@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,9 +48,10 @@ public class AmbienteDAO {
             stmt.execute();
             stmt.close();
 
-            System.out.println("ok");
+            JOptionPane.showMessageDialog(null, "Ambiente adicionado", "", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Adicionar", "", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
@@ -212,6 +214,40 @@ public class AmbienteDAO {
             throw new RuntimeException(e);
         }
         return listAmb;
+    }
+    
+    public Ambiente listaPorId(int idamb) {
+        List<Ambiente> listAmb = new ArrayList<>();
+        try (Connection con = new ConnectionFactory().Conn()) {
+            PreparedStatement stmt;
+            stmt = con.prepareStatement("select * from ambiente where idamb = ?");
+            stmt.setInt(1, idamb);
+            ResultSet rs;
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("idamb");
+                String descricao = rs.getString("descricao");
+                int codcamp = rs.getInt("codcamp");
+                Date dataCriacao = rs.getDate("datacriacao");
+                Date dataModificacao = rs.getDate("datamodificacao");
+
+                Ambiente a = new Ambiente();
+                a.setId(id);
+                a.setDescricao(descricao);
+                a.setCodCamp(codcamp);
+                a.setDatacriacao(dataCriacao);
+                a.setDatamodificacao(dataModificacao);
+                
+                return a;
+                
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 
     //    public int achaAmbienteId(int id) {

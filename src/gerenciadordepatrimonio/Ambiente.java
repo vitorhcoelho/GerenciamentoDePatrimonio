@@ -62,9 +62,7 @@ public class Ambiente {
 
     @Override
     public String toString() {
-        return "\nID Ambiente: " + this.id + "\tID Campus: " + this.codCamp + "\tDescrição: " + this.descricao
-                + "\nData de Criação: " + this.datacriacao
-                + "\nData de Modificação: " + this.datamodificacao;
+        return getId() + " - " + getDescricao();
     }
 
 }

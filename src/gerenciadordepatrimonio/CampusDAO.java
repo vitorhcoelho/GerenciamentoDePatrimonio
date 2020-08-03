@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,9 +52,11 @@ public class CampusDAO {
             stmt.execute();
             stmt.close();
 
-            System.out.println("ok");
+            JOptionPane.showMessageDialog(null, "Campus adicionado", "", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Adicionar", "", JOptionPane.ERROR_MESSAGE);
+
             throw new RuntimeException(e);
         }
     }

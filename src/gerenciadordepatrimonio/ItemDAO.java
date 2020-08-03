@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,14 +44,15 @@ public class ItemDAO {
             stmt.execute();
             stmt.close();
 
-            System.out.println("ok");
+            JOptionPane.showMessageDialog(null, "Servidor adicionado", "", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
+             JOptionPane.showMessageDialog(null, "Erro ao Adicionar", "", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
 
-    public void altera(Item alterado, int id) {
+    public void altera(Item alterado) {
         String sql = "UPDATE item SET especificacao = ?, codigo = ?, "
                 + "estado = ?, datacompra = ?, valor = ?, iddono = ?, ambienteid = ?, datacriacao = ?, datamodificacao = ?"
                 + " WHERE (iditem = ?)";
@@ -66,7 +68,7 @@ public class ItemDAO {
             stmt.setInt(7, alterado.getAmbienteId());
             stmt.setDate(8, alterado.getDatacriacao());
             stmt.setDate(9, alterado.getDatamodificacao());
-            stmt.setInt(10, id);
+            stmt.setInt(10, alterado.getId());
 
             stmt.execute();
             stmt.close();
