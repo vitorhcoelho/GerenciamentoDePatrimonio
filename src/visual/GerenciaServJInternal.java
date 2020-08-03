@@ -29,7 +29,7 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
     public GerenciaServJInternal() {
         initComponents();
         setClosable(true);
-        setSize(700, 700);
+        setSize(990, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         for (Campus c : campDAO.lista()) {

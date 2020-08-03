@@ -295,7 +295,7 @@ public class GerenciaItensJInternal1 extends javax.swing.JInternalFrame {
         i.setCodigo(jFormattedTextFieldCodPatri.getText());
         i.setEstado(Integer.parseInt(jFormattedTextFieldEstdConserv.getText()));
         i.setDatacompra(jFormattedTextFieldDataCompra.getText());
-        //i.setValorcompra(jFormattedTextFieldDataCompra.get());
+        i.setValorcompra(jFormattedTextFieldValorCompra.getText());
         i.setDatacriacao(Date.valueOf(LocalDate.now()));
         i.setDatamodificacao(Date.valueOf(LocalDate.now()));
 
