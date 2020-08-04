@@ -131,6 +131,7 @@ public class RevisaoDAO {
     }
 
     public void imprime(List<Revisao> rev) {
+        List<Revisao> listRev = new ArrayList<>();
         for (Revisao c : rev) {
             System.out.println(c);
         }

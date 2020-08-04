@@ -6,6 +6,8 @@
 package visual;
 
 import gerenciadordepatrimonio.Servidor;
+import java.awt.Dimension;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -69,24 +71,59 @@ public class TelaServidor extends javax.swing.JFrame {
         jMenu2.setText("Visualizar");
 
         jMenuItemViewServs.setText("Servidores");
+        jMenuItemViewServs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewServsActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemViewServs);
 
         jMenuItemViewCampus.setText("Campus");
+        jMenuItemViewCampus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewCampusActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemViewCampus);
 
         jMenuItemViewAmbientes.setText("Ambientes");
+        jMenuItemViewAmbientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewAmbientesActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemViewAmbientes);
 
         jMenuItemViewItens.setText("Itens");
+        jMenuItemViewItens.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewItensActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemViewItens);
 
         jMenuItemViewMovAmb.setText("Movimentações entre ambientes");
+        jMenuItemViewMovAmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewMovAmbActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemViewMovAmb);
 
         jMenuItemViewMovDonos.setText("Movimentações entre donos");
+        jMenuItemViewMovDonos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewMovDonosActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemViewMovDonos);
 
         jMenuItemViewRev.setText("Revisões");
+        jMenuItemViewRev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemViewRevActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItemViewRev);
 
         jMenuBar1.add(jMenu2);
@@ -141,6 +178,70 @@ public class TelaServidor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuLogoutActionPerformed
 
+    private void jMenuItemViewServsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewServsActionPerformed
+        // TODO add your handling code here:
+        ViewServidores frameInterno = new ViewServidores();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
+    }//GEN-LAST:event_jMenuItemViewServsActionPerformed
+
+    private void jMenuItemViewCampusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewCampusActionPerformed
+        // TODO add your handling code here:
+        ViewCampus frameInterno = new ViewCampus();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
+    }//GEN-LAST:event_jMenuItemViewCampusActionPerformed
+
+    private void jMenuItemViewAmbientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewAmbientesActionPerformed
+        // TODO add your handling code here:
+        ViewAmbientes frameInterno = new ViewAmbientes();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
+    }//GEN-LAST:event_jMenuItemViewAmbientesActionPerformed
+
+    private void jMenuItemViewItensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewItensActionPerformed
+        // TODO add your handling code here:
+        ViewItens frameInterno = new ViewItens();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
+    }//GEN-LAST:event_jMenuItemViewItensActionPerformed
+
+    private void jMenuItemViewMovAmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewMovAmbActionPerformed
+        // TODO add your handling code here:
+        ViewMovAmb frameInterno = new ViewMovAmb();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
+    }//GEN-LAST:event_jMenuItemViewMovAmbActionPerformed
+
+    private void jMenuItemViewMovDonosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewMovDonosActionPerformed
+        // TODO add your handling code here:
+        ViewMovDono frameInterno = new ViewMovDono();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
+    }//GEN-LAST:event_jMenuItemViewMovDonosActionPerformed
+
+    private void jMenuItemViewRevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewRevActionPerformed
+        // TODO add your handling code here:
+        ViewRevisoes frameInterno = new ViewRevisoes();
+        frameInterno.setVisible(true);
+        jDesktopPane1.add(frameInterno);
+        centralizaForm(frameInterno);
+    }//GEN-LAST:event_jMenuItemViewRevActionPerformed
+
+    private void centralizaForm(JInternalFrame frame) {
+        Dimension desktopSize = jDesktopPane1.getSize();
+        Dimension jInternalFrameSize = frame.getSize();
+        frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        frame.toFront();
+    }
+    
     /**
      * @param args the command line arguments
      */

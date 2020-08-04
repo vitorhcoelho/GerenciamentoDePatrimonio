@@ -7,17 +7,30 @@ package visual;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import gerenciadordepatrimonio.Ambiente;
+import gerenciadordepatrimonio.AmbienteDAO;
+import gerenciadordepatrimonio.Item;
+import gerenciadordepatrimonio.ItemDAO;
+import gerenciadordepatrimonio.Revisao;
+import gerenciadordepatrimonio.RevisaoDAO;
 import gerenciadordepatrimonio.Servidor;
+import gerenciadordepatrimonio.ServidorDAO;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.swing.JDesktopPane;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +39,8 @@ import javax.swing.JInternalFrame;
 public class TelaAdm extends javax.swing.JFrame {
 
     TelaLogin l = null;
+    RevisaoDAO revDAO = new RevisaoDAO();
+
     /**
      * Creates new form TelaAdm
      */
@@ -329,53 +344,17 @@ public class TelaAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuLogoutMouseClicked
 
     private void jMenuItemRelatorioAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioAmbienteActionPerformed
-        // TODO add your handling code here:
-        Document document = new Document();
-
         try {
-            PdfWriter.getInstance(document, new FileOutputStream("documento.pdf"));
-
-            document.open();
-            document.add(new Paragraph("#Teste_GERARDO_PDF https://github.com/Heverton"));
-
-        } catch (DocumentException ex) {
-            System.out.println("Error:" + ex);
-        } catch (FileNotFoundException ex) {
-            System.out.println("Error:" + ex);
-        } finally {
-            document.close();
-        }
-
-        try {
-            Desktop.getDesktop().open(new File("documento.pdf"));
+            // TODO add your handling code here:
+            this.valorPorAmbiente();
         } catch (IOException ex) {
-            System.out.println("Error:" + ex);
+            Logger.getLogger(TelaAdm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jMenuItemRelatorioAmbienteActionPerformed
 
     private void jMenuItemRelatorioServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioServidorActionPerformed
         // TODO add your handling code here:
-        Document document = new Document();
 
-        try {
-            PdfWriter.getInstance(document, new FileOutputStream("documento.pdf"));
-
-            document.open();
-            document.add(new Paragraph("#Teste_GERARDO_PDF https://github.com/Heverton"));
-
-        } catch (DocumentException ex) {
-            System.out.println("Error:" + ex);
-        } catch (FileNotFoundException ex) {
-            System.out.println("Error:" + ex);
-        } finally {
-            document.close();
-        }
-
-        try {
-            Desktop.getDesktop().open(new File("documento.pdf"));
-        } catch (IOException ex) {
-            System.out.println("Error:" + ex);
-        }
     }//GEN-LAST:event_jMenuItemRelatorioServidorActionPerformed
 
     private void jMenuItemViewServsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemViewServsActionPerformed
@@ -439,6 +418,84 @@ public class TelaAdm extends javax.swing.JFrame {
         Dimension jInternalFrameSize = frame.getSize();
         frame.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
+        frame.toFront();
+    }
+
+    public String relatorioTotalFinan() {
+        ServidorDAO servDAO = new ServidorDAO();
+        String relat = null;
+
+        for (Servidor s : servDAO.lista()) {
+            if (s != null) {
+                relat = (s.getNome() + " - TOTAL: R$" + this.valorTotalPorServ(s.getId()));
+            }
+        }
+        return relat;
+    }
+
+    public double valorTotalPorServ(int idServ) {
+        double total = 0;
+        ItemDAO itemDAO = new ItemDAO();
+
+        for (Item i : itemDAO.lista()) {
+            if (i.getIdDono() == idServ && i != null) {
+                total = total + Double.parseDouble(i.getValorcompra());
+            }
+        }
+        return total;
+    }
+
+    public void valorPorAmbiente() throws IOException {
+        double total = 0;
+        ItemDAO itemDAO = new ItemDAO();
+        AmbienteDAO ambDAO = new AmbienteDAO();
+        List<String> itens = new ArrayList();
+        Double precoCompra = null;
+
+        for (Ambiente a : ambDAO.lista()) {
+            for (Item i : itemDAO.lista()) {
+                if (i.getAmbienteId() == a.getId() && i != null) {
+
+                    total = total + Double.parseDouble(i.getValorcompra());
+                    itens.add(i.getEspecificacao());
+                    this.relatorioAmb(a.getId(), a.getDescricao(), total, itens);
+                }
+            }
+        }
+    }
+
+    public void relatorioAmb(int idAmb, String nomeAmb, double total, List<String> itens) throws IOException {
+
+        int id = idAmb;
+        String nome = nomeAmb;
+        String texto = "Itens no ambiente: \n\n";
+
+        texto += "ID do ambiente: " + Integer.toString(id) + "\n";
+        texto += "Nome do ambiente: " + nome + "\n";
+        texto += "Valor total no ambiente: " + total + "\n";
+        texto += "Itens: \n";
+
+        for (String i : itens) {
+            texto += i + "\n";
+        }
+
+        texto += "\n";
+
+        try (OutputStream file = new FileOutputStream(new File("C:\\Users\\Vitor Hugo\\Downloads" + "Relatório de ambientes" + ".pdf"))) {
+
+            Document document = new Document();
+
+            PdfWriter.getInstance(document, file);
+
+            document.open();
+            document.add(new Paragraph(texto, FontFactory.getFont(FontFactory.HELVETICA, 10)));
+            document.close();
+
+        } catch (DocumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        System.out.println("Relatório gerado com sucesso!");
     }
 
     /**

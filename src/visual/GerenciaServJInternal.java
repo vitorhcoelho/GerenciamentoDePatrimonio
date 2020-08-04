@@ -640,19 +640,11 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         int linha = this.jTable2.getSelectedRow();
         Servidor servTemp = this.tableModelServ.get(linha);
         //remove
+        sDAO.exclui(servTemp);
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-        int linha = this.jTable1.getSelectedRow();
-        Servidor servTemp = this.tableModelServ.get(linha);
-        this.jTextFieldNome1.setText(servTemp.getNome());
-        this.jTextFieldEmail1.setText(servTemp.getEmail());
-        this.jComboBoxCampus1.setSelectedItem(servTemp.getCampus());
-        this.jTextFieldCargo1.setText(servTemp.getCargo());
-        this.jTextFieldPapel1.setText(servTemp.getPapel());
-        this.jTextFieldLogin1.setText(servTemp.getLogin());
-        this.jCheckBoxAdmPerm1.setSelected(validaAdm(servTemp));
     }//GEN-LAST:event_jTable2MouseClicked
 
     private boolean validaAdm(Servidor temp) {
