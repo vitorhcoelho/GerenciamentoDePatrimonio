@@ -40,7 +40,7 @@ public class GerenciaRevisoesJInternal11 extends javax.swing.JInternalFrame {
     public GerenciaRevisoesJInternal11() {
         initComponents();
         setClosable(true);
-        setSize(700, 700);
+        setSize(1100, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         jTextFieldAno.setText(String.valueOf(LocalDate.now().getYear()));

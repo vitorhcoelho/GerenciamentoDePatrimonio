@@ -33,7 +33,7 @@ public class GerenciaItensJInternal1 extends javax.swing.JInternalFrame {
     public GerenciaItensJInternal1() {
         initComponents();
         setClosable(true);
-        setSize(1000, 700);
+        setSize(1100, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         ServidorDAO sDAO = new ServidorDAO();
@@ -174,8 +174,8 @@ public class GerenciaItensJInternal1 extends javax.swing.JInternalFrame {
                     .addComponent(jFormattedTextFieldCodPatri)
                     .addComponent(jComboBoxAmbiente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jComboBoxServidorDono, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jFormattedTextFieldValorCompra)
-                    .addComponent(jFormattedTextFieldDataCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldDataCompra)
+                    .addComponent(jFormattedTextFieldValorCompra))
                 .addContainerGap(205, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

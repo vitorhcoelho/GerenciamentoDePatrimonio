@@ -30,7 +30,7 @@ public class GerenciaAmbientesJInternal1 extends javax.swing.JInternalFrame {
     public GerenciaAmbientesJInternal1() {
         initComponents();
         setClosable(true);
-        setSize(700, 700);
+        setSize(1100, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         CampusDAO cDAO = new CampusDAO();

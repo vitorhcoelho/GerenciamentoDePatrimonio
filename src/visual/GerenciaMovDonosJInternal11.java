@@ -35,7 +35,7 @@ public class GerenciaMovDonosJInternal11 extends javax.swing.JInternalFrame {
     public GerenciaMovDonosJInternal11() {
         initComponents();
         setClosable(true);
-        setSize(700, 700);
+        setSize(1100, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         for (Item i : iDAO.lista()) {

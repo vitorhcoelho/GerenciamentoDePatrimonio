@@ -81,8 +81,8 @@
                           <Component id="jFormattedTextFieldCodPatri" alignment="0" max="32767" attributes="0"/>
                           <Component id="jComboBoxAmbiente" alignment="0" max="32767" attributes="0"/>
                           <Component id="jComboBoxServidorDono" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextFieldValorCompra" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextFieldDataCompra" min="-2" pref="151" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldDataCompra" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldValorCompra" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="205" max="32767" attributes="0"/>
                   </Group>
