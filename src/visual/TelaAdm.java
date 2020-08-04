@@ -24,6 +24,7 @@ import javax.swing.JInternalFrame;
  * @author Vitor Hugo
  */
 public class TelaAdm extends javax.swing.JFrame {
+
     TelaLogin l = null;
     /**
      * Creates new form TelaAdm
@@ -295,50 +296,50 @@ public class TelaAdm extends javax.swing.JFrame {
     private void jMenuItemRelatorioAmbienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioAmbienteActionPerformed
         // TODO add your handling code here:
         Document document = new Document();
-        
+
         try {
             PdfWriter.getInstance(document, new FileOutputStream("documento.pdf"));
-            
+
             document.open();
             document.add(new Paragraph("#Teste_GERARDO_PDF https://github.com/Heverton"));
-            
+
         } catch (DocumentException ex) {
-            System.out.println("Error:"+ex);
+            System.out.println("Error:" + ex);
         } catch (FileNotFoundException ex) {
-            System.out.println("Error:"+ex);
-        }finally{
+            System.out.println("Error:" + ex);
+        } finally {
             document.close();
         }
-        
+
         try {
             Desktop.getDesktop().open(new File("documento.pdf"));
         } catch (IOException ex) {
-            System.out.println("Error:"+ex);
+            System.out.println("Error:" + ex);
         }
     }//GEN-LAST:event_jMenuItemRelatorioAmbienteActionPerformed
 
     private void jMenuItemRelatorioServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRelatorioServidorActionPerformed
         // TODO add your handling code here:
         Document document = new Document();
-        
+
         try {
             PdfWriter.getInstance(document, new FileOutputStream("documento.pdf"));
-            
+
             document.open();
             document.add(new Paragraph("#Teste_GERARDO_PDF https://github.com/Heverton"));
-            
+
         } catch (DocumentException ex) {
-            System.out.println("Error:"+ex);
+            System.out.println("Error:" + ex);
         } catch (FileNotFoundException ex) {
-            System.out.println("Error:"+ex);
-        }finally{
+            System.out.println("Error:" + ex);
+        } finally {
             document.close();
         }
-        
+
         try {
             Desktop.getDesktop().open(new File("documento.pdf"));
         } catch (IOException ex) {
-            System.out.println("Error:"+ex);
+            System.out.println("Error:" + ex);
         }
     }//GEN-LAST:event_jMenuItemRelatorioServidorActionPerformed
 
