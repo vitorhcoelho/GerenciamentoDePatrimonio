@@ -487,7 +487,6 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         jTextFieldLogin1.setText("");
         jPasswordField3.setText("");
         jCheckBoxAdmPerm1.setSelected(false);
-        //jTabbedPane1.setSelectedIndex(WIDTH);
     }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

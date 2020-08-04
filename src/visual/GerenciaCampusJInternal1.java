@@ -28,7 +28,7 @@ public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
     public GerenciaCampusJInternal1() {
         initComponents();
         setClosable(true);
-        setSize(700, 700);
+        setSize(1100, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         this.tableModelCampus = new TableModelCampus();
