@@ -503,7 +503,8 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
         if(s.getSenha().equals(senhaAntiga)){
         
         if (senhaNova.equals(confirmaSenha)) {
-           
+            
+            
             s.setNome(jTextFieldNome1.getText());
             s.setEmail(jTextFieldEmail1.getText());
             s.setCargo(jTextFieldCargo1.getText());
