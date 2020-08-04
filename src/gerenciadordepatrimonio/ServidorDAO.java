@@ -59,7 +59,7 @@ public class ServidorDAO {
         }
     }
 
-    public void altera(Servidor alterado, int id) {
+    public void altera(Servidor alterado) {
         String sql = "UPDATE servidor SET nome = ?, email = ?, "
                 + "codcampus = ?, cargo = ?, papel = ?, login = ?, senha = ?, adm = ?, logado = ?, definitivo = ?"
                 + " WHERE (idservidor = ?)";
@@ -76,7 +76,7 @@ public class ServidorDAO {
             stmt.setInt(8, alterado.isAdm());
             stmt.setInt(9, alterado.isLogado());
             stmt.setInt(10, alterado.isSystem());
-            stmt.setInt(11, id);
+            stmt.setInt(11, alterado.getId());
 
             stmt.execute();
             stmt.close();
