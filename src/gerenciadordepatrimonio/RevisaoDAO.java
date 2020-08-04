@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
  * @author gusta
  */
 public class RevisaoDAO {
-    
+
     public void adiciona(Revisao novo) {
         String sql = "insert into revisao "
                 + "(ano, idservidor, idamb, estado, datacriacao, datamodificacao)"
@@ -32,13 +32,12 @@ public class RevisaoDAO {
             PreparedStatement stmt;
             stmt = con.prepareStatement(sql);
 
-            stmt.setInt(1, novo.getAno());
+            stmt.setString(1, novo.getAno());
             stmt.setInt(2, novo.getIdServ());
             stmt.setInt(3, novo.getIdAmb());
             stmt.setInt(4, novo.getEstado());
             stmt.setDate(5, novo.getDataCriacao());
             stmt.setDate(6, novo.getDataModificacao());
-
 
             stmt.execute();
             stmt.close();
@@ -46,7 +45,7 @@ public class RevisaoDAO {
             JOptionPane.showMessageDialog(null, "Revisão adicionada", "", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
-             JOptionPane.showMessageDialog(null, "Erro ao Adicionar", "", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro ao Adicionar", "", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }
@@ -58,7 +57,7 @@ public class RevisaoDAO {
 
         try (Connection con = new ConnectionFactory().Conn()) {
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, alterado.getAno());
+            stmt.setString(1, alterado.getAno());
             stmt.setInt(2, alterado.getIdServ());
             stmt.setInt(3, alterado.getIdAmb());
             stmt.setInt(4, alterado.getEstado());
@@ -106,7 +105,7 @@ public class RevisaoDAO {
 
             while (rs.next()) {
                 int id = rs.getInt("idrevisao");
-                int ano = rs.getInt("ano");
+                String ano = rs.getString("ano");
                 int idserv = rs.getInt("idservidor");
                 int idamb = rs.getInt("idamb");
                 int estado = rs.getInt("estado");
@@ -130,11 +129,38 @@ public class RevisaoDAO {
         }
         return listRev;
     }
-    
+
     public void imprime(List<Revisao> rev) {
         for (Revisao c : rev) {
             System.out.println(c);
         }
+    }
+
+    public int buscaIdRevisao(String year, int ids, int ida) {
+        List<Revisao> listRev = new ArrayList<>();
+        try (Connection con = new ConnectionFactory().Conn()) {
+            PreparedStatement stmt;
+            stmt = con.prepareStatement("select * from revisao where idamb = ?");
+            stmt.setInt(1, ida);
+            ResultSet rs;
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String ano = rs.getString("ano");
+                int idserv = rs.getInt("idservidor");
+                if (idserv == ids) {
+                    if (ano.equals(year)) {
+                        int id = rs.getInt("idrevisao");
+                        return id;
+                    }
+                }
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
     }
 
 //    private Revisao[] revs = new Revisao[30];

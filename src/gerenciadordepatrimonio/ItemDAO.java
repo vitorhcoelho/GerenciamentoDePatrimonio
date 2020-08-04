@@ -149,6 +149,50 @@ public class ItemDAO {
         }
     }
     
+        public List<Item> listaPorAmbiente(int ida) {
+        List<Item> listItem = new ArrayList<>();
+        try (Connection con = new ConnectionFactory().Conn()) {
+            PreparedStatement stmt;
+            stmt = con.prepareStatement("select * from item where ambienteid = ?");
+            stmt.setInt(1, ida);
+            ResultSet rs;
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("iditem");
+                String espec = rs.getString("especificacao");
+                String codigo = rs.getString("codigo");
+                int estado = rs.getInt("estado");
+                String datacompra = rs.getString("datacompra");
+                String valor = rs.getString("valor");
+                int iddono = rs.getInt("iddono");
+                int idamb = rs.getInt("ambienteid");
+                Date datacriacao = rs.getDate("datacriacao");
+                Date datamod = rs.getDate("datamodificacao");
+
+
+                Item a = new Item();
+                a.setId(id);
+                a.setAmbienteId(idamb);
+                a.setCodigo(codigo);
+                a.setDatacompra(datacompra);
+                a.setDatacriacao(datacriacao);
+                a.setDatamodificacao(datamod);
+                a.setEspecificacao(espec);
+                a.setEstado(estado);
+                a.setIdDono(iddono);
+                a.setValorcompra(valor);
+
+                listItem.add(a);
+            }
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listItem;
+    }
+    
     
     
 

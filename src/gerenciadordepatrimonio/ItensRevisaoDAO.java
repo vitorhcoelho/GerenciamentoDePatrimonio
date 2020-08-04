@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,6 +43,7 @@ public class ItensRevisaoDAO {
             System.out.println("ok");
 
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro Em ItensRevisao", "", JOptionPane.ERROR_MESSAGE);
             throw new RuntimeException(e);
         }
     }

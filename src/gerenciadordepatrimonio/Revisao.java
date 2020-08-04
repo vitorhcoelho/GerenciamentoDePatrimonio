@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class Revisao {
 
     private int id;
-    private int ano;
+    private String ano;
     private int idServ;
     private int idAmb;
     private int estado;
@@ -31,11 +31,11 @@ public class Revisao {
         this.id = id;
     }
 
-    public int getAno() {
+    public String getAno() {
         return ano;
     }
 
-    public void setAno(int ano) {
+    public void setAno(String ano) {
         this.ano = ano;
     }
 

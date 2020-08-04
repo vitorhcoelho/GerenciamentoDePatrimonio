@@ -5,8 +5,18 @@
  */
 package visual;
 
+import gerenciadordepatrimonio.Ambiente;
+import gerenciadordepatrimonio.AmbienteDAO;
+import gerenciadordepatrimonio.Item;
+import gerenciadordepatrimonio.ItemDAO;
+import gerenciadordepatrimonio.ItensRevisao;
+import gerenciadordepatrimonio.ItensRevisaoDAO;
 import gerenciadordepatrimonio.Revisao;
 import gerenciadordepatrimonio.RevisaoDAO;
+import gerenciadordepatrimonio.Servidor;
+import gerenciadordepatrimonio.ServidorDAO;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
 import tabelas.TableModelRevisao;
@@ -19,6 +29,10 @@ public class GerenciaRevisoesJInternal11 extends javax.swing.JInternalFrame {
 
     TableModelRevisao tableModelRevs;
     RevisaoDAO revDAO = new RevisaoDAO();
+    ServidorDAO sDAO = new ServidorDAO();
+    AmbienteDAO aDAO = new AmbienteDAO();
+    ItemDAO iDAO = new ItemDAO();
+    ItensRevisaoDAO iRDAO = new ItensRevisaoDAO();
 
     /**
      * Creates new form FrameInterno
@@ -28,9 +42,18 @@ public class GerenciaRevisoesJInternal11 extends javax.swing.JInternalFrame {
         setClosable(true);
         setSize(700, 700);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        
-        
-this.tableModelRevs = new TableModelRevisao();
+
+        jTextFieldAno.setText(String.valueOf(LocalDate.now().getYear()));
+
+        for (Servidor s : sDAO.lista()) {
+            jComboBoxServidor.addItem(s);
+        }
+
+        for (Ambiente a : aDAO.lista()) {
+            jComboBoxAmbiente.addItem(a);
+        }
+
+        this.tableModelRevs = new TableModelRevisao();
         this.jTable5.setModel(tableModelRevs);
         this.jTable6.setModel(tableModelRevs);
 
@@ -39,6 +62,7 @@ this.tableModelRevs = new TableModelRevisao();
         for (Revisao i : inicial) {
             this.tableModelRevs.add(i);
         }
+
     }
 
     /**
@@ -52,6 +76,14 @@ this.tableModelRevs = new TableModelRevisao();
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldAno = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxServidor = new javax.swing.JComboBox<>();
+        jComboBoxAmbiente = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable5 = new javax.swing.JTable();
@@ -61,15 +93,79 @@ this.tableModelRevs = new TableModelRevisao();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabel1.setText("Ano:");
+
+        jLabel2.setText("Servidor Responsável:");
+
+        jComboBoxServidor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um Servidor>" }));
+        jComboBoxServidor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxServidorActionPerformed(evt);
+            }
+        });
+
+        jComboBoxAmbiente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Selecione um Ambiente>" }));
+
+        jLabel3.setText("Ambiente:");
+
+        jButton1.setText("Salvar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 619, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldAno)
+                            .addComponent(jComboBoxServidor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxAmbiente, 0, 210, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton2)))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxServidor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxAmbiente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(141, 141, 141)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Adicionar", jPanel1);
@@ -104,7 +200,7 @@ this.tableModelRevs = new TableModelRevisao();
                 .addContainerGap(257, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Editar", jPanel2);
+        jTabbedPane1.addTab("Buscar e Continuar", jPanel2);
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,6 +254,74 @@ this.tableModelRevs = new TableModelRevisao();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Revisao r = new Revisao();
+        Servidor s = new Servidor();
+        Ambiente a = new Ambiente();
+        ItensRevisao iR = new ItensRevisao();
+
+        if (jComboBoxServidor.getSelectedItem().equals("<Selecione um Servidor>")) {
+            if (jComboBoxAmbiente.getSelectedItem().equals("<Selecione um Ambiente>")) {
+                JOptionPane.showMessageDialog(null, "Selecione um Servidor e Ambiente", "", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um Servidor", "", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            if (jComboBoxAmbiente.getSelectedItem().equals("<Selecione um Ambiente>")) {
+                JOptionPane.showMessageDialog(null, "Selecione um Ambiente", "", JOptionPane.ERROR_MESSAGE);
+            } else {
+                s = (Servidor) jComboBoxServidor.getSelectedItem();
+                a = (Ambiente) jComboBoxAmbiente.getSelectedItem();
+
+                String ano = jTextFieldAno.getText();
+                int amb = a.getId();
+
+                r.setAno(ano);
+                r.setIdServ(s.getId());
+                r.setIdAmb(amb);
+                r.setEstado(1);
+                r.setDataCriacao(Date.valueOf(LocalDate.now()));
+                r.setDataModificacao(Date.valueOf(LocalDate.now()));
+
+                revDAO.adiciona(r);
+                int idrev = revDAO.buscaIdRevisao(ano, s.getId(), amb);
+                if (idrev != 1) {
+
+                    for (Item i : iDAO.listaPorAmbiente(amb)) {
+                        iR.setIdRevisao(idrev);
+                        iR.setItem(i.getId());
+                        iR.setPago(0);
+                        iR.setEncontrado(0);
+
+                        iRDAO.adiciona(iR);
+                    }
+
+                    jTextFieldAno.setText(String.valueOf(LocalDate.now().getYear()));
+                    jComboBoxServidor.setSelectedItem("<Selecione um Servidor>");
+                    jComboBoxAmbiente.setSelectedItem("<Selecione um Ambiente>");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Erro Criador de Revisão", "", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBoxServidorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxServidorActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBoxServidorActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        jTextFieldAno.setText(String.valueOf(LocalDate.now().getYear()));
+        jComboBoxServidor.setSelectedItem("<Selecione um Servidor>");
+        jComboBoxAmbiente.setSelectedItem("<Selecione um Ambiente>");
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,6 +373,13 @@ this.tableModelRevs = new TableModelRevisao();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<Object> jComboBoxAmbiente;
+    private javax.swing.JComboBox<Object> jComboBoxServidor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -217,5 +388,6 @@ this.tableModelRevs = new TableModelRevisao();
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
+    private javax.swing.JTextField jTextFieldAno;
     // End of variables declaration//GEN-END:variables
 }
