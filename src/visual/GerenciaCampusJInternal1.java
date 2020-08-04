@@ -433,6 +433,7 @@ public class GerenciaCampusJInternal1 extends javax.swing.JInternalFrame {
 
     private void jButtonCancelar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelar5ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButtonCancelar5ActionPerformed
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
