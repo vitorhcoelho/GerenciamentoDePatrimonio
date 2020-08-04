@@ -27,7 +27,7 @@ public class GerenciaServJInternal extends javax.swing.JInternalFrame {
     ServidorDAO servDAO = new ServidorDAO();
     CampusDAO campDAO = new CampusDAO();
     TableModelServidor tableModelServ;
-
+    int idEdicao;
     /**
      * Creates new form FrameInterno
      */
